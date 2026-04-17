@@ -229,3 +229,60 @@ a {
   z-index: -1;
   pointer-events: auto;
 }
+
+/* Sections */
+.content-section {
+  padding: var(--spacing-xl) 5%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.about-card h3 {
+  color: var(--primary-accent);
+  margin-bottom: var(--spacing-sm);
+}
+
+.skills-container {
+  margin-top: var(--spacing-lg);
+}
+
+.skills-title {
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.skills-marquee {
+  margin-bottom: var(--spacing-sm);
+  overflow: hidden;
+}
+
+.skill-pill {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  margin: 0 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+  border-radius: 50px;
+  font-family: var(--font-mono);
+  color: var(--primary-accent);
+  white-space: nowrap;
+}

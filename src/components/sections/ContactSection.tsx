@@ -4,6 +4,13 @@ import Card from '../ui/Card';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
 
+const contactInfo = [
+  { icon: "📧", label: "Email", value: "rockrianto231@gmail.com", href: "mailto:rockrianto231@gmail.com" },
+  { icon: "📱", label: "Phone", value: "+880 1609302952", href: "tel:+8801609302952" },
+  { icon: "📍", label: "Location", value: "Dhaka, Bangladesh", href: null },
+  { icon: "🎓", label: "University Email", value: "mahim.cse.20230104015@aust.edu", href: "mailto:mahim.cse.20230104015@aust.edu" },
+];
+
 const ContactSection = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
@@ -18,15 +25,35 @@ const ContactSection = () => {
       <Reveal direction="down">
         <h2 className="section-title" style={{ textAlign: 'center' }}>Get In Touch</h2>
       </Reveal>
+
+      {/* Contact Info Grid */}
+      <Reveal direction="up" delay={0.1}>
+        <div className="contact-info-grid">
+          {contactInfo.map((item, i) => (
+            <div key={i} className="contact-info-chip">
+              <span className="contact-info-icon">{item.icon}</span>
+              <div>
+                <span className="contact-info-label">{item.label}</span>
+                {item.href ? (
+                  <a href={item.href} className="contact-info-value contact-info-link">{item.value}</a>
+                ) : (
+                  <span className="contact-info-value">{item.value}</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Reveal>
       
       <div style={{ maxWidth: '600px', margin: '0 auto', width: '100%' }}>
-        <Reveal direction="up" delay={0.2}>
+        <Reveal direction="up" delay={0.3}>
           <Card>
+            <h3 style={{ marginBottom: '1.5rem', color: 'var(--primary-accent)', fontSize: '1.2rem' }}>Send me a message</h3>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <Input 
                 id="name" 
                 label="Name" 
-                placeholder="John Doe" 
+                placeholder="Your name" 
                 required 
                 value={formData.name}
                 onChange={e => setFormData({...formData, name: e.target.value})}
@@ -35,7 +62,7 @@ const ContactSection = () => {
                 id="email" 
                 type="email" 
                 label="Email" 
-                placeholder="john@example.com" 
+                placeholder="your@email.com" 
                 required 
                 value={formData.email}
                 onChange={e => setFormData({...formData, email: e.target.value})}

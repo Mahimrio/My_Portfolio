@@ -25,7 +25,7 @@ const Loader = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <div className={`loader-overlay ${fadeOut ? 'loader-fade-out' : ''}`}>
       <div className="loader-content">
-        <h1 className="loader-logo">Portfolio</h1>
+        <h1 className="loader-logo">Rianto.dev</h1>
         <div className="loader-bar-track">
           <div className="loader-bar-fill" style={{ width: `${progress}%` }} />
         </div>

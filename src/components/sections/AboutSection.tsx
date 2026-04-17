@@ -1,10 +1,21 @@
 import React from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
-import Marquee from 'react-fast-marquee';
 
 const skills1 = ["React.js", "TypeScript", "Three.js", "GSAP", "Next.js", "Tailwind CSS"];
 const skills2 = ["Node.js", "WebGL", "Figma", "Redux", "Framer Motion", "Vite"];
+
+const CustomMarquee = ({ children, direction = 'left', speed = 40 }: { children: React.ReactNode, direction?: 'left'|'right', speed?: number }) => {
+  return (
+    <div style={{ display: 'flex', overflow: 'hidden', width: '100%', position: 'relative' }}>
+      <div className={`marquee-track ${direction === 'right' ? 'marquee-reverse' : ''}`} style={{ animationDuration: `${100 / speed}s` }}>
+        {children}
+        {children}
+        {children}
+      </div>
+    </div>
+  );
+};
 
 const AboutSection = () => {
   return (
@@ -36,20 +47,24 @@ const AboutSection = () => {
       <Reveal direction="up" delay={0.6}>
         <div id="skills" className="skills-container">
           <h3 className="skills-title">Core Technologies</h3>
-          <Marquee gradient={false} speed={40} className="skills-marquee">
-            {skills1.map((skill, index) => (
-              <span key={`s1-${index}`} className="skill-pill">
-                {skill}
-              </span>
-            ))}
-          </Marquee>
-          <Marquee gradient={false} speed={30} direction="right" className="skills-marquee">
-             {skills2.map((skill, index) => (
-              <span key={`s2-${index}`} className="skill-pill">
-                {skill}
-              </span>
-            ))}
-          </Marquee>
+          <div className="skills-marquee">
+            <CustomMarquee speed={30}>
+              {skills1.map((skill, index) => (
+                <span key={`s1-${index}`} className="skill-pill">
+                  {skill}
+                </span>
+              ))}
+            </CustomMarquee>
+          </div>
+          <div className="skills-marquee">
+            <CustomMarquee speed={25} direction="right">
+               {skills2.map((skill, index) => (
+                <span key={`s2-${index}`} className="skill-pill">
+                  {skill}
+                </span>
+              ))}
+            </CustomMarquee>
+          </div>
         </div>
       </Reveal>
     </section>

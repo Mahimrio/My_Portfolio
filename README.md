@@ -1,4 +1,4 @@
-# Professional Animated Portfolio
+# Rianto's Portfolio
 
 > A high-performance, fluid, and interactive 3D portfolio built with modern web technologies.
 

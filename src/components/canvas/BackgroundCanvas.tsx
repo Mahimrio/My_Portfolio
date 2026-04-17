@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
+import Particles from './Particles';
 
 const BackgroundCanvas = () => {
   return (
@@ -11,7 +12,7 @@ const BackgroundCanvas = () => {
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <Suspense fallback={null}>
           <Environment preset="city" />
-          {/* Models and particles will be injected in Issue 3.3 */}
+          <Particles />
         </Suspense>
       </Canvas>
     </div>

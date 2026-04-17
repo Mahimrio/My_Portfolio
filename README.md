@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# Professional Animated Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A high-performance, fluid, and interactive 3D portfolio built with modern web technologies.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
+![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This repository contains the source code for a stunning, highly animated portfolio website. Designed and developed to highlight interactive 3D background elements using Three.js as well as beautifully smooth scroll animations executed via GreenSock (GSAP). 
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🎯 Project Goals
 
-## Expanding the ESLint configuration
+- **Performance-First**: Fast load times optimized via Vite.
+- **Fluid & Dynamic UX**: Complex scroll-triggered animations and fluid transitions mimicking industry-leading interactive portfolios.
+- **Modern UI Design**: Utilizing dark mode aesthetics, glassmorphism, and minimal typography.
+- **Responsive WebGL Layout**: Full 3D background canvases reacting to device orientation and mouse events without hurting mobile UX.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Components & Technologies
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend Core:** [React 18](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vitejs.dev/)
+- **3D Engine:** [Three.js](https://threejs.org/) + [@react-three/fiber](https://docs.pmnd.rs/react-three-fiber/) + [@react-three/drei](https://github.com/pmndrs/drei)
+- **Animations:** [GSAP (GreenSock)](https://gsap.com/) & [Lenis Smooth Scroll](https://lenis.studiofreight.com/)
+- **Styling:** CSS3 variables & custom modular design systems
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📅 Roadmap / Milestones
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+We are developing this project symmetrically with the following structured milestones:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- [x] **Milestone 1:** Foundation & Git Configuration (Vite + TS setup, Basic Layouts)
+- [ ] **Milestone 2:** Theming & Styling System (Global variables, Custom premium typography)
+- [ ] **Milestone 3:** 3D Elements Integration (Three.js canvas setup, WebGL models/particles)
+- [ ] **Milestone 4:** Fluid Scroll Animations (GSAP scroll triggers, Lenis smooth scroll)
+- [ ] **Milestone 5:** Core Sections Implementation (Hero, About, Projects, Contact blocks)
+- [ ] **Milestone 6:** Polish & Optimization (SEO, Performance checks, Loading States)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Local Development Setup
+
+To run this project locally on your machine:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Mahimrio/My_Portfolio.git
+   ```
+2. **Navigate to directory:**
+   ```bash
+   cd My_Portfolio
+   ```
+3. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+4. **Run Development Server:**
+   ```bash
+   npm run dev
+   ```
+   > The application will typically start running at `http://localhost:5173`
+
+---
+*Designed & Developed with ❤️ by Mahimrio.*

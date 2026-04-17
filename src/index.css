@@ -1,8 +1,26 @@
 :root {
-  --bg-color: #0d0d0d;
-  --text-color: #ffffff;
+  /* Colors */
+  --bg-color: #050505;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a0a0a0;
   --primary-accent: #00ff88;
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+  
+  /* Typography */
+  --font-main: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -13,9 +31,10 @@
 
 body {
   background-color: var(--bg-color);
-  color: var(--text-color);
+  color: var(--text-primary);
   font-family: var(--font-main);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -37,24 +56,28 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 5%;
+  padding: var(--spacing-md) 5%;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 100;
-  backdrop-filter: blur(10px);
+  background: rgba(5, 5, 5, 0.5);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
 }
 
 .nav-logo {
   font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 2px;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
 .nav-links a {
-  margin-left: 2rem;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
+  margin-left: var(--spacing-md);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
 }
 
 .nav-links a:hover {
@@ -63,9 +86,10 @@ a {
 
 .footer {
   text-align: center;
-  padding: 2rem;
-  font-size: 0.8rem;
-  opacity: 0.7;
+  padding: var(--spacing-md);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--card-border);
 }
 
 .hero-section {
@@ -80,10 +104,98 @@ a {
 .hero-section h1 {
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 800;
 }
 
 .hero-section p {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  opacity: 0.8;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+/* UI Components */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-accent);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary-accent);
+  border: 1px solid var(--primary-accent);
+}
+
+.btn-outline:hover {
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ui-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: var(--spacing-md);
+  backdrop-filter: blur(10px);
+  transition: transform var(--transition-normal);
+}
+
+.ui-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.ui-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-sm);
+}
+
+.ui-label {
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.ui-input {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  transition: border-color var(--transition-fast);
+}
+
+.ui-input:focus {
+  outline: none;
+  border-color: var(--primary-accent);
 }

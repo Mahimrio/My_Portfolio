@@ -93,25 +93,44 @@ a {
 }
 
 .hero-section {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 0 5%;
+  position: relative;
 }
 
-.hero-section h1 {
+.hero-content {
+  max-width: 800px;
+  z-index: 10;
+}
+
+.hero-title {
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 1.1;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
   font-weight: 800;
+  background: linear-gradient(to right, #fff, #a0a0a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.hero-section p {
+.hero-subtitle {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 400;
+  color: var(--primary-accent);
+  margin-bottom: var(--spacing-sm);
+  font-family: var(--font-mono);
+}
+
+.hero-description {
   font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--text-secondary);
-  max-width: 600px;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 /* UI Components */
@@ -209,4 +228,87 @@ a {
   height: 100vh;
   z-index: -1;
   pointer-events: auto;
+}
+
+/* Sections */
+.content-section {
+  padding: var(--spacing-xl) 5%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-primary);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.about-card h3 {
+  color: var(--primary-accent);
+  margin-bottom: var(--spacing-sm);
+}
+
+.skills-container {
+  margin-top: var(--spacing-lg);
+}
+
+.skills-title {
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.skills-marquee {
+  margin-bottom: var(--spacing-sm);
+  overflow: hidden;
+}
+
+.skill-pill {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  margin: 0 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+  border-radius: 50px;
+  font-family: var(--font-mono);
+  color: var(--primary-accent);
+  white-space: nowrap;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  flex-grow: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--primary-accent);
+  border-radius: 4px;
 }

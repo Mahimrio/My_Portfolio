@@ -286,3 +286,29 @@ a {
   color: var(--primary-accent);
   white-space: nowrap;
 }
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  flex-grow: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--primary-accent);
+  border-radius: 4px;
+}

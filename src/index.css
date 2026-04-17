@@ -287,6 +287,21 @@ a {
   white-space: nowrap;
 }
 
+/* Custom Marquee */
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll linear infinite;
+  min-width: 100%;
+}
+.marquee-reverse {
+  animation-direction: reverse;
+}
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); }
+}
+
 .project-card {
   display: flex;
   flex-direction: column;

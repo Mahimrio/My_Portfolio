@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <header className="navbar">
-      <div className="nav-logo">Portfolio</div>
+      <div className="nav-logo">Rianto<span style={{ color: 'var(--primary-accent)' }}>.dev</span></div>
       <button
         className={`hamburger ${menuOpen ? 'hamburger-active' : ''}`}
         onClick={() => setMenuOpen(!menuOpen)}
@@ -21,6 +21,7 @@ const Navbar = () => {
       </button>
       <nav className={`nav-links ${menuOpen ? 'nav-open' : ''}`}>
         <a href="#about" onClick={handleLinkClick}>About</a>
+        <a href="#education" onClick={handleLinkClick}>Education</a>
         <a href="#skills" onClick={handleLinkClick}>Skills</a>
         <a href="#projects" onClick={handleLinkClick}>Projects</a>
         <a href="#contact" onClick={handleLinkClick}>Contact</a>

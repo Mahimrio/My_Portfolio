@@ -2,8 +2,34 @@ import React from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 
-const skills1 = ["React.js", "TypeScript", "Three.js", "GSAP", "Next.js", "Tailwind CSS"];
-const skills2 = ["Node.js", "WebGL", "Figma", "Redux", "Framer Motion", "Vite"];
+const languages = ["Assembly", "C", "C++", "Java", "JavaScript", "TypeScript"];
+const frameworks = ["React.js", "Next.js", "Node.js", "Django", "PHP Laravel"];
+const databases = ["MySQL", "MSSQL", "MongoDB", "Firebase", "Supabase"];
+const tools = ["Git", "VS Code", "Arduino", "Proteus", "iGraphics"];
+
+const education = [
+  {
+    degree: "BSc in CSE",
+    status: "Ongoing",
+    institution: "Ahsanullah University of Science & Technology (AUST)",
+    result: "CGPA: 3.5+",
+    year: "2023 – Present",
+  },
+  {
+    degree: "HSC",
+    status: "",
+    institution: "Shaheed Police Smrity College",
+    result: "GPA: 5.00",
+    year: "2022",
+  },
+  {
+    degree: "SSC",
+    status: "",
+    institution: "Monipur High School and College",
+    result: "GPA: 5.00",
+    year: "2020",
+  },
+];
 
 const CustomMarquee = ({ children, direction = 'left', speed = 40 }: { children: React.ReactNode, direction?: 'left'|'right', speed?: number }) => {
   return (
@@ -29,41 +55,102 @@ const AboutSection = () => {
           <Card className="about-card">
             <h3>Who I am</h3>
             <p>
-              I am a passionate creative developer obsessed with interactive design and high-performance web applications. I bridge the gap between complex engineering and beautiful, intuitive interfaces.
+              I am a motivated Computer Science & Engineering student at AUST with hands-on experience in full-stack web development and embedded systems. I'm passionate about building innovative solutions that solve real-world problems.
             </p>
           </Card>
         </Reveal>
 
         <Reveal direction="left" delay={0.4}>
           <Card className="about-card">
-            <h3>My Philosophy</h3>
+            <h3>What I Do</h3>
             <p>
-              The web should be an experience. By combining modern frameworks with WebGL and fluid animation engines, I construct digital products that feel alive and engaging to the user.
+              From building event management platforms to designing autonomous fire-fighting robots, I love working across the full technology stack. I'm eager to contribute technical skills and a passion for problem-solving to dynamic projects.
             </p>
           </Card>
         </Reveal>
       </div>
 
+      {/* Education Section */}
+      <Reveal direction="up" delay={0.3}>
+        <div id="education" className="education-container">
+          <h3 className="skills-title">Education</h3>
+          <div className="education-timeline">
+            {education.map((edu, i) => (
+              <div key={i} className="education-item">
+                <div className="edu-dot" />
+                <Card className="education-card">
+                  <div className="edu-header">
+                    <h4>
+                      {edu.degree}
+                      {edu.status && <span className="edu-status">{edu.status}</span>}
+                    </h4>
+                    <span className="edu-year">{edu.year}</span>
+                  </div>
+                  <p className="edu-institution">{edu.institution}</p>
+                  <p className="edu-result">{edu.result}</p>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Skills Section */}
       <Reveal direction="up" delay={0.6}>
         <div id="skills" className="skills-container">
-          <h3 className="skills-title">Core Technologies</h3>
+          <h3 className="skills-title">Technical Skills</h3>
+
+          <p className="skill-category-label">Languages</p>
           <div className="skills-marquee">
             <CustomMarquee speed={30}>
-              {skills1.map((skill, index) => (
-                <span key={`s1-${index}`} className="skill-pill">
+              {languages.map((skill, index) => (
+                <span key={`lang-${index}`} className="skill-pill">
                   {skill}
                 </span>
               ))}
             </CustomMarquee>
           </div>
+
+          <p className="skill-category-label">Frameworks & Technologies</p>
           <div className="skills-marquee">
             <CustomMarquee speed={25} direction="right">
-               {skills2.map((skill, index) => (
-                <span key={`s2-${index}`} className="skill-pill">
+              {frameworks.map((skill, index) => (
+                <span key={`fw-${index}`} className="skill-pill">
                   {skill}
                 </span>
               ))}
             </CustomMarquee>
+          </div>
+
+          <p className="skill-category-label">Databases & Tools</p>
+          <div className="skills-marquee">
+            <CustomMarquee speed={28}>
+              {[...databases, ...tools].map((skill, index) => (
+                <span key={`db-${index}`} className="skill-pill">
+                  {skill}
+                </span>
+              ))}
+            </CustomMarquee>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Soft Skills */}
+      <Reveal direction="up" delay={0.8}>
+        <div className="soft-skills-container">
+          <h3 className="skills-title">Strengths</h3>
+          <div className="soft-skills-grid">
+            {[
+              { icon: "🤝", label: "Teamwork & Collaboration" },
+              { icon: "🧩", label: "Problem-Solving" },
+              { icon: "📚", label: "Tutoring & Mentoring" },
+              { icon: "🧠", label: "Analytical Thinking" },
+            ].map((item, i) => (
+              <div key={i} className="soft-skill-chip">
+                <span className="soft-skill-icon">{item.icon}</span>
+                <span>{item.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </Reveal>

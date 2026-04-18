@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 

@@ -1,7 +1,5 @@
-import React from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
-import Button from '../ui/Button';
 
 const projects = [
   {

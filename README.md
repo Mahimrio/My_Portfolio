@@ -28,14 +28,21 @@ This repository contains the source code for a stunning, highly animated portfol
 
 ## 📅 Roadmap / Milestones
 
-We are developing this project symmetrically with the following structured milestones:
+We successfully developed this project symmetrically with the following structured milestones:
 
 - [x] **Milestone 1:** Foundation & Git Configuration (Vite + TS setup, Basic Layouts)
-- [ ] **Milestone 2:** Theming & Styling System (Global variables, Custom premium typography)
-- [ ] **Milestone 3:** 3D Elements Integration (Three.js canvas setup, WebGL models/particles)
-- [ ] **Milestone 4:** Fluid Scroll Animations (GSAP scroll triggers, Lenis smooth scroll)
-- [ ] **Milestone 5:** Core Sections Implementation (Hero, About, Projects, Contact blocks)
-- [ ] **Milestone 6:** Polish & Optimization (SEO, Performance checks, Loading States)
+- [x] **Milestone 2:** Theming & Styling System (Global variables, Custom premium typography)
+- [x] **Milestone 3:** 3D Elements Integration (Three.js canvas setup, WebGL models/particles)
+- [x] **Milestone 4:** Fluid Scroll Animations (GSAP scroll triggers, Lenis smooth scroll)
+- [x] **Milestone 5:** Core Sections Implementation (Hero, About, Projects, Contact blocks)
+- [x] **Milestone 6:** Initial Polish (Loader states, UI alignments)
+- [x] **Milestone 7:** Bug Fixes 🐛 (Resolved GSAP hooks, implemented performance-first Custom CSS Marquee)
+- [x] **Milestone 8:** Hero Visual 🖼️ (Integrated profile imagery and rich glowing CSS pseudo-animations)
+- [x] **Milestone 9:** Functional Contact Form 📬 (Integrated EmailJS with granular idle/sending/success UI states)
+- [x] **Milestone 10:** Navigation Enhancement 🧭 (IntersectionObservers for active scroll-state highlighting & GSAP progress bars)
+- [x] **Milestone 11:** Content Expansion 📋 (Filled project gallery, additional marquee icons, robust copy, Download CV button)
+- [x] **Milestone 12:** Performance & A11y ⚡♿ (React.lazy / Suspense for WebGL layer, `aria` accessibility, refined Lenis scroll physics, sophisticated UI hover spring animations)
+- [x] **Milestone 13:** Polish & Deploy 🚀 (Expanded rich footer, resolved all strict TS compilation factors, deployed seamlessly via `gh-pages`)
 
 ---
 

@@ -121,7 +121,9 @@ const Navbar = () => {
             key={link.href}
             href={link.href}
             onClick={handleLinkClick}
-            ref={(el) => (linksRef.current[i] = el as HTMLAnchorElement)}
+            ref={(el) => {
+              if (el) linksRef.current[i] = el;
+            }}
             className={activeSection === link.href ? 'nav-active' : ''}
           >
             {link.label}

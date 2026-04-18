@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
-import * as THREE from 'three';
 
 const Particles = () => {
   const ref = useRef<any>(null);

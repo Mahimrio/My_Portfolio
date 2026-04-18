@@ -1,11 +1,17 @@
 import React from 'react';
 import Reveal from '../animations/Reveal';
 import Button from '../ui/Button';
+import heroImg from '../../assets/hero.png';
 
 const HeroSection = () => {
   return (
     <section id="hero" className="hero-section">
       <div className="hero-content">
+        <Reveal direction="down" delay={0.1}>
+          <div className="hero-photo-wrapper">
+            <img src={heroImg} alt="Mahim Abdullah Rianto" className="hero-photo" />
+          </div>
+        </Reveal>
         <Reveal direction="down" delay={0.2}>
           <p className="hero-greeting">Hello, I'm</p>
         </Reveal>

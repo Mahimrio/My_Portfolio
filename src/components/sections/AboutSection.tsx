@@ -1,7 +1,43 @@
 import React from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
-import Marquee from 'react-fast-marquee';
+
+// Pure CSS marquee — no external dependency, works with all Vite/React versions
+interface CSSMarqueeProps {
+  children: React.ReactNode;
+  speed?: number;
+  direction?: 'left' | 'right';
+  pauseOnHover?: boolean;
+}
+
+const CSSMarquee: React.FC<CSSMarqueeProps> = ({
+  children,
+  speed = 40,
+  direction = 'left',
+  pauseOnHover = true,
+}) => {
+  const duration = `${Math.round(200 / (speed / 20))}s`;
+  const items = React.Children.toArray(children);
+  // Duplicate items to create a seamless loop, with unique keys per copy
+  const allItems = [
+    ...items.map((item, i) => <React.Fragment key={`orig-${i}`}>{item}</React.Fragment>),
+    ...items.map((item, i) => <React.Fragment key={`copy1-${i}`}>{item}</React.Fragment>),
+    ...items.map((item, i) => <React.Fragment key={`copy2-${i}`}>{item}</React.Fragment>),
+  ];
+  return (
+    <div className="css-marquee-wrapper" style={pauseOnHover ? undefined : undefined}>
+      <div
+        className={`css-marquee-track ${pauseOnHover ? 'pause-on-hover' : ''}`}
+        style={{
+          animationDuration: duration,
+          animationDirection: direction === 'right' ? 'reverse' : 'normal',
+        }}
+      >
+        {allItems}
+      </div>
+    </div>
+  );
+};
 
 const languages = ["Assembly", "C", "C++", "Java", "JavaScript", "TypeScript"];
 const frameworks = ["React.js", "Next.js", "Node.js", "Django", "PHP Laravel"];
@@ -91,35 +127,35 @@ const AboutSection = () => {
 
           <p className="skill-category-label">Languages</p>
           <div className="skills-marquee">
-            <Marquee speed={40} gradient={false} autoFill={true} pauseOnHover={true}>
+            <CSSMarquee speed={40} direction="left" pauseOnHover={true}>
               {languages.map((skill, index) => (
                 <span key={`lang-${index}`} className="skill-pill">
                   {skill}
                 </span>
               ))}
-            </Marquee>
+            </CSSMarquee>
           </div>
 
           <p className="skill-category-label">Frameworks & Technologies</p>
           <div className="skills-marquee">
-            <Marquee speed={35} direction="right" gradient={false} autoFill={true} pauseOnHover={true}>
+            <CSSMarquee speed={35} direction="right" pauseOnHover={true}>
               {frameworks.map((skill, index) => (
                 <span key={`fw-${index}`} className="skill-pill">
                   {skill}
                 </span>
               ))}
-            </Marquee>
+            </CSSMarquee>
           </div>
 
           <p className="skill-category-label">Databases & Tools</p>
           <div className="skills-marquee">
-            <Marquee speed={38} gradient={false} autoFill={true} pauseOnHover={true}>
+            <CSSMarquee speed={38} direction="left" pauseOnHover={true}>
               {[...databases, ...tools].map((skill, index) => (
                 <span key={`db-${index}`} className="skill-pill">
                   {skill}
                 </span>
               ))}
-            </Marquee>
+            </CSSMarquee>
           </div>
         </div>
       </Reveal>

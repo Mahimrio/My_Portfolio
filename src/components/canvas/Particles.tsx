@@ -21,15 +21,19 @@ const Particles = () => {
     return positions;
   });
 
+  const groupRef = useRef<any>(null);
+
   useFrame((state, delta) => {
+    if (groupRef.current) {
+      // Automatic slow continuous rotation
+      groupRef.current.rotation.x -= delta / 15;
+      groupRef.current.rotation.y -= delta / 20;
+    }
+
     if (ref.current) {
-      // Automatic slow rotation
-      ref.current.rotation.x -= delta / 15;
-      ref.current.rotation.y -= delta / 20;
-      
-      // Interactive mouse-push effect
-      const targetX = state.pointer.x * 0.2;
-      const targetY = state.pointer.y * 0.2;
+      // Interactive mouse-tilt effect
+      const targetX = state.pointer.x * 0.3;
+      const targetY = state.pointer.y * 0.3;
       
       ref.current.rotation.y += (targetX - ref.current.rotation.y) * 0.05;
       ref.current.rotation.x += (-targetY - ref.current.rotation.x) * 0.05;
@@ -37,7 +41,7 @@ const Particles = () => {
   });
 
   return (
-    <group rotation={[0, 0, 0]}>
+    <group ref={groupRef}>
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent

@@ -70,6 +70,7 @@ const SocialsSection = () => {
               target="_blank" 
               rel="noopener noreferrer" 
               className="social-card-link"
+              aria-label={`Connect with Mahim on ${social.name}`}
             >
               <Card className="social-card">
                 <div className="social-card-inner">

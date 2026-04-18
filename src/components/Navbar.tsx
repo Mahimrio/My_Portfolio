@@ -126,7 +126,7 @@ const Navbar = () => {
             }}
             className={activeSection === link.href ? 'nav-active' : ''}
           >
-            {link.label}
+            <span>{link.label}</span>
           </a>
         ))}
       </nav>

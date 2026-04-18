@@ -28,6 +28,14 @@ const HeroSection = () => {
         </Reveal>
         <Reveal direction="up" delay={0.9}>
           <div className="hero-cta" style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Button variant="outline" onClick={() => {
+              const link = document.createElement('a');
+              link.href = `${import.meta.env.BASE_URL}cv.pdf`;
+              link.download = 'Mahim_Abdullah_Rianto_CV.pdf';
+              link.click();
+            }}>
+              Download CV
+            </Button>
             <Button variant="primary" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>
               View Projects
             </Button>

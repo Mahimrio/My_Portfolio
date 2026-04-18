@@ -20,7 +20,7 @@ const Footer = () => {
 
       <div style={{ width: '100%', maxWidth: '600px', height: '1px', background: 'var(--card-border)', opacity: 0.5 }} />
 
-      <p style={{ margin: 0 }}>&copy; {new Date().getFullYear()} Mahim Abdullah Rianto. All rights reserved.</p>
+      <p style={{ margin: 0 }}><span>&copy; {new Date().getFullYear()} Mahim Abdullah Rianto. All rights reserved.</span></p>
     </footer>
   );
 };

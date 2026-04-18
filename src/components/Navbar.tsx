@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const menuRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLAnchorElement[]>([]);
 
   useEffect(() => {
@@ -50,8 +55,48 @@ const Navbar = () => {
     { href: "#socials", label: "Socials" },
   ];
 
+  useEffect(() => {
+    // Scroll progress bar
+    gsap.to(progressBarRef.current, {
+      width: "100%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.3
+      }
+    });
+
+    // Intersection Observer for active sections
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -60% 0px" } // trigger when near the middle
+    );
+
+    navLinks.forEach((link) => {
+      const sectionId = link.href.split('#')[1];
+      const section = document.getElementById(sectionId);
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <header className="navbar">
+    <>
+      <div className="scroll-progress-container">
+        <div className="scroll-progress-bar" ref={progressBarRef} />
+      </div>
+      <header className="navbar">
       <div className="nav-logo">Rianto<span style={{ color: 'var(--primary-accent)' }}>.dev</span></div>
       
       <button
@@ -77,12 +122,14 @@ const Navbar = () => {
             href={link.href}
             onClick={handleLinkClick}
             ref={(el) => (linksRef.current[i] = el as HTMLAnchorElement)}
+            className={activeSection === link.href ? 'nav-active' : ''}
           >
             {link.label}
           </a>
         ))}
       </nav>
     </header>
+  </>
   );
 };
 

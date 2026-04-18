@@ -59,7 +59,7 @@ const SocialsSection = () => {
   return (
     <section id="presence" className="content-section">
       <Reveal direction="down">
-        <h2 className="section-title" style={{ textAlign: 'center' }}><span>Social Presence</span></h2>
+        <h2 className="section-title" style={{ textAlign: 'center' }}><span>Connect with Me</span></h2>
       </Reveal>
 
       <div className="presence-grid">

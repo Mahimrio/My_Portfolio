@@ -30,7 +30,7 @@ const HeroSection = () => {
           <div className="hero-cta" style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Button variant="outline" onClick={() => {
               const link = document.createElement('a');
-              link.href = '/cv.pdf';
+              link.href = `${import.meta.env.BASE_URL}cv.pdf`;
               link.download = 'Mahim_Abdullah_Rianto_CV.pdf';
               link.click();
             }}>

@@ -73,16 +73,21 @@ const Navbar = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(`#${entry.target.id}`);
+            if (entry.target.id === 'hero') {
+              setActiveSection('');
+            } else {
+              setActiveSection(`#${entry.target.id}`);
+            }
           }
         });
       },
-      { rootMargin: "-40% 0px -60% 0px" } // trigger when near the middle
+      { rootMargin: "-30% 0px -70% 0px" } // trigger when near top
     );
 
-    navLinks.forEach((link) => {
-      const sectionId = link.href.split('#')[1];
-      const section = document.getElementById(sectionId);
+    // Observe all sections including hero to clear the active state at the top
+    const sectionIds = ['hero', ...navLinks.map(link => link.href.split('#')[1])];
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
       if (section) observer.observe(section);
     });
 

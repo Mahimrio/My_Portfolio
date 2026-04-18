@@ -127,7 +127,7 @@ const AboutSection = () => {
 
           <p className="skill-category-label">Languages</p>
           <div className="skills-marquee">
-            <CSSMarquee speed={40} direction="left" pauseOnHover={true}>
+            <CSSMarquee speed={65} direction="left" pauseOnHover={true}>
               {languages.map((skill, index) => (
                 <span key={`lang-${index}`} className="skill-pill">
                   {skill}
@@ -138,7 +138,7 @@ const AboutSection = () => {
 
           <p className="skill-category-label">Frameworks & Technologies</p>
           <div className="skills-marquee">
-            <CSSMarquee speed={35} direction="right" pauseOnHover={true}>
+            <CSSMarquee speed={55} direction="right" pauseOnHover={true}>
               {frameworks.map((skill, index) => (
                 <span key={`fw-${index}`} className="skill-pill">
                   {skill}
@@ -149,7 +149,7 @@ const AboutSection = () => {
 
           <p className="skill-category-label">Databases & Tools</p>
           <div className="skills-marquee">
-            <CSSMarquee speed={38} direction="left" pauseOnHover={true}>
+            <CSSMarquee speed={60} direction="left" pauseOnHover={true}>
               {[...databases, ...tools].map((skill, index) => (
                 <span key={`db-${index}`} className="skill-pill">
                   {skill}

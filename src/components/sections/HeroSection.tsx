@@ -13,17 +13,17 @@ const HeroSection = () => {
           </div>
         </Reveal>
         <Reveal direction="down" delay={0.2}>
-          <p className="hero-greeting">Hello, I'm</p>
+          <p className="hero-greeting"><span>Hello, I'm</span></p>
         </Reveal>
         <Reveal direction="down" delay={0.3}>
-          <h1 className="hero-title">Mahim Abdullah Rianto</h1>
+          <h1 className="hero-title"><span>Mahim Abdullah Rianto</span></h1>
         </Reveal>
         <Reveal direction="up" delay={0.5}>
-          <h2 className="hero-subtitle">Full-Stack Developer &amp; CSE Student</h2>
+          <h2 className="hero-subtitle"><span>Full-Stack Developer &amp; CSE Student</span></h2>
         </Reveal>
         <Reveal direction="up" delay={0.7}>
           <p className="hero-description">
-            Motivated and detail-oriented Computer Science &amp; Engineering student at Ahsanullah University of Science &amp; Technology (AUST), with hands-on experience in full-stack web development and embedded systems.
+            <span>Motivated and detail-oriented Computer Science &amp; Engineering student at Ahsanullah University of Science &amp; Technology (AUST), with hands-on experience in full-stack web development and embedded systems.</span>
           </p>
         </Reveal>
         <Reveal direction="up" delay={0.9}>
@@ -34,13 +34,13 @@ const HeroSection = () => {
               link.download = 'Mahim_Abdullah_Rianto_CV.pdf';
               link.click();
             }}>
-              Download CV
+              <span>Download CV</span>
             </Button>
             <Button variant="primary" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>
-              View Projects
+              <span>View Projects</span>
             </Button>
             <Button variant="outline" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-              Contact Me
+              <span>Contact Me</span>
             </Button>
           </div>
         </Reveal>

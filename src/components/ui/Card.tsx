@@ -8,7 +8,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ children, className = '' }) => {
   return (
     <div className={`ui-card ${className}`}>
-      {children}
+      <div style={{ display: 'contents' }}>{children}</div>
     </div>
   );
 };

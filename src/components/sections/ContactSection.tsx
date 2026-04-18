@@ -76,7 +76,7 @@ const ContactSection = () => {
   return (
     <section id="contact" className="content-section">
       <Reveal direction="down">
-        <h2 className="section-title" style={{ textAlign: 'center' }}>Get In Touch</h2>
+        <h2 className="section-title" style={{ textAlign: 'center' }}><span>Get In Touch</span></h2>
       </Reveal>
 
       {/* Contact Info Grid */}
@@ -86,11 +86,11 @@ const ContactSection = () => {
             <div key={i} className="contact-info-chip">
               <span className="contact-info-icon" style={{ color: 'var(--primary-accent)' }}>{item.icon}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <span className="contact-info-label">{item.label}</span>
+                <span className="contact-info-label"><span>{item.label}</span></span>
                 {item.href ? (
-                  <a href={item.href} className="contact-info-value contact-info-link" style={{ fontSize: '0.8rem' }}>{item.value}</a>
+                  <a href={item.href} className="contact-info-value contact-info-link" style={{ fontSize: '0.8rem' }}><span>{item.value}</span></a>
                 ) : (
-                  <span className="contact-info-value" style={{ fontSize: '0.8rem' }}>{item.value}</span>
+                  <span className="contact-info-value" style={{ fontSize: '0.8rem' }}><span>{item.value}</span></span>
                 )}
               </div>
             </div>
@@ -101,7 +101,7 @@ const ContactSection = () => {
       <div style={{ maxWidth: '600px', margin: '0 auto', width: '100%' }}>
         <Reveal direction="up" delay={0.3}>
           <Card>
-            <h3 style={{ marginBottom: '1.5rem', color: 'var(--primary-accent)', fontSize: '1.2rem' }}>Send me a message</h3>
+            <h3 style={{ marginBottom: '1.5rem', color: 'var(--primary-accent)', fontSize: '1.2rem' }}><span>Send me a message</span></h3>
             <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <Input 
                 name="user_name" 
@@ -122,7 +122,7 @@ const ContactSection = () => {
               />
               
               <div className="ui-input-wrapper">
-                <label className="ui-label" htmlFor="message">Message</label>
+                <label className="ui-label" htmlFor="message"><span>Message</span></label>
                 <textarea 
                   name="message" 
                   id="message"
@@ -143,17 +143,17 @@ const ContactSection = () => {
                   style={{ width: '100%', opacity: status === 'sending' ? 0.7 : 1 }}
                   disabled={status === 'sending'}
                 >
-                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                  <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
                 </Button>
                 
                 {status === 'success' && (
                   <p style={{ color: 'var(--primary-accent)', textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
-                    Message sent! I'll reply soon. ✅
+                    <span>Message sent! I'll reply soon. ✅</span>
                   </p>
                 )}
                 {status === 'error' && (
                   <p style={{ color: '#ff4444', textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
-                    Oops, something went wrong. Please connect via email mostly.
+                    <span>Oops, something went wrong. Please connect via email mostly.</span>
                   </p>
                 )}
               </div>

@@ -102,7 +102,7 @@ const Navbar = () => {
         <div className="scroll-progress-bar" ref={progressBarRef} />
       </div>
       <header className="navbar">
-      <div className="nav-logo">Rianto<span style={{ color: 'var(--primary-accent)' }}>.dev</span></div>
+      <div className="nav-logo"><span>Rianto</span><span style={{ color: 'var(--primary-accent)' }}>.dev</span></div>
       
       <button
         className={`hamburger ${menuOpen ? 'hamburger-active' : ''}`}

@@ -7,7 +7,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input: React.FC<InputProps> = ({ label, id, ...props }) => {
   return (
     <div className="ui-input-wrapper">
-      {label && <label htmlFor={id} className="ui-label">{label}</label>}
+      {label && <label htmlFor={id} className="ui-label"><span>{label}</span></label>}
       <input id={id} className="ui-input" {...props} />
     </div>
   );

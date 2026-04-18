@@ -78,8 +78,8 @@ const SocialsSection = () => {
                     {social.icon}
                   </div>
                   <div className="social-info">
-                    <h3 className="social-name">{social.name}</h3>
-                    <span className="social-action">Connect ↗</span>
+                    <h3 className="social-name"><span>{social.name}</span></h3>
+                    <span className="social-action"><span>Connect ↗</span></span>
                   </div>
                 </div>
               </Card>

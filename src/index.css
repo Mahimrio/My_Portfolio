@@ -476,12 +476,20 @@ a {
 .edu-status {
   font-size: 0.7rem;
   padding: 0.15rem 0.6rem;
-  background: rgba(0, 255, 136, 0.15);
-  color: var(--primary-accent);
   border-radius: 50px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+.status-ongoing {
+  background: rgba(0, 255, 136, 0.15);
+  color: var(--primary-accent);
+}
+
+.status-completed {
+  background: rgba(0, 212, 255, 0.15);
+  color: #00d4ff;
 }
 
 .edu-year {
@@ -502,6 +510,59 @@ a {
   font-weight: 600;
   font-size: 0.95rem;
   font-family: var(--font-mono);
+}
+
+.edu-details {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.edu-detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.edu-detail-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+}
+
+.edu-detail-content {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.edu-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edu-detail-list li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.edu-detail-list li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--primary-accent);
+  font-size: 1.1rem;
 }
 
 /* ========== SKILLS ========== */

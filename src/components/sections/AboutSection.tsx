@@ -39,10 +39,10 @@ const CSSMarquee: React.FC<CSSMarqueeProps> = ({
   );
 };
 
-const languages = ["Assembly", "C", "C++", "Java", "JavaScript", "TypeScript"];
-const frameworks = ["React.js", "Next.js", "Node.js", "Django", "PHP Laravel"];
-const databases = ["MySQL", "MSSQL", "MongoDB", "Firebase", "Supabase"];
-const tools = ["Git", "VS Code", "Arduino", "Proteus", "iGraphics"];
+const languages = ["Assembly", "C", "C++", "Java", "Python", "JavaScript", "TypeScript"];
+const frameworks = ["React.js", "Next.js", "Node.js", "Django", "PHP Laravel", "TailwindCSS"];
+const databases = ["MySQL", "MSSQL", "PostgreSQL", "MongoDB", "Firebase", "Supabase"];
+const tools = ["Git", "Docker", "Postman", "VS Code", "Arduino", "Proteus", "iGraphics"];
 
 const education = [
   {
@@ -80,7 +80,7 @@ const AboutSection = () => {
           <Card className="about-card">
             <h3>Who I am</h3>
             <p>
-              I am a motivated Computer Science & Engineering student at AUST with hands-on experience in full-stack web development and embedded systems. I'm passionate about building innovative solutions that solve real-world problems.
+              I'm a Full-Stack Web Developer & Computer Science undergraduate at AUST. I specialize in building performant, modern web applications and have hands-on experience designing embedded systems. I love turning complex problems into elegant, user-centric solutions.
             </p>
           </Card>
         </Reveal>
@@ -89,7 +89,7 @@ const AboutSection = () => {
           <Card className="about-card">
             <h3>What I Do</h3>
             <p>
-              From building event management platforms to designing autonomous fire-fighting robots, I love working across the full technology stack. I'm eager to contribute technical skills and a passion for problem-solving to dynamic projects.
+              From architecting full-stack web platforms to programming autonomous robotics, I thrive across the entire technology stack. I'm actively seeking opportunities to contribute my technical expertise to ambitious teams and dynamic projects.
             </p>
           </Card>
         </Reveal>

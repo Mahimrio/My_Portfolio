@@ -31,6 +31,24 @@ const projects = [
     github: null,
     accent: "#ff6b35",
   },
+  {
+    title: "Interactive Portfolio",
+    subtitle: "Personal Web Showcase",
+    description: "A highly interactive, 3D animated personal portfolio website. Features smooth scrolling, performant CSS animations, and a responsive glassmorphic UI.",
+    tags: ["React.js", "TypeScript", "Vite", "GSAP"],
+    role: "Frontend Developer",
+    github: "https://github.com/Mahimrio/My_Portfolio",
+    accent: "#a855f7",
+  },
+  {
+    title: "Task Flow Pro",
+    subtitle: "Productivity Application",
+    description: "A comprehensive task management dashboard with real-time updates, kanban boards, and team collaboration features.",
+    tags: ["Next.js", "TailwindCSS", "Supabase"],
+    role: "Full-Stack Developer",
+    github: null,
+    accent: "#eab308",
+  },
 ];
 
 const ProjectsSection = () => {

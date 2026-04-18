@@ -32,7 +32,7 @@ const Navbar = () => {
       gsap.to(menuRef.current, {
         right: '-100%',
         duration: 0.5,
-        ease: 'power3.inIn',
+        ease: 'power3.inOut',
       });
     }
   }, [menuOpen]);

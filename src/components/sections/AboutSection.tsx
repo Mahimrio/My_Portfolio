@@ -1,10 +1,7 @@
 import React from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
-import MarqueePackage from 'react-fast-marquee';
-
-// Fix for ESM/CJS interop issues with react-fast-marquee in some environments
-const Marquee = (MarqueePackage as any).default || MarqueePackage;
+import Marquee from 'react-fast-marquee';
 
 const languages = ["Assembly", "C", "C++", "Java", "JavaScript", "TypeScript"];
 const frameworks = ["React.js", "Next.js", "Node.js", "Django", "PHP Laravel"];
@@ -16,7 +13,7 @@ const education = [
     degree: "BSc in CSE",
     status: "Ongoing",
     institution: "Ahsanullah University of Science & Technology (AUST)",
-    result: "CGPA: 3.5+",
+    result: "CGPA: 3.50 / 4.00",
     year: "2023 – Present",
   },
   {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 import Input from '../ui/Input';
@@ -37,12 +38,39 @@ const contactInfo = [
 ];
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const formRef = useRef<HTMLFormElement>(null);
+  const [formData, setFormData] = useState({ user_name: '', user_email: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thanks ${formData.name}! Your message has been simulated to send.`);
-    setFormData({ name: '', email: '', message: '' });
+    if (!formRef.current) return;
+    
+    setStatus('sending');
+
+    // Replace these values via the .env file in the root
+    const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
+    const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+
+    if (!serviceID || !templateID || !publicKey) {
+      console.warn("EmailJS keys missing. Make sure .env is configured.");
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+
+    emailjs.sendForm(serviceID, templateID, formRef.current, publicKey)
+      .then(() => {
+        setStatus('success');
+        setFormData({ user_name: '', user_email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 5000);
+      });
   };
 
   return (
@@ -74,29 +102,30 @@ const ContactSection = () => {
         <Reveal direction="up" delay={0.3}>
           <Card>
             <h3 style={{ marginBottom: '1.5rem', color: 'var(--primary-accent)', fontSize: '1.2rem' }}>Send me a message</h3>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <Input 
-                id="name" 
+                name="user_name" 
                 label="Name" 
                 placeholder="Your name" 
                 required 
-                value={formData.name}
-                onChange={e => setFormData({...formData, name: e.target.value})}
+                value={formData.user_name}
+                onChange={e => setFormData({...formData, user_name: e.target.value})}
               />
               <Input 
-                id="email" 
+                name="user_email" 
                 type="email" 
                 label="Email" 
                 placeholder="your@email.com" 
                 required 
-                value={formData.email}
-                onChange={e => setFormData({...formData, email: e.target.value})}
+                value={formData.user_email}
+                onChange={e => setFormData({...formData, user_email: e.target.value})}
               />
               
               <div className="ui-input-wrapper">
                 <label className="ui-label" htmlFor="message">Message</label>
                 <textarea 
-                  id="message" 
+                  name="message" 
+                  id="message"
                   className="ui-input" 
                   rows={5} 
                   placeholder="Hello, I'd like to work with you..."
@@ -107,7 +136,27 @@ const ContactSection = () => {
                 ></textarea>
               </div>
               
-              <Button type="submit" variant="primary" style={{ marginTop: '1rem' }}>Send Message</Button>
+              <div aria-live="polite" style={{ marginTop: '0.5rem' }}>
+                <Button 
+                  type="submit" 
+                  variant="primary" 
+                  style={{ width: '100%', opacity: status === 'sending' ? 0.7 : 1 }}
+                  disabled={status === 'sending'}
+                >
+                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                </Button>
+                
+                {status === 'success' && (
+                  <p style={{ color: 'var(--primary-accent)', textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
+                    Message sent! I'll reply soon. ✅
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p style={{ color: '#ff4444', textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem' }}>
+                    Oops, something went wrong. Please connect via email mostly.
+                  </p>
+                )}
+              </div>
             </form>
           </Card>
         </Reveal>

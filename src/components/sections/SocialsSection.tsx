@@ -57,29 +57,29 @@ const socials = [
 
 const SocialsSection = () => {
   return (
-    <section id="socials" className="content-section">
+    <section id="presence" className="content-section">
       <Reveal direction="down">
-        <h2 className="section-title" style={{ textAlign: 'center' }}>Social Presence</h2>
+        <h2 className="section-title" style={{ textAlign: 'center' }}><span>Social Presence</span></h2>
       </Reveal>
 
-      <div className="socials-grid">
+      <div className="presence-grid">
         {socials.map((social, i) => (
           <Reveal key={i} direction="up" delay={0.1 * i}>
             <a 
               href={social.url} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="social-card-link"
+              className="presence-card-link"
               aria-label={`Connect with Mahim on ${social.name}`}
             >
-              <Card className="social-card">
-                <div className="social-card-inner">
-                  <div className="social-icon-wrapper" style={{ color: social.color }}>
+              <Card className="presence-card">
+                <div className="presence-card-inner">
+                  <div className="presence-icon-wrapper" style={{ color: social.color }}>
                     {social.icon}
                   </div>
-                  <div className="social-info">
-                    <h3 className="social-name"><span>{social.name}</span></h3>
-                    <span className="social-action"><span>Connect ↗</span></span>
+                  <div className="presence-info">
+                    <h3 className="presence-name"><span>{social.name}</span></h3>
+                    <span className="presence-action"><span>Connect ↗</span></span>
                   </div>
                 </div>
               </Card>

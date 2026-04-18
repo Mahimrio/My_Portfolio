@@ -52,7 +52,7 @@ const Navbar = () => {
     { href: "#skills", label: "Skills" },
     { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" },
-    { href: "#socials", label: "Socials" },
+    { href: "#presence", label: "Socials" },
   ];
 
   useEffect(() => {

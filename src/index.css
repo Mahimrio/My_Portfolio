@@ -828,8 +828,8 @@ a {
   text-decoration: underline;
 }
 
-/* ========== SOCIALS ========== */
-.socials-grid {
+/* ========== PRESENCE (FORMERLY SOCIALS) ========== */
+.presence-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
@@ -838,12 +838,12 @@ a {
   width: 100%;
 }
 
-.social-card-link {
+.presence-card-link {
   text-decoration: none;
   display: block;
 }
 
-.social-card {
+.presence-card {
   padding: 1.25rem !important;
   height: 100%;
   cursor: pointer;
@@ -851,13 +851,13 @@ a {
   border: 1px solid var(--card-border) !important;
 }
 
-.social-card:hover {
+.presence-card:hover {
   background: rgba(255, 255, 255, 0.05) !important;
   border-color: var(--primary-accent) !important;
   transform: translateY(-8px);
 }
 
-.social-card-inner {
+.presence-card-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -865,7 +865,7 @@ a {
   gap: 1rem;
 }
 
-.social-icon-wrapper {
+.presence-icon-wrapper {
   background: rgba(255, 255, 255, 0.03);
   padding: 1rem;
   border-radius: 12px;
@@ -875,18 +875,18 @@ a {
   transition: transform var(--transition-normal);
 }
 
-.social-card:hover .social-icon-wrapper {
+.presence-card:hover .presence-icon-wrapper {
   transform: scale(1.1);
 }
 
-.social-name {
+.presence-name {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.25rem;
 }
 
-.social-action {
+.presence-action {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--primary-accent);
@@ -894,7 +894,7 @@ a {
   transition: opacity var(--transition-fast);
 }
 
-.social-card:hover .social-action {
+.presence-card:hover .presence-action {
   opacity: 1;
 }
 

@@ -15,7 +15,7 @@ const Footer = () => {
         <a href="#about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>About</span></a>
         <a href="#projects" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>Projects</span></a>
         <a href="#contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>Contact</span></a>
-        <a href="#socials" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>Socials</span></a>
+        <a href="#presence" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>Socials</span></a>
       </div>
 
       <div style={{ width: '100%', maxWidth: '600px', height: '1px', background: 'var(--card-border)', opacity: 0.5 }} />

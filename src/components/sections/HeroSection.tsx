@@ -1,7 +1,7 @@
 
 import Reveal from '../animations/Reveal';
 import Button from '../ui/Button';
-import heroImg from '../../assets/hero.png';
+import heroImg from '../../assets/my-photo.jpg';
 
 const HeroSection = () => {
   return (

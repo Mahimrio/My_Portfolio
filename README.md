@@ -15,7 +15,7 @@ This repository contains the source code for a stunning, highly animated portfol
 ## 🎯 Project Goals
 
 - **Performance-First**: Fast load times optimized via Vite.
-- **Fluid & Dynamic UX**: Complex scroll-triggered animations and fluid transitions mimicking industry-leading interactive portfolios.
+- **Fluid & Dynamic UX**: Complex scroll-triggered animations and fluid transitions.
 - **Modern UI Design**: Utilizing dark mode aesthetics, glassmorphism, and minimal typography.
 - **Responsive WebGL Layout**: Full 3D background canvases reacting to device orientation and mouse events without hurting mobile UX.
 

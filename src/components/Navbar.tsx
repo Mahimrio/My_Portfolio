@@ -25,6 +25,7 @@ const Navbar = () => {
         <a href="#skills" onClick={handleLinkClick}>Skills</a>
         <a href="#projects" onClick={handleLinkClick}>Projects</a>
         <a href="#contact" onClick={handleLinkClick}>Contact</a>
+        <a href="#socials" onClick={handleLinkClick}>Socials</a>
       </nav>
     </header>
   );

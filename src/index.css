@@ -451,6 +451,28 @@ a {
   overflow: hidden !important;
 }
 
+/* ========== PURE CSS MARQUEE ========== */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.css-marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.css-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll linear infinite;
+  will-change: transform;
+}
+
+.css-marquee-track.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
 .skill-pill {
   display: inline-block;
   padding: 0.75rem 2rem;

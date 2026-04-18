@@ -1,6 +1,10 @@
 import React from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
+import MarqueePackage from 'react-fast-marquee';
+
+// Fix for ESM/CJS interop issues with react-fast-marquee in some environments
+const Marquee = (MarqueePackage as any).default || MarqueePackage;
 
 const languages = ["Assembly", "C", "C++", "Java", "JavaScript", "TypeScript"];
 const frameworks = ["React.js", "Next.js", "Node.js", "Django", "PHP Laravel"];
@@ -30,18 +34,6 @@ const education = [
     year: "2020",
   },
 ];
-
-const CustomMarquee = ({ children, direction = 'left', speed = 40 }: { children: React.ReactNode, direction?: 'left'|'right', speed?: number }) => {
-  return (
-    <div style={{ display: 'flex', overflow: 'hidden', width: '100%', position: 'relative' }}>
-      <div className={`marquee-track ${direction === 'right' ? 'marquee-reverse' : ''}`} style={{ animationDuration: `${100 / speed}s` }}>
-        {children}
-        {children}
-        {children}
-      </div>
-    </div>
-  );
-};
 
 const AboutSection = () => {
   return (
@@ -102,35 +94,35 @@ const AboutSection = () => {
 
           <p className="skill-category-label">Languages</p>
           <div className="skills-marquee">
-            <CustomMarquee speed={30}>
+            <Marquee speed={40} gradient={false} autoFill={true} pauseOnHover={true}>
               {languages.map((skill, index) => (
                 <span key={`lang-${index}`} className="skill-pill">
                   {skill}
                 </span>
               ))}
-            </CustomMarquee>
+            </Marquee>
           </div>
 
           <p className="skill-category-label">Frameworks & Technologies</p>
           <div className="skills-marquee">
-            <CustomMarquee speed={25} direction="right">
+            <Marquee speed={35} direction="right" gradient={false} autoFill={true} pauseOnHover={true}>
               {frameworks.map((skill, index) => (
                 <span key={`fw-${index}`} className="skill-pill">
                   {skill}
                 </span>
               ))}
-            </CustomMarquee>
+            </Marquee>
           </div>
 
           <p className="skill-category-label">Databases & Tools</p>
           <div className="skills-marquee">
-            <CustomMarquee speed={28}>
+            <Marquee speed={38} gradient={false} autoFill={true} pauseOnHover={true}>
               {[...databases, ...tools].map((skill, index) => (
                 <span key={`db-${index}`} className="skill-pill">
                   {skill}
                 </span>
               ))}
-            </CustomMarquee>
+            </Marquee>
           </div>
         </div>
       </Reveal>

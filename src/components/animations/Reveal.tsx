@@ -3,15 +3,17 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 interface RevealProps {
   children: React.ReactNode;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right';
+  className?: string;
+  fullHeight?: boolean;
 }
 
-const Reveal: React.FC<RevealProps> = ({ children, delay = 0, direction = 'up' }) => {
+const Reveal: React.FC<RevealProps> = ({ children, delay = 0, direction = 'up', className = '', fullHeight = false }) => {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -36,10 +38,19 @@ const Reveal: React.FC<RevealProps> = ({ children, delay = 0, direction = 'up' }
         toggleActions: 'play none none reverse',
       },
     });
-  }, { scope: container });
+  }, { dependencies: [], scope: container });
 
   return (
-    <div ref={container} style={{ opacity: 1 }}>
+    <div 
+      ref={container} 
+      className={className}
+      style={{ 
+        opacity: 1, 
+        height: fullHeight ? '100%' : 'auto',
+        display: fullHeight ? 'flex' : 'block',
+        flexDirection: 'column'
+      }}
+    >
       {children}
     </div>
   );

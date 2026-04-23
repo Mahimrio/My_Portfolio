@@ -1,27 +1,53 @@
-
+import { useState, useEffect } from 'react';
 
 const Footer = () => {
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 500);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="footer" style={{ padding: '3rem 5%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-      <div className="nav-logo" style={{ cursor: 'pointer' }} onClick={handleScrollToTop}>
-        Rianto<span style={{ color: 'var(--primary-accent)' }}>.dev</span>
-      </div>
-      
-      <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-        <a href="#about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>About</span></a>
-        <a href="#projects" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>Projects</span></a>
-        <a href="#contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>Contact</span></a>
-        <a href="#presence" style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.3s' }}><span>Socials</span></a>
-      </div>
+    <>
+      {/* Floating back-to-top button */}
+      <button
+        className={`back-to-top-btn ${visible ? 'visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label="Back to top"
+        title="Back to top"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+          <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z" />
+        </svg>
+      </button>
 
-      <div style={{ width: '100%', maxWidth: '600px', height: '1px', background: 'var(--card-border)', opacity: 0.5 }} />
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-logo" onClick={scrollToTop}>
+            Rianto<span>.dev</span>
+          </div>
 
-      <p style={{ margin: 0 }}><span>&copy; {new Date().getFullYear()} Mahim Abdullah Rianto. All rights reserved.</span></p>
-    </footer>
+          <p className="footer-tagline">Building the future, one commit at a time.</p>
+
+          <nav className="footer-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="#presence">Socials</a>
+          </nav>
+
+          <div className="footer-divider" />
+
+          <p className="footer-copy">
+            &copy; {new Date().getFullYear()} Mahim Abdullah Rianto. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </>
   );
 };
 

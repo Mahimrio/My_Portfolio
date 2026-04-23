@@ -1,7 +1,11 @@
-import { StrictMode, Component } from 'react'
+import { Component } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 class ErrorBoundary extends Component<any, any> {
   constructor(props: any) {
@@ -26,6 +30,12 @@ class ErrorBoundary extends Component<any, any> {
           <pre style={{ overflowX: 'auto', background: '#222', padding: '1rem', marginTop: '1rem' }}>
             {this.state.error?.stack}
           </pre>
+          <button 
+            onClick={() => window.location.reload()}
+            style={{ padding: '0.5rem 1rem', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '1rem' }}
+          >
+            Reload Page
+          </button>
         </div>
       );
     }
@@ -34,9 +44,7 @@ class ErrorBoundary extends Component<any, any> {
 }
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
-  </StrictMode>,
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
 )

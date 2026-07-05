@@ -88,9 +88,9 @@ const ContactSection = () => {
   return (
     <section id="contact" className="content-section">
       <Reveal direction="down">
-        <h2 className="section-title" style={{ textAlign: 'center' }}>
-          <span>Get In Touch</span>
-        </h2>
+          <h2 className="section-title" style={{ textAlign: 'center' }}>
+            Get In Touch
+          </h2>
       </Reveal>
 
       <Reveal direction="up" delay={0.2}>
@@ -125,7 +125,7 @@ const ContactSection = () => {
           {/* ── Right panel: Form ── */}
           <Card>
             <h3 style={{ marginBottom: '1.25rem', color: 'var(--primary-accent)', fontSize: '1.1rem' }}>
-              <span>Send me a message</span>
+              Send me a message
             </h3>
 
             <form ref={formRef} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
@@ -171,7 +171,7 @@ const ContactSection = () => {
 
               {/* Message */}
               <div className="ui-input-wrapper">
-                <label className="ui-label" htmlFor="message"><span>Message</span></label>
+                <label className="ui-label" htmlFor="message">Message</label>
                 <textarea
                   name="message"
                   id="message"
@@ -193,17 +193,17 @@ const ContactSection = () => {
                   style={{ width: '100%', opacity: status === 'sending' ? 0.7 : 1 }}
                   disabled={status === 'sending'}
                 >
-                  <span>{status === 'sending' ? 'Sending…' : 'Send Message'}</span>
+                  {status === 'sending' ? 'Sending…' : 'Send Message'}
                 </Button>
 
                 {status === 'success' && (
                   <p className="form-status-success">
-                    <span>✅ Message sent! I'll reply soon.</span>
+                    ✅ Message sent! I'll reply soon.
                   </p>
                 )}
                 {status === 'error' && (
                   <p className="form-status-error">
-                    <span>⚠️ Something went wrong. Please email me directly.</span>
+                    ⚠️ Something went wrong. Please email me directly.
                   </p>
                 )}
               </div>

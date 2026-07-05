@@ -23,8 +23,10 @@ const TypingEffect = () => {
     if (!deleting && charIdx === current.length) {
       timer = setTimeout(() => setDeleting(true), 2200);
     } else if (deleting && charIdx === 0) {
-      setDeleting(false);
-      setRoleIdx((p) => (p + 1) % roles.length);
+      timer = setTimeout(() => {
+        setDeleting(false);
+        setRoleIdx((p) => (p + 1) % roles.length);
+      }, 0);
     } else {
       timer = setTimeout(() => {
         setText(current.slice(0, charIdx + (deleting ? -1 : 1)));

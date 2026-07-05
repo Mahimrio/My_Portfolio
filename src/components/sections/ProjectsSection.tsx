@@ -39,13 +39,40 @@ const projects = [
     accent: "#a855f7",
   },
   {
-    title: "Task Flow Pro",
-    subtitle: "Productivity Application",
-    description: "A comprehensive task management dashboard with real-time updates, kanban boards, and team collaboration features.",
-    tags: ["Next.js", "TailwindCSS", "Supabase"],
+    title: "Zenith Protocol",
+    subtitle: "Scalable Web-Based Game Platform (In Development)",
+    description: "A highly scalable web-based game platform employing a Plugin Architecture where a central React 'Host App' lazy-loads self-contained game modules via dynamic imports and communicates through a shared event bus. Scores, authentication, and state validation are securely handled via a robust Laravel 11 backend.",
+    tags: ["React 18+", "Vite", "TypeScript", "Tailwind CSS", "Zustand", "GSAP 3", "Laravel 11", "MySQL 8+"],
     role: "Full-Stack Developer",
-    github: null,
-    accent: "#eab308",
+    github: "https://github.com/Mahimrio/Zenith-Protocol.git",
+    accent: "#6366f1",
+  },
+  {
+    title: "ShasthyaHub-AI",
+    subtitle: "Multi-Agent AI Healthcare Platform",
+    description: "A comprehensive healthcare platform designed for rural Bangladesh featuring three AI-powered agents. Built for SciBlitz AI Challenge 2026. Supports bilingual interface (English & বাংলা) and is PWA-enabled for offline access.",
+    tags: ["Next.js 15", "Supabase", "Tailwind CSS", "shadcn/ui", "TanStack Query", "Google Gemini", "Groq Llama", "PWA"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/Mahimrio/ShasthyaHub-AI.git",
+    accent: "#10b981",
+  },
+  {
+    title: "LockIn",
+    subtitle: "Semester Routine Tracker (In Development)",
+    description: "A personal static web app for tracking semester routines and schedules. Built as a lightweight React site with no backend dependency.",
+    tags: ["Vite", "React 18", "Tailwind CSS"],
+    role: "Frontend Developer",
+    github: "https://github.com/Mahimrio/LockIn.git",
+    accent: "#f59e0b",
+  },
+  {
+    title: "OfficeVolt",
+    subtitle: "Techathon 2026",
+    description: "A real-time office energy monitoring dashboard and Discord bot that simulates 15 smart devices across 3 rooms, surfaces live power usage, and pushes intelligent alerts when devices are left on after hours or running too long. Built for the ones who want to know why the electricity bill is higher than that.",
+    tags: ["Node.js", "Express", "Socket.IO", "React", "Vite", "Tailwind CSS", "Discord.js", "DeepSeek API"],
+    role: "Full-Stack Developer (Frontend & Backend)",
+    github: "https://github.com/FazleRabbiMugdho/Techathon2026-Team_Prognosis.git",
+    accent: "#ef4444",
   },
 ];
 
@@ -53,7 +80,7 @@ const ProjectsSection = () => {
   return (
     <section id="projects" className="content-section">
       <Reveal direction="down">
-        <h2 className="section-title"><span>My Projects</span></h2>
+        <h2 className="section-title">My Projects</h2>
       </Reveal>
 
       <div className="projects-grid">
@@ -63,16 +90,16 @@ const ProjectsSection = () => {
               <div className="project-accent-bar" style={{ background: `linear-gradient(90deg, ${project.accent}, transparent)` }} />
               <div className="project-header">
                 <div>
-                  <h3 className="project-title"><span>{project.title}</span></h3>
-                  <span className="project-subtitle"><span>{project.subtitle}</span></span>
+                  <h3 className="project-title">{project.title}</h3>
+                  <span className="project-subtitle">{project.subtitle}</span>
                 </div>
-                <span className="project-role"><span>{project.role}</span></span>
+                <span className="project-role">{project.role}</span>
               </div>
-              <p className="project-description"><span>{project.description}</span></p>
+              <p className="project-description">{project.description}</p>
               <div className="project-footer">
                 <div className="project-tags">
                   {project.tags.map(tag => (
-                    <span key={tag} className="tag"><span>{tag}</span></span>
+                    <span key={tag} className="tag">{tag}</span>
                   ))}
                 </div>
                 {project.github && (

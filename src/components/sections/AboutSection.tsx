@@ -134,39 +134,39 @@ const AboutSection = () => {
   return (
     <section id="about" className="content-section">
       <Reveal direction="up">
-        <h2 className="section-title"><span>About Me</span></h2>
+        <h2 className="section-title">About Me</h2>
       </Reveal>
 
       <div className="about-grid">
         <Reveal direction="right" delay={0.2} fullHeight>
           <Card className="about-card">
-            <h3><span>Who I Am</span></h3>
+            <h3>Who I Am</h3>
             <p>
-              <span>I am a motivated Computer Science &amp; Engineering student at AUST with
+              I am a motivated Computer Science &amp; Engineering student at AUST with
               hands-on experience in full-stack web development and embedded systems.
-              I'm passionate about building innovative solutions that solve real-world problems.</span>
+              I'm passionate about building innovative solutions that solve real-world problems.
             </p>
           </Card>
         </Reveal>
 
         <Reveal direction="left" delay={0.4} fullHeight>
           <Card className="about-card">
-            <h3><span>What I Do</span></h3>
+            <h3>What I Do</h3>
             <p>
-              <span>From building event management platforms to designing autonomous fire-fighting
+              From building event management platforms to designing autonomous fire-fighting
               robots, I love working across the full technology stack — from the browser to the
-              bare-metal microcontroller.</span>
+              bare-metal microcontroller.
             </p>
           </Card>
         </Reveal>
 
         <Reveal direction="up" delay={0.5} fullHeight>
           <Card className="about-card">
-            <h3><span>My Interests</span></h3>
+            <h3>My Interests</h3>
             <p>
-              <span>I enjoy competitive programming, open-source contributions, and exploring the
+              I enjoy competitive programming, open-source contributions, and exploring the
               intersection of AI and embedded systems. Outside of code, I'm a cricket enthusiast
-              and enjoy tutoring fellow students.</span>
+              and enjoy tutoring fellow students.
             </p>
           </Card>
         </Reveal>
@@ -175,7 +175,7 @@ const AboutSection = () => {
       {/* Education Section */}
       <Reveal direction="up" delay={0.3}>
         <div id="education" className="education-container">
-          <h3 className="skills-title"><span>Education</span></h3>
+          <h3 className="skills-title">Education</h3>
           <div className="education-timeline">
             {education.map((edu, i) => (
               <div key={i} className="education-item">
@@ -183,17 +183,17 @@ const AboutSection = () => {
                 <Card className="education-card">
                   <div className="edu-header">
                     <h4>
-                      <span>{edu.degree}</span>
+                      {edu.degree}
                       {edu.status && (
                         <span className={`edu-status ${edu.status.toLowerCase() === 'ongoing' ? 'status-ongoing' : 'status-completed'}`}>
-                          <span>{edu.status}</span>
+                          {edu.status}
                         </span>
                       )}
                     </h4>
-                    <span className="edu-year"><span>{edu.year}</span></span>
+                    <span className="edu-year">{edu.year}</span>
                   </div>
-                  <p className="edu-institution"><span>{edu.institution}</span></p>
-                  <p className="edu-result"><span>{edu.result}</span></p>
+                  <p className="edu-institution">{edu.institution}</p>
+                  <p className="edu-result">{edu.result}</p>
 
                   <div className="edu-details">
                     {edu.coursework && (
@@ -235,23 +235,23 @@ const AboutSection = () => {
       {/* Skills Section */}
       <Reveal direction="up" delay={0.6}>
         <div id="skills" className="skills-container">
-          <h3 className="skills-title"><span>Technical Skills</span></h3>
+          <h3 className="skills-title">Technical Skills</h3>
 
-          <p className="skill-category-label"><span>Languages</span></p>
+          <p className="skill-category-label">Languages</p>
           <div className="skills-marquee">
             <CSSMarquee speed={65} direction="left" pauseOnHover>
               {languages.map((skill, i) => <SkillPill key={`lang-${i}`} skill={skill} />)}
             </CSSMarquee>
           </div>
 
-          <p className="skill-category-label"><span>Frameworks &amp; Technologies</span></p>
+          <p className="skill-category-label">Frameworks &amp; Technologies</p>
           <div className="skills-marquee">
             <CSSMarquee speed={55} direction="right" pauseOnHover>
               {frameworks.map((skill, i) => <SkillPill key={`fw-${i}`} skill={skill} />)}
             </CSSMarquee>
           </div>
 
-          <p className="skill-category-label"><span>Databases &amp; Tools</span></p>
+          <p className="skill-category-label">Databases &amp; Tools</p>
           <div className="skills-marquee">
             <CSSMarquee speed={60} direction="left" pauseOnHover>
               {[...databases, ...tools].map((skill, i) => <SkillPill key={`db-${i}`} skill={skill} />)}
@@ -263,7 +263,7 @@ const AboutSection = () => {
       {/* Soft Skills */}
       <Reveal direction="up" delay={0.8}>
         <div className="soft-skills-container">
-          <h3 className="skills-title"><span>Strengths</span></h3>
+          <h3 className="skills-title">Strengths</h3>
           <div className="soft-skills-grid">
             {[
               { icon: '🤝', label: 'Teamwork & Collaboration' },

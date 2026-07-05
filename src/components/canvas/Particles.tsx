@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
+import type { Points as ThreePoints, Group } from 'three';
 
 const Particles = () => {
-  const ref = useRef<any>(null);
+  const ref = useRef<ThreePoints>(null!);
   
   const [sphere] = useState(() => {
     const count = 3000;
@@ -20,7 +21,7 @@ const Particles = () => {
     return positions;
   });
 
-  const groupRef = useRef<any>(null);
+  const groupRef = useRef<Group>(null!);
 
   useFrame((state, delta) => {
     if (groupRef.current) {

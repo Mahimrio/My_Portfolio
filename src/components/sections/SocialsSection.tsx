@@ -59,7 +59,7 @@ const SocialsSection = () => {
   return (
     <section id="presence" className="content-section">
       <Reveal direction="down">
-        <h2 className="section-title" style={{ textAlign: 'center' }}><span>Connect with Me</span></h2>
+        <h2 className="section-title" style={{ textAlign: 'center' }}>Connect with Me</h2>
       </Reveal>
 
       <div className="presence-grid">
@@ -78,8 +78,8 @@ const SocialsSection = () => {
                     {social.icon}
                   </div>
                   <div className="presence-info">
-                    <h3 className="presence-name"><span>{social.name}</span></h3>
-                    <span className="presence-action"><span>Connect ↗</span></span>
+                    <h3 className="presence-name">{social.name}</h3>
+                    <span className="presence-action">Connect ↗</span>
                   </div>
                 </div>
               </Card>

@@ -986,10 +986,29 @@ a {
   text-decoration: none;
 }
 
+.project-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
 .project-link:hover {
   color: var(--primary-accent);
   border-color: var(--primary-accent);
   background: rgba(59, 130, 246, 0.05);
+}
+
+.project-link--live {
+  color: var(--primary-accent);
+  border-color: rgba(0, 255, 136, 0.35);
+  background: rgba(0, 255, 136, 0.08);
+}
+
+.project-link--live:hover {
+  border-color: var(--primary-accent);
+  background: rgba(0, 255, 136, 0.15);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.2);
 }
 
 /* ========== CONTACT ========== */

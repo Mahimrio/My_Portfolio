@@ -5,6 +5,7 @@ import Loader from './components/Loader';
 import HeroSection from './components/sections/HeroSection';
 import AboutSection from './components/sections/AboutSection';
 import ProjectsSection from './components/sections/ProjectsSection';
+import CertificatesSection from './components/sections/CertificatesSection';
 import ContactSection from './components/sections/ContactSection';
 import SocialsSection from './components/sections/SocialsSection';
 
@@ -24,6 +25,7 @@ function App() {
           <HeroSection />
           <AboutSection />
           <ProjectsSection />
+          <CertificatesSection />
           <ContactSection />
           <SocialsSection />
         </Layout>

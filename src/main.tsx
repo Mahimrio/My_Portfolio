@@ -39,12 +39,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
           <pre style={{ overflowX: 'auto', background: '#222', padding: '1rem', marginTop: '1rem' }}>
             {this.state.error?.stack}
           </pre>
-          <button 
-            onClick={() => window.location.reload()}
-            style={{ position: 'fixed', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', padding: '0.75rem 2rem', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', zIndex: 10000, fontSize: '1rem', fontWeight: 600 }}
-          >
-            Reload Page
-          </button>
         </div>
       );
     }

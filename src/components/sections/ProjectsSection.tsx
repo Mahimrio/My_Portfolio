@@ -1,56 +1,18 @@
+import { useState } from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 
 const projects = [
+  // --- 4 PINNED PROJECTS (Shown by default) ---
   {
-    title: "Eventify",
-    subtitle: "Event Management System",
-    description: "A web-based platform that allows users to host events and purchase tickets online. Supports event creation, ticket management, and user authentication.",
-    tags: ["React.js", "PHP Laravel", "MySQL"],
-    role: "Full-Stack Developer",
-    github: "https://github.com/FazleRabbiMugdho/Eventify.git",
-    live: "https://eventi-fy.me/",
-    accent: "#00ff88",
-  },
-  {
-    title: "MRP",
-    subtitle: "Market Rate Management System",
-    description: "A system designed to track and display market prices publicly, aiming to reduce market syndicate activities and create consumer awareness.",
-    tags: ["React.js", "MongoDB"],
-    role: "Full-Stack Developer",
-    github: "https://github.com/FazleRabbiMugdho/mrp.git",
+    title: "InternLink",
+    subtitle: "AI-Powered Career & Internship Portal",
+    description: "InternLink — AI-powered university career & internship portal for CSE 3200 (implementation) + CSE 3224 (design/SQA), AUST. Connects students, companies, counselors, and admins through a single platform with AI for resume analysis, job matching, and interview prep.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "ASP.NET Core 8", "EF Core 8", "Npgsql", "Supabase PostgreSQL"],
+    role: "Full-Stack Developer (Frontend & Backend)",
+    github: "https://github.com/Mahimrio/InternLink.git",
     live: null,
-    accent: "#00d4ff",
-  },
-  {
-    title: "Fire Fighting Bot",
-    subtitle: "Arduino-Based Robot",
-    description: "An autonomous Arduino-powered robot equipped with various sensors and controllers to detect fire, navigate toward the source, and extinguish it by spraying water.",
-    tags: ["Microprocessor", "Microcontrollers", "Proteus", "C Language"],
-    role: "Embedded Systems Developer",
-    github: null,
-    live: null,
-    accent: "#ff6b35",
-  },
-  {
-    title: "Interactive Portfolio",
-    subtitle: "Personal Web Showcase",
-    description: "A highly interactive, 3D animated personal portfolio website. Features smooth scrolling, performant CSS animations, and a responsive glassmorphic UI.",
-    tags: ["React.js", "TypeScript", "Vite", "GSAP"],
-    role: "Frontend Developer",
-    github: "https://github.com/Mahimrio/My_Portfolio",
-    live: "https://mahimrio.github.io/My_Portfolio/",
-    accent: "#a855f7",
-  },
-  {
-    title: "Zenith Protocol",
-    subtitle: "Scalable Web-Based Game Platform (In Development)",
-    description: "A highly scalable web-based game platform employing a Plugin Architecture where a central React 'Host App' lazy-loads self-contained game modules via dynamic imports and communicates through a shared event bus. Scores, authentication, and state validation are securely handled via a robust Laravel 11 backend.",
-    tags: ["React 18+", "Vite", "TypeScript", "Tailwind CSS", "Zustand", "GSAP 3", "Laravel 11", "MySQL 8+"],
-    role: "Full-Stack Developer",
-    github: "https://github.com/Mahimrio/Zenith-Protocol.git",
-    live: null,
-    accent: "#6366f1",
+    accent: "#3b82f6",
   },
   {
     title: "ShasthyaHub-AI",
@@ -63,14 +25,14 @@ const projects = [
     accent: "#10b981",
   },
   {
-    title: "LockIn",
-    subtitle: "Semester Routine Tracker (In Development)",
-    description: "A personal static web app for tracking semester routines and schedules. Built as a lightweight React site with no backend dependency.",
-    tags: ["Vite", "React 18", "Tailwind CSS"],
-    role: "Frontend Developer",
-    github: "https://github.com/Mahimrio/LockIn.git",
-    live: "https://mahimrio.github.io/LockIn/",
-    accent: "#f59e0b",
+    title: "Eventify",
+    subtitle: "Event Management System",
+    description: "A web-based platform that allows users to host events and purchase tickets online. Supports event creation, ticket management, and user authentication.",
+    tags: ["React.js", "PHP Laravel", "MySQL"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/FazleRabbiMugdho/Eventify.git",
+    live: "https://eventi-fy.me/",
+    accent: "#00ff88",
   },
   {
     title: "OfficeVolt",
@@ -82,9 +44,81 @@ const projects = [
     live: "https://officevolt.vercel.app/",
     accent: "#ef4444",
   },
+  {
+    title: "Zenith Protocol",
+    subtitle: "Scalable Web-Based Game Platform (In Development)",
+    description: "A highly scalable web-based game platform employing a Plugin Architecture where a central React 'Host App' lazy-loads self-contained game modules via dynamic imports and communicates through a shared event bus. Scores, authentication, and state validation are securely handled via a robust Laravel 11 backend.",
+    tags: ["React 18+", "Vite", "TypeScript", "Tailwind CSS", "Zustand", "GSAP 3", "Laravel 11", "MySQL 8+"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/Mahimrio/Zenith-Protocol.git",
+    live: null,
+    accent: "#6366f1",
+  },
+
+  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
+  {
+    title: "Interactive Portfolio",
+    subtitle: "Personal Web Showcase",
+    description: "A highly interactive, 3D animated personal portfolio website. Features smooth scrolling, performant CSS animations, and a responsive glassmorphic UI.",
+    tags: ["React.js", "TypeScript", "Vite", "GSAP"],
+    role: "Frontend Developer",
+    github: "https://github.com/Mahimrio/My_Portfolio",
+    live: "https://mahimrio.github.io/My_Portfolio/",
+    accent: "#a855f7",
+  },
+  {
+    title: "MRP",
+    subtitle: "Market Rate Management System",
+    description: "A system designed to track and display market prices publicly, aiming to reduce market syndicate activities and create consumer awareness.",
+    tags: ["React.js", "MongoDB"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/FazleRabbiMugdho/mrp.git",
+    live: null,
+    accent: "#00d4ff",
+  },
+  {
+    title: "LockIn",
+    subtitle: "Semester Routine Tracker (In Development)",
+    description: "A personal static web app for tracking semester routines and schedules. Built as a lightweight React site with no backend dependency.",
+    tags: ["Vite", "React 18", "Tailwind CSS"],
+    role: "Frontend Developer",
+    github: "https://github.com/Mahimrio/LockIn.git",
+    live: "https://mahimrio.github.io/LockIn/",
+    accent: "#f59e0b",
+  },
+  {
+    title: "Fire Fighting Bot",
+    subtitle: "Arduino-Based Robot",
+    description: "An autonomous Arduino-powered robot equipped with various sensors and controllers to detect fire, navigate toward the source, and extinguish it by spraying water.",
+    tags: ["Microprocessor", "Microcontrollers", "Proteus", "C Language"],
+    role: "Embedded Systems Developer",
+    github: null,
+    live: null,
+    accent: "#ff6b35",
+  },
 ];
 
+const PINNED_COUNT = 4;
+
 const ProjectsSection = () => {
+  const [showAll, setShowAll] = useState(false);
+  const [isCollapsing, setIsCollapsing] = useState(false);
+
+  const handleToggle = () => {
+    if (showAll) {
+      setIsCollapsing(true);
+      setTimeout(() => {
+        setShowAll(false);
+        setIsCollapsing(false);
+      }, 350);
+    } else {
+      setShowAll(true);
+    }
+  };
+
+  const visibleProjects = (showAll || isCollapsing) ? projects : projects.slice(0, PINNED_COUNT);
+  const isExpandedActive = showAll && !isCollapsing;
+
   return (
     <section id="projects" className="content-section">
       <Reveal direction="down">
@@ -92,53 +126,85 @@ const ProjectsSection = () => {
       </Reveal>
 
       <div className="projects-grid">
-        {projects.map((project, index) => (
-          <Reveal key={index} direction="up" delay={0.2 * index}>
-            <Card className="project-card">
-              <div className="project-accent-bar" style={{ background: `linear-gradient(90deg, ${project.accent}, transparent)` }} />
-              <div className="project-header">
-                <div>
-                  <h3 className="project-title">{project.title}</h3>
-                  <span className="project-subtitle">{project.subtitle}</span>
+        {visibleProjects.map((project, index) => {
+          const isExtra = index >= PINNED_COUNT;
+          let animClass = '';
+          if (isExtra) {
+            animClass = isCollapsing ? 'collapse-animate' : 'expand-animate';
+          }
+          return (
+            <Reveal key={project.title} direction="up" delay={isExtra ? 0.04 * (index - PINNED_COUNT) : 0.15 * index}>
+              <Card className={`project-card ${animClass}`}>
+                <div className="project-accent-bar" style={{ background: `linear-gradient(90deg, ${project.accent}, transparent)` }} />
+                <div className="project-header">
+                  <div>
+                    <h3 className="project-title">{project.title}</h3>
+                    <span className="project-subtitle">{project.subtitle}</span>
+                  </div>
+                  <span className="project-role">{project.role}</span>
                 </div>
-                <span className="project-role">{project.role}</span>
-              </div>
-              <p className="project-description">{project.description}</p>
-              <div className="project-footer">
-                <div className="project-tags">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="tag">{tag}</span>
-                  ))}
+                <p className="project-description">{project.description}</p>
+                <div className="project-footer">
+                  <div className="project-tags">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                  <div className="project-actions">
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link project-link--live"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <span>Live Demo</span>
+                      </a>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        <span>View Code</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
-                <div className="project-actions">
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link project-link--live"
-                    >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                      <span>Live Demo</span>
-                    </a>
-                  )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link"
-                    >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                      <span>View Code</span>
-                    </a>
-                  )}
-                </div>
-              </div>
-            </Card>
-          </Reveal>
-        ))}
+              </Card>
+            </Reveal>
+          );
+        })}
       </div>
+
+      {projects.length > PINNED_COUNT && (
+        <div className="see-more-container">
+          <button
+            className="see-more-btn"
+            onClick={handleToggle}
+            aria-expanded={isExpandedActive}
+          >
+            <span>{isExpandedActive ? 'Show Less' : `See More Projects (${projects.length - PINNED_COUNT}+)`}</span>
+            <svg
+              className={`see-more-chevron ${isExpandedActive ? 'chevron-up' : ''}`}
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+        </div>
+      )}
     </section>
   );
 };

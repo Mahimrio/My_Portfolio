@@ -6,24 +6,24 @@ import Card from '../ui/Card';
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
 
 const skillIconUrl: Record<string, string> = {
-  'C':           `${DEVICON}/c/c-original.svg`,
-  'C++':         `${DEVICON}/cplusplus/cplusplus-original.svg`,
-  'Java':        `${DEVICON}/java/java-original.svg`,
-  'JavaScript':  `${DEVICON}/javascript/javascript-original.svg`,
-  'TypeScript':  `${DEVICON}/typescript/typescript-original.svg`,
-  'React.js':    `${DEVICON}/react/react-original.svg`,
-  'Next.js':     `${DEVICON}/nextjs/nextjs-original.svg`,
-  'Node.js':     `${DEVICON}/nodejs/nodejs-original.svg`,
-  'Django':      `${DEVICON}/django/django-plain.svg`,
+  'C': `${DEVICON}/c/c-original.svg`,
+  'C++': `${DEVICON}/cplusplus/cplusplus-original.svg`,
+  'Java': `${DEVICON}/java/java-original.svg`,
+  'JavaScript': `${DEVICON}/javascript/javascript-original.svg`,
+  'TypeScript': `${DEVICON}/typescript/typescript-original.svg`,
+  'React.js': `${DEVICON}/react/react-original.svg`,
+  'Next.js': `${DEVICON}/nextjs/nextjs-original.svg`,
+  'Node.js': `${DEVICON}/nodejs/nodejs-original.svg`,
+  'Django': `${DEVICON}/django/django-plain.svg`,
   'PHP Laravel': `${DEVICON}/laravel/laravel-original.svg`,
-  'MySQL':       `${DEVICON}/mysql/mysql-original.svg`,
-  'MSSQL':       `${DEVICON}/microsoftsqlserver/microsoftsqlserver-plain.svg`,
-  'MongoDB':     `${DEVICON}/mongodb/mongodb-original.svg`,
-  'Firebase':    `${DEVICON}/firebase/firebase-plain.svg`,
-  'Supabase':    `${DEVICON}/supabase/supabase-original.svg`,
-  'Git':         `${DEVICON}/git/git-original.svg`,
-  'VS Code':     `${DEVICON}/vscode/vscode-original.svg`,
-  'Arduino':     `${DEVICON}/arduino/arduino-original.svg`,
+  'MySQL': `${DEVICON}/mysql/mysql-original.svg`,
+  'MSSQL': `${DEVICON}/microsoftsqlserver/microsoftsqlserver-plain.svg`,
+  'MongoDB': `${DEVICON}/mongodb/mongodb-original.svg`,
+  'Firebase': `${DEVICON}/firebase/firebase-plain.svg`,
+  'Supabase': `${DEVICON}/supabase/supabase-original.svg`,
+  'Git': `${DEVICON}/git/git-original.svg`,
+  'VS Code': `${DEVICON}/vscode/vscode-original.svg`,
+  'Arduino': `${DEVICON}/arduino/arduino-original.svg`,
 };
 
 // ─── Skill Pill ───────────────────────────────────────────────────────────────
@@ -79,17 +79,17 @@ const CSSMarquee: React.FC<CSSMarqueeProps> = ({
 };
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const languages   = ['Assembly', 'C', 'C++', 'Java', 'JavaScript', 'TypeScript'];
-const frameworks  = ['React.js', 'Next.js', 'Node.js', 'Django', 'PHP Laravel'];
-const databases   = ['MySQL', 'MSSQL', 'MongoDB', 'Firebase', 'Supabase'];
-const tools       = ['Git', 'VS Code', 'Arduino', 'Proteus', 'iGraphics'];
+const languages = ['Assembly', 'C', 'C++', 'Java', 'JavaScript', 'TypeScript'];
+const frameworks = ['React.js', 'Next.js', 'Node.js', 'Django', 'PHP Laravel'];
+const databases = ['MySQL', 'MSSQL', 'MongoDB', 'Firebase', 'Supabase'];
+const tools = ['Git', 'VS Code', 'Arduino', 'Proteus', 'iGraphics'];
 
 const education = [
   {
     degree: 'BSc in CSE',
     status: 'Ongoing',
     institution: 'Ahsanullah University of Science & Technology (AUST)',
-    result: 'CGPA: 3.50+ (in 5th semester)',
+    result: 'CGPA: 3.30+ (in 6th semester)',
     year: '2023 – Present',
     coursework: [
       'Digital System Design', 'MicroProcessors & MicroControllers', 'Data Communications',
@@ -98,7 +98,7 @@ const education = [
       'Elementary Structured Programming (C)', 'Data Structures & Algorithms',
       'Database Management Systems', 'Software Engineering', 'Artificial Intelligence',
     ],
-    extraCurricular: ['Member: AUST PIC'],
+    extraCurricular: ['Associative Executive: AUST CAIC', '\n', 'Member: AUST PIC'],
     skillsAcquired: 'Full-stack development, Logic Circuit Design & Embedded Systems Development',
   },
   {
@@ -215,7 +215,11 @@ const AboutSection = () => {
                     {edu.extraCurricular && (
                       <div className="edu-detail-row">
                         <span className="edu-detail-label">🤝 Involvement:</span>
-                        <span className="edu-detail-content">{edu.extraCurricular.join(', ')}</span>
+                        <div className="edu-detail-content">
+                          {edu.extraCurricular.map((item, idx) => (
+                            <div key={idx}>{item}</div>
+                          ))}
+                        </div>
                       </div>
                     )}
                     {edu.skillsAcquired && (
@@ -239,21 +243,21 @@ const AboutSection = () => {
 
           <p className="skill-category-label">Languages</p>
           <div className="skills-marquee">
-            <CSSMarquee speed={65} direction="left" pauseOnHover>
+            <CSSMarquee speed={90} direction="left" pauseOnHover>
               {languages.map((skill, i) => <SkillPill key={`lang-${i}`} skill={skill} />)}
             </CSSMarquee>
           </div>
 
           <p className="skill-category-label">Frameworks &amp; Technologies</p>
           <div className="skills-marquee">
-            <CSSMarquee speed={55} direction="right" pauseOnHover>
+            <CSSMarquee speed={80} direction="right" pauseOnHover>
               {frameworks.map((skill, i) => <SkillPill key={`fw-${i}`} skill={skill} />)}
             </CSSMarquee>
           </div>
 
           <p className="skill-category-label">Databases &amp; Tools</p>
           <div className="skills-marquee">
-            <CSSMarquee speed={60} direction="left" pauseOnHover>
+            <CSSMarquee speed={85} direction="left" pauseOnHover>
               {[...databases, ...tools].map((skill, i) => <SkillPill key={`db-${i}`} skill={skill} />)}
             </CSSMarquee>
           </div>

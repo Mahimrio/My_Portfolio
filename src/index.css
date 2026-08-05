@@ -672,6 +672,7 @@ a {
   height: 100vh;
   z-index: -1;
   pointer-events: auto;
+  background: var(--bg-color);
 }
 
 /* ========== SECTIONS ========== */
@@ -1215,6 +1216,10 @@ a {
 }
 
 .project-link--live:hover {
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 35%, #93c5fd 55%, #3b82f6 100%);
+  background-size: 250% auto;
+  color: #ffffff !important;
+  border-color: transparent !important;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
   animation-play-state: paused;
@@ -1658,8 +1663,8 @@ a {
 .contact-left-icon-box {
   width: 42px;
   height: 42px;
-  background: rgba(0, 255, 136, 0.08);
-  border: 1px solid rgba(0, 255, 136, 0.2);
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.25);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -1732,11 +1737,17 @@ a {
   width: 100%;
 }
 
+/* Each social card is wrapped in a Reveal div — size that wrapper so all cards match */
+.presence-grid > * {
+  flex: 1 1 210px;
+  max-width: 220px;
+}
+
 .presence-card-link {
   text-decoration: none;
   display: block;
-  flex: 1 1 220px;
-  max-width: 280px;
+  width: 100%;
+  height: 100%;
 }
 
 .presence-card {
@@ -2065,4 +2076,170 @@ a {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ========== THEME TOGGLE ========== */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px) rotate(12deg);
+  border-color: var(--primary-accent);
+}
+
+/* ========== LIGHT THEME ========== */
+[data-theme="light"] {
+  --bg-color: #eef2f7;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --primary-accent: #2563eb;
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(37, 99, 235, 0.18);
+  color-scheme: light;
+}
+
+/* Navbar */
+[data-theme="light"] .navbar {
+  background: rgba(255, 255, 255, 0.78);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .nav-links {
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .nav-links a:hover {
+  color: var(--text-primary);
+  background: rgba(15, 23, 42, 0.05);
+}
+
+[data-theme="light"] .nav-links a.nav-active {
+  background: #0f172a;
+  color: #f8fafc;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.2);
+}
+
+/* Theme toggle in light mode */
+[data-theme="light"] .theme-toggle {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(15, 23, 42, 0.09);
+}
+
+/* Loader */
+[data-theme="light"] .loader-logo {
+  background: linear-gradient(to right, #0f172a, var(--primary-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+[data-theme="light"] .loader-bar-track {
+  background: rgba(15, 23, 42, 0.1);
+}
+
+/* Hero */
+[data-theme="light"] .hero-title {
+  background: linear-gradient(135deg, #0f172a 0%, #334155 45%, var(--primary-accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+[data-theme="light"] .hero-photo {
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+/* Cards & inputs */
+[data-theme="light"] .ui-card:hover {
+  border-color: rgba(15, 23, 42, 0.15);
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="light"] .ui-input {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Skill pills */
+[data-theme="light"] .skill-pill {
+  background: rgba(15, 23, 42, 0.035);
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .skill-pill:hover {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.4);
+  color: var(--text-primary);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.12);
+}
+
+/* Soft-skill chips */
+[data-theme="light"] .soft-skill-chip {
+  background: rgba(15, 23, 42, 0.03);
+}
+
+/* Project cards */
+[data-theme="light"] .project-card:hover {
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.14),
+    0 0 22px color-mix(in srgb, var(--accent, var(--primary-accent)) 18%, transparent);
+}
+
+/* Certificates */
+[data-theme="light"] .cert-photo-card {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .cert-photo-card:hover {
+  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.14), 0 0 20px rgba(37, 99, 235, 0.12);
+}
+
+/* Contact icon boxes */
+[data-theme="light"] .contact-left-icon-box {
+  background: rgba(37, 99, 235, 0.09);
+}
+
+/* Presence / social cards */
+[data-theme="light"] .presence-card {
+  background: rgba(15, 23, 42, 0.02) !important;
+}
+
+[data-theme="light"] .presence-card:hover {
+  background: rgba(37, 99, 235, 0.05) !important;
+}
+
+[data-theme="light"] .presence-icon-wrapper {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+/* Mobile tab bar */
+[data-theme="light"] .mobile-tab-bar {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+/* Subtle gradient background in light mode */
+[data-theme="light"] .canvas-container {
+  background:
+    radial-gradient(1100px 750px at 12% -5%, rgba(37, 99, 235, 0.11) 0%, transparent 55%),
+    radial-gradient(1000px 700px at 92% 105%, rgba(139, 92, 246, 0.1) 0%, transparent 55%),
+    linear-gradient(155deg, #eaf0f9 0%, #dee7f3 45%, #d3ddec 100%);
 }

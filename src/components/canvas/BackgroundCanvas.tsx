@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment } from '@react-three/drei';
 import Particles from './Particles';
 
 const BackgroundCanvas = () => {
@@ -11,7 +10,6 @@ const BackgroundCanvas = () => {
         <ambientLight intensity={0.2} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <Suspense fallback={null}>
-          <Environment preset="city" />
           <Particles />
         </Suspense>
       </Canvas>

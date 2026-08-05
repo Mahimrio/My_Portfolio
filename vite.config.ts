@@ -5,7 +5,4 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/My_Portfolio/',
   plugins: [react()],
-  optimizeDeps: {
-    include: ['react-fast-marquee'],
-  },
 })

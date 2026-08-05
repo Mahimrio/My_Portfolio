@@ -16,6 +16,8 @@ const Reveal: React.FC<RevealProps> = ({ children, delay = 0, direction = 'up', 
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     let y = 0;
     let x = 0;
 

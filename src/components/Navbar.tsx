@@ -41,6 +41,8 @@ const Navbar = () => {
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     // Entrance animation for the bottom bar on mobile
     if (window.innerWidth <= 768) {
       gsap.from(menuRef.current, {
@@ -96,10 +98,16 @@ const Navbar = () => {
 
       <header className="navbar">
         {/* Logo */}
-        <div className="nav-logo" onClick={() => window.location.reload()} title="Reload Page">
+        <button
+          type="button"
+          className="nav-logo"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          title="Back to top"
+          aria-label="Back to top"
+        >
           <span>Rianto</span>
           <span style={{ color: 'var(--primary-accent)' }}>.dev</span>
-        </div>
+        </button>
 
         {/* Desktop Nav Links */}
         <nav className="nav-links desktop-only">

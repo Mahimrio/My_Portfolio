@@ -68,18 +68,32 @@ const Navbar = () => {
   }, { dependencies: [], scope: menuRef });
 
   useEffect(() => {
+    const ratios = new Map<string, number>();
+    const navHrefs = new Set(navLinks.map((l) => l.href));
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id === 'hero' ? '' : `#${entry.target.id}`);
+          ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+
+        // Pick the most-visible section on screen
+        let bestId = '';
+        let bestRatio = 0;
+        ratios.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
           }
         });
+
+        const href = `#${bestId}`;
+        setActiveSection(navHrefs.has(href) ? href : '');
       },
-      { rootMargin: '-30% 0px -70% 0px' }
+      { threshold: [0.15, 0.35, 0.6, 0.85] }
     );
 
-    const sectionIds = ['hero', ...navLinks.map((l) => l.href.split('#')[1])];
+    const sectionIds = ['hero', 'presence', ...navLinks.map((l) => l.href.split('#')[1])];
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);

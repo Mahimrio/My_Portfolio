@@ -90,6 +90,18 @@ const HeroSection = () => {
           </div>
         </Reveal>
       </div>
+
+      <button
+        type="button"
+        className="hero-scroll-cue"
+        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        aria-label="Scroll to About section"
+      >
+        <span>Scroll</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
     </section>
   );
 };

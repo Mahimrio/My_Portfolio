@@ -84,9 +84,25 @@ const certificates: CertificateItem[] = [
       footerText: "★ OFFICIAL ★",
     },
   },
+  {
+    title: "Future-Proof Your Cyber Career – Certificate of Participation",
+    issuer: "AUST Cybersecurity & AI Club (AUSTCAIC)",
+    date: "2026",
+    description: "Participated in the seminar \"Future-Proof Your Cyber Career: Preparation, Global Opportunities & AI Integration\", featuring speaker Mashihoor Rahman, organized by AUSTCAIC.",
+    image: `${import.meta.env.BASE_URL}certificates/Mahim Abdullah Rianto_Certificate.jpg`,
+    link: `${import.meta.env.BASE_URL}certificates/Mahim Abdullah Rianto_Certificate.jpg`,
+    accent: "#0ea5e9",
+    previewTags: {
+      topLeft: "AUSTCAIC",
+      topRight: "CERTIFICATE",
+      heading: "Future-Proof Your Cyber Career – Certificate of Participation",
+      subtext: "This certificate is proudly presented for active participation in the AUSTCAIC seminar",
+      footerText: "★ OFFICIAL ★",
+    },
+  },
 ];
 
-const PINNED_CERT_COUNT = 3;
+const PINNED_CERT_COUNT = 4;
 
 // Default Certificate Placeholder Graphic
 const DefaultCertificateGraphic = ({ tags }: { tags?: CertificateItem['previewTags'] }) => {

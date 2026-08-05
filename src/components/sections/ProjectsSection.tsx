@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 
@@ -48,12 +48,13 @@ const projects = [
   // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
   {
     title: "Zenith Protocol",
-    subtitle: "Scalable Web-Based Game Platform (In Development)",
+    subtitle: "Scalable Web-Based Game Platform",
     description: "A highly scalable web-based game platform employing a Plugin Architecture where a central React 'Host App' lazy-loads self-contained game modules via dynamic imports and communicates through a shared event bus. Scores, authentication, and state validation are securely handled via a robust Laravel 11 backend.",
     tags: ["React 18+", "Vite", "TypeScript", "Tailwind CSS", "Zustand", "GSAP 3", "Laravel 11", "MySQL 8+"],
     role: "Full-Stack Developer",
     github: "https://github.com/Mahimrio/Zenith-Protocol.git",
     live: null,
+    inDevelopment: true,
     accent: "#6366f1",
   },
 
@@ -79,12 +80,13 @@ const projects = [
   },
   {
     title: "LockIn",
-    subtitle: "Semester Routine Tracker (In Development)",
+    subtitle: "Semester Routine Tracker",
     description: "A personal static web app for tracking semester routines and schedules. Built as a lightweight React site with no backend dependency.",
     tags: ["Vite", "React 18", "Tailwind CSS"],
     role: "Frontend Developer",
     github: "https://github.com/Mahimrio/LockIn.git",
     live: "https://mahimrio.github.io/LockIn/",
+    inDevelopment: true,
     accent: "#f59e0b",
   },
   {
@@ -135,11 +137,14 @@ const ProjectsSection = () => {
           }
           return (
             <Reveal key={project.title} direction="up" delay={isExtra ? 0.04 * (index - PINNED_COUNT) : 0.15 * index}>
-              <Card className={`project-card ${animClass}`}>
+              <Card className={`project-card ${animClass}`} style={{ '--accent': project.accent } as CSSProperties}>
                 <div className="project-accent-bar" style={{ background: `linear-gradient(90deg, ${project.accent}, transparent)` }} />
                 <div className="project-header">
                   <div>
-                    <h3 className="project-title">{project.title}</h3>
+                    <div className="project-title-row">
+                      <h3 className="project-title">{project.title}</h3>
+                      {project.inDevelopment && <span className="project-status">In Development</span>}
+                    </div>
                     <span className="project-subtitle">{project.subtitle}</span>
                   </div>
                   <span className="project-role">{project.role}</span>

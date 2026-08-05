@@ -2,6 +2,37 @@ import React from 'react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 
+// ─── Inline icons ─────────────────────────────────────────────────────────────
+const iconProps = {
+  width: 15,
+  height: 15,
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 2,
+  strokeLinecap: 'round' as const,
+  strokeLinejoin: 'round' as const,
+};
+
+const BookIcon = () => (
+  <svg {...iconProps}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+);
+const TrophyIcon = () => (
+  <svg {...iconProps}><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" /><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" /></svg>
+);
+const HandshakeIcon = () => (
+  <svg {...iconProps}><path d="m11 17 2 2a1 1 0 1 0 3-3" /><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /><path d="m21 3 1 11h-2" /><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /><path d="M3 4h8" /></svg>
+);
+const GearIcon = () => (
+  <svg {...iconProps}><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>
+);
+const PuzzleIcon = () => (
+  <svg {...iconProps}><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 1.998c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.075.84-.505 1.02-.969a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z" /></svg>
+);
+const BrainIcon = () => (
+  <svg {...iconProps}><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" /></svg>
+);
+
 // ─── Devicon URL helper ───────────────────────────────────────────────────────
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
 
@@ -198,13 +229,13 @@ const AboutSection = () => {
                   <div className="edu-details">
                     {edu.coursework && (
                       <div className="edu-detail-row">
-                        <span className="edu-detail-label">📚 Coursework:</span>
+                        <span className="edu-detail-label"><BookIcon /> Coursework</span>
                         <span className="edu-detail-content">{edu.coursework.join(', ')}</span>
                       </div>
                     )}
                     {edu.achievements && (
                       <div className="edu-detail-row">
-                        <span className="edu-detail-label">🏆 Achievements:</span>
+                        <span className="edu-detail-label"><TrophyIcon /> Achievements</span>
                         <ul className="edu-detail-list">
                           {edu.achievements.map((ach, idx) => (
                             <li key={idx}>{ach}</li>
@@ -214,7 +245,7 @@ const AboutSection = () => {
                     )}
                     {edu.extraCurricular && (
                       <div className="edu-detail-row">
-                        <span className="edu-detail-label">🤝 Involvement:</span>
+                        <span className="edu-detail-label"><HandshakeIcon /> Involvement</span>
                         <div className="edu-detail-content">
                           {edu.extraCurricular.map((item, idx) => (
                             <div key={idx}>{item}</div>
@@ -224,7 +255,7 @@ const AboutSection = () => {
                     )}
                     {edu.skillsAcquired && (
                       <div className="edu-detail-row">
-                        <span className="edu-detail-label">⚙️ Skills:</span>
+                        <span className="edu-detail-label"><GearIcon /> Skills</span>
                         <span className="edu-detail-content">{edu.skillsAcquired}</span>
                       </div>
                     )}
@@ -270,10 +301,10 @@ const AboutSection = () => {
           <h3 className="skills-title">Strengths</h3>
           <div className="soft-skills-grid">
             {[
-              { icon: '🤝', label: 'Teamwork & Collaboration' },
-              { icon: '🧩', label: 'Problem-Solving' },
-              { icon: '📚', label: 'Tutoring & Mentoring' },
-              { icon: '🧠', label: 'Analytical Thinking' },
+              { icon: <HandshakeIcon />, label: 'Teamwork & Collaboration' },
+              { icon: <PuzzleIcon />, label: 'Problem-Solving' },
+              { icon: <BookIcon />, label: 'Tutoring & Mentoring' },
+              { icon: <BrainIcon />, label: 'Analytical Thinking' },
             ].map((item, i) => (
               <div key={i} className="soft-skill-chip">
                 <span className="soft-skill-icon">{item.icon}</span>

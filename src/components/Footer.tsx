@@ -27,9 +27,9 @@ const Footer = () => {
 
       <footer className="footer">
         <div className="footer-content">
-          <div className="footer-logo" onClick={scrollToTop}>
+          <button type="button" className="footer-logo" onClick={scrollToTop} aria-label="Back to top">
             Rianto<span>.dev</span>
-          </div>
+          </button>
 
           <p className="footer-tagline">Building the future, one commit at a time.</p>
 

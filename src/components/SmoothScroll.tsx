@@ -9,6 +9,11 @@ interface SmoothScrollProps {
 
 const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
   useEffect(() => {
+    // Respect users who prefer reduced motion: skip Lenis smooth scrolling.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     let lenis: Lenis | null = null;
     let tickerCallback: gsap.TickerCallback;
 

@@ -66,7 +66,7 @@ const ContactSection = () => {
     const publicKey  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || '';
 
     if (!serviceID || !templateID || !publicKey) {
-      console.warn('EmailJS keys missing. Configure your .env file.');
+      if (import.meta.env.DEV) console.warn('EmailJS keys missing. Configure your .env file.');
       setStatus('error');
       setTimeout(() => setStatus('idle'), 4000);
       return;
@@ -79,7 +79,7 @@ const ContactSection = () => {
         setTimeout(() => setStatus('idle'), 5000);
       })
       .catch((err) => {
-        console.error('EmailJS Error:', err);
+        if (import.meta.env.DEV) console.error('EmailJS Error:', err);
         setStatus('error');
         setTimeout(() => setStatus('idle'), 5000);
       });

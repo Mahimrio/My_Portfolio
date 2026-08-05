@@ -3,7 +3,7 @@ import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 
 const projects = [
-  // --- 4 PINNED PROJECTS (Shown by default) ---
+  // --- PINNED PROJECTS (first PINNED_COUNT shown by default) ---
   {
     title: "InternLink",
     subtitle: "AI-Powered Career & Internship Portal",
@@ -44,6 +44,8 @@ const projects = [
     live: "https://officevolt.vercel.app/",
     accent: "#ef4444",
   },
+
+  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
   {
     title: "Zenith Protocol",
     subtitle: "Scalable Web-Based Game Platform (In Development)",
@@ -55,7 +57,6 @@ const projects = [
     accent: "#6366f1",
   },
 
-  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
   {
     title: "Interactive Portfolio",
     subtitle: "Personal Web Showcase",

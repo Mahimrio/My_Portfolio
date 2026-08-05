@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import type { Points as ThreePoints, Group } from 'three';
 
-const Particles = () => {
+const Particles = ({ color = '#00ff88', opacity = 0.4, size = 0.025 }: { color?: string; opacity?: number; size?: number }) => {
   const ref = useRef<ThreePoints>(null!);
   
   const [sphere] = useState(() => {
@@ -45,11 +45,11 @@ const Particles = () => {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
-          color="#00ff88"
-          size={0.025}
+          color={color}
+          size={size}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.4}
+          opacity={opacity}
         />
       </Points>
     </group>

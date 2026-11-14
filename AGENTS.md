@@ -18,10 +18,11 @@
 ## Project Structure
 ```
 src/
-├── main.tsx                   Entry point, ErrorBoundary, registers ScrollTrigger (no StrictMode)
+├── main.tsx                   Entry point, ErrorBoundary, registers ScrollTrigger & Draggable (no StrictMode)
 ├── App.tsx                    Root: Loader + BackgroundCanvas + SmoothScroll + Layout + sections
-├── index.css                  All global styles (~1342 lines, CSS custom properties)
+├── index.css                  All global styles (~2700 lines, CSS custom properties)
 ├── components/
+│   ├── IdCardDrop.tsx         Interactive 3D hanging AUST student ID card (physics, Draggable, elastic recoil)
 │   ├── Layout.tsx             Navbar + main + Footer wrapper
 │   ├── Navbar.tsx             Fixed header, scroll progress bar, mobile tab bar, CV download button
 │   ├── Footer.tsx             Back-to-top button, footer links, copyright
@@ -206,3 +207,4 @@ Also configured as GitHub repository secrets for CI/CD builds.
 14. **Topbar glowing & sliding transition** — cursor-following spotlight glow + smooth sliding pill indicator across nav tabs with dark/light mode contrast
 15. **Achievements section** — added standalone section above Projects displaying 8 competition & hackathon placements
 16. **Featured certificates** — added FastRoboX 1.0 (BUBT), 3rd IAIT National IT Fest, and RoboFusion 1.0 (Walton/UFTB) certificates with `★ FEATURED` badges
+17. **Interactive 3D AUST ID Card Lanyard** — added `IdCardDrop.tsx` with GSAP elastic drop-in, pendulum swing, 3D hover tilt with glare, and Draggable spring-back physics in Hero section

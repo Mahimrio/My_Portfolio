@@ -19,6 +19,11 @@ const navLinks = [
     icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg> 
   },
   { 
+    href: '#achievements', 
+    label: 'Achievements', 
+    icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> 
+  },
+  { 
     href: '#projects', 
     label: 'Projects', 
     icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg> 
@@ -37,6 +42,11 @@ const navLinks = [
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('');
+  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
+  const [indicator, setIndicator] = useState({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
+  const navContainerRef = useRef<HTMLElement>(null);
+  const linkRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
+
   const [theme, setTheme] = useState<'dark' | 'light'>(() =>
     document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'
   );
@@ -53,6 +63,66 @@ const Navbar = () => {
     }
     window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
     setTheme(next);
+  };
+
+  const targetHref = hoveredHref || activeSection;
+
+  useEffect(() => {
+    const updatePosition = () => {
+      if (!targetHref) {
+        setIndicator((prev) => ({ ...prev, opacity: 0 }));
+        return;
+      }
+
+      const targetEl = linkRefs.current.get(targetHref);
+      const container = navContainerRef.current;
+      if (targetEl && container) {
+        setIndicator({
+          left: targetEl.offsetLeft,
+          top: targetEl.offsetTop,
+          width: targetEl.offsetWidth,
+          height: targetEl.offsetHeight,
+          opacity: 1,
+        });
+      } else {
+        setIndicator((prev) => ({ ...prev, opacity: 0 }));
+      }
+    };
+
+    const frame = requestAnimationFrame(updatePosition);
+    return () => cancelAnimationFrame(frame);
+  }, [targetHref, activeSection]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!targetHref) return;
+      const targetEl = linkRefs.current.get(targetHref);
+      if (targetEl) {
+        setIndicator({
+          left: targetEl.offsetLeft,
+          top: targetEl.offsetTop,
+          width: targetEl.offsetWidth,
+          height: targetEl.offsetHeight,
+          opacity: 1,
+        });
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [targetHref]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const container = navContainerRef.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    container.style.setProperty('--mouse-x', `${x}px`);
+    container.style.setProperty('--mouse-y', `${y}px`);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredHref(null);
   };
 
   useGSAP(() => {
@@ -139,16 +209,52 @@ const Navbar = () => {
         </button>
 
         {/* Desktop Nav Links */}
-        <nav className="nav-links desktop-only">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={activeSection === link.href ? 'nav-active' : ''}
-            >
-              <span>{link.label}</span>
-            </a>
-          ))}
+        <nav
+          ref={navContainerRef}
+          className="nav-links desktop-only"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* Spotlight cursor glow */}
+          <div className="nav-spotlight" aria-hidden="true" />
+
+          {/* Sliding glowing pill indicator */}
+          <div
+            className={`nav-slider-pill ${indicator.opacity > 0 ? 'is-visible' : ''} ${
+              hoveredHref ? 'is-hovering' : activeSection ? 'is-active-resting' : ''
+            }`}
+            style={{
+              transform: `translate3d(${indicator.left}px, ${indicator.top}px, 0)`,
+              width: `${indicator.width}px`,
+              height: `${indicator.height}px`,
+            }}
+            aria-hidden="true"
+          />
+
+          {navLinks.map((link) => {
+            const isHighlighted = targetHref === link.href;
+            const isCurrentSection = activeSection === link.href;
+
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                ref={(el) => {
+                  if (el) linkRefs.current.set(link.href, el);
+                  else linkRefs.current.delete(link.href);
+                }}
+                onMouseEnter={() => setHoveredHref(link.href)}
+                onFocus={() => setHoveredHref(link.href)}
+                onBlur={() => setHoveredHref(null)}
+                onClick={() => setActiveSection(link.href)}
+                className={`nav-link-item ${isHighlighted ? 'is-highlighted' : ''} ${
+                  isCurrentSection ? 'nav-active' : ''
+                }`}
+              >
+                <span>{link.label}</span>
+              </a>
+            );
+          })}
         </nav>
 
         <div className="nav-right">

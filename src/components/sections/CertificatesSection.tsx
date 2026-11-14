@@ -10,6 +10,7 @@ export interface CertificateItem {
   credentialId?: string;
   link?: string;
   accent?: string;
+  featured?: boolean;
   previewTags?: {
     topLeft: string;
     topRight: string;
@@ -20,6 +21,57 @@ export interface CertificateItem {
 }
 
 const certificates: CertificateItem[] = [
+  {
+    title: "FastRoboX 1.0 – IoT Hackathon Certificate of Achievement",
+    issuer: "IEEE BUBT Student Branch & BUBT",
+    date: "2026",
+    description: "Awarded Second Runner Up (Team AUST_Airgap) in the IoT Hackathon segment of FastRoboX 1.0 – A National Robotics Competition 2026, recognizing technical innovation and competitive excellence.",
+    image: `${import.meta.env.BASE_URL}certificates/FastRoboX BUBT.jpeg`,
+    link: `${import.meta.env.BASE_URL}certificates/FastRoboX BUBT.jpeg`,
+    accent: "#f59e0b",
+    featured: true,
+    previewTags: {
+      topLeft: "IEEE BUBT",
+      topRight: "ACHIEVEMENT",
+      heading: "FastRoboX 1.0 – IoT Hackathon",
+      subtext: "Presented to AUST_Airgap for securing Second Runner Up",
+      footerText: "★ 2ND RUNNER UP ★",
+    },
+  },
+  {
+    title: "3rd IAIT National IT Fest – AI Hackathon Certificate of Participation",
+    issuer: "Ideal Association of Informatics and Technology (IAIT) & NCC Bank",
+    date: "2026",
+    description: "Successfully participated in the AI Hackathon segment at the 3rd IAIT National IT Fest 2026, recognized for active involvement and remarkable competitive performance.",
+    image: `${import.meta.env.BASE_URL}certificates/IAIT National IT Fest.jpeg`,
+    link: `${import.meta.env.BASE_URL}certificates/IAIT National IT Fest.jpeg`,
+    accent: "#3b82f6",
+    featured: true,
+    previewTags: {
+      topLeft: "IAIT / NCC",
+      topRight: "PARTICIPATION",
+      heading: "3rd IAIT National IT Fest",
+      subtext: "Presented for active involvement and remarkable performance in AI Hackathon",
+      footerText: "★ OFFICIAL ★",
+    },
+  },
+  {
+    title: "RoboFusion 1.0 – Techathon Certificate of Participation",
+    issuer: "UFTB Robotics Club, University of Frontier Technology & Walton",
+    date: "2026",
+    description: "Awarded for active and enthusiastic participation in WALTON Presents ROBOFUSION 1.0 (Techathon), organized by the UFTB Robotics Club at the University of Frontier Technology, Bangladesh.",
+    image: `${import.meta.env.BASE_URL}certificates/RoboFusion UFTB.png`,
+    link: `${import.meta.env.BASE_URL}certificates/RoboFusion UFTB.pdf`,
+    accent: "#10b981",
+    featured: true,
+    previewTags: {
+      topLeft: "UFTB / WALTON",
+      topRight: "PARTICIPATION",
+      heading: "RoboFusion 1.0 – Techathon",
+      subtext: "Presented for active and enthusiastic participation in Walton Presents RoboFusion 1.0",
+      footerText: "★ OFFICIAL ★",
+    },
+  },
   {
     title: "SciBlitz 2.0 – AI Hackathon Certificate of Achievement",
     issuer: "IEEE CUET Student Branch / SheSTEM",
@@ -171,9 +223,17 @@ const CertificatesSection = () => {
           }
           return (
             <Reveal key={item.title} direction="up" delay={isExtra ? 0.04 * (index - PINNED_CERT_COUNT) : 0.15 * index}>
-              <div className={`cert-photo-card ${animClass}`}>
+              <div className={`cert-photo-card ${item.featured ? 'is-featured' : ''} ${animClass}`}>
                 {/* 1. Image Preview / Document Box */}
                 <div className="cert-photo-wrapper">
+                  {item.featured && (
+                    <span className="cert-featured-badge">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                      </svg>
+                      <span>Featured</span>
+                    </span>
+                  )}
                   {item.image ? (
                     <img src={item.image} alt={item.title} className="cert-photo-img" loading="lazy" />
                   ) : (

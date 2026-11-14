@@ -4,6 +4,7 @@ import SmoothScroll from './components/SmoothScroll';
 import Loader from './components/Loader';
 import HeroSection from './components/sections/HeroSection';
 import AboutSection from './components/sections/AboutSection';
+import AchievementsSection from './components/sections/AchievementsSection';
 import ProjectsSection from './components/sections/ProjectsSection';
 import CertificatesSection from './components/sections/CertificatesSection';
 import ContactSection from './components/sections/ContactSection';
@@ -24,6 +25,7 @@ function App() {
         <Layout>
           <HeroSection />
           <AboutSection />
+          <AchievementsSection />
           <ProjectsSection />
           <CertificatesSection />
           <ContactSection />

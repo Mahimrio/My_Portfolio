@@ -35,8 +35,9 @@ src/
 │   ├── sections/
 │   │   ├── HeroSection.tsx    Photo, typing effect (4 roles), CTA buttons
 │   │   ├── AboutSection.tsx   About cards, education timeline, skill marquees (pure CSS), soft skills
+│   │   ├── AchievementsSection.tsx 8 competition & hackathon awards in responsive card grid
 │   │   ├── ProjectsSection.tsx 8 project cards with accent bars, GitHub links, and Live Demo buttons
-│   │   ├── CertificatesSection.tsx Certificates & Achievements cards with category badges
+│   │   ├── CertificatesSection.tsx Certificates cards with featured labels, badges & previews
 │   │   ├── ContactSection.tsx 2-column layout + EmailJS form (state machine)
 │   │   └── SocialsSection.tsx 5 social media link cards (LinkedIn, GitHub, WhatsApp, FB, IG)
 │   └── ui/
@@ -202,3 +203,6 @@ Also configured as GitHub repository secrets for CI/CD builds.
 11. Added `.env.example` for EmailJS config
 12. Added 4 projects: Zenith Protocol, ShasthyaHub-AI, LockIn, OfficeVolt
 13. Removed Task Flow Pro project
+14. **Topbar glowing & sliding transition** — cursor-following spotlight glow + smooth sliding pill indicator across nav tabs with dark/light mode contrast
+15. **Achievements section** — added standalone section above Projects displaying 8 competition & hackathon placements
+16. **Featured certificates** — added FastRoboX 1.0 (BUBT), 3rd IAIT National IT Fest, and RoboFusion 1.0 (Walton/UFTB) certificates with `★ FEATURED` badges

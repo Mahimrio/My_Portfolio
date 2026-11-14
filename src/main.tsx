@@ -4,8 +4,9 @@ import './index.css'
 import App from './App.tsx'
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { Draggable } from 'gsap/Draggable';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Draggable);
 
 interface ErrorBoundaryProps {
   children: ReactNode;

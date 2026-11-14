@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Reveal from '../animations/Reveal';
 import Button from '../ui/Button';
+import IdCardDrop from '../IdCardDrop';
 import heroImg from '../../assets/my-photo.jpg';
 
 const roles = [
@@ -48,6 +49,7 @@ const TypingEffect = () => {
 const HeroSection = () => {
   return (
     <section id="hero" className="hero-section">
+      {/* Centered Hero Content — Kept exactly as originally designed */}
       <div className="hero-content">
         <Reveal direction="down" delay={0.1}>
           <div className="hero-photo-wrapper">
@@ -89,6 +91,11 @@ const HeroSection = () => {
             </Button>
           </div>
         </Reveal>
+      </div>
+
+      {/* Interactive Hanging AUST Student ID Card in the Right Corner Empty Space */}
+      <div className="hero-corner-card">
+        <IdCardDrop />
       </div>
 
       <button

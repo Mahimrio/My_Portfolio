@@ -492,6 +492,13 @@ a {
   pointer-events: auto;
 }
 
+/* Owner request (2026-11-24): the ID card is intentionally hidden.
+   Keep IdCardDrop.tsx and all related code intact. Remove only this rule
+   to bring the card back. Also documented in AGENTS.md. */
+.hero-corner-card {
+  display: none;
+}
+
 @media (max-width: 1100px) {
   .hero-corner-card {
     display: none;

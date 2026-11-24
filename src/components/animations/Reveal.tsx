@@ -33,10 +33,12 @@ const Reveal: React.FC<RevealProps> = ({ children, delay = 0, direction = 'up', 
       duration: 1.2,
       delay: delay,
       ease: 'power3.out',
+      immediateRender: false,
       scrollTrigger: {
         trigger: container.current,
         start: 'top 85%',
-        toggleActions: 'play none none reverse',
+        toggleActions: 'play none none none',
+        once: true,
       },
     });
   }, { dependencies: [], scope: container });

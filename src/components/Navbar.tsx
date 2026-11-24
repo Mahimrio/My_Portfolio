@@ -156,15 +156,15 @@ const Navbar = () => {
       });
     }
 
-    // Scroll Progress Bar
+    // Scroll Progress Bar: Animate scaleX on GPU compositor thread (0 layout reflows)
     gsap.to(progressBarRef.current, {
-      width: '100%',
+      scaleX: 1,
       ease: 'none',
       scrollTrigger: {
         trigger: 'body',
         start: 'top top',
         end: 'bottom bottom',
-        scrub: 0.3,
+        scrub: 0.05,
       },
     });
   }, { dependencies: [], scope: menuRef });
@@ -192,7 +192,7 @@ const Navbar = () => {
         const href = `#${bestId}`;
         setActiveSection(navHrefs.has(href) ? href : '');
       },
-      { threshold: [0.15, 0.35, 0.6, 0.85] }
+      { threshold: [0.2, 0.5] }
     );
 
     const sectionIds = ['hero', 'presence', ...navLinks.map((l) => l.href.split('#')[1])];

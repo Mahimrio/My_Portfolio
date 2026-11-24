@@ -117,46 +117,55 @@ const tools = ['Git', 'VS Code', 'Arduino', 'Proteus', 'iGraphics'];
 
 const education = [
   {
-    degree: 'BSc in CSE',
+    degree: 'BSc in Computer Science & Engineering',
     status: 'Ongoing',
     institution: 'Ahsanullah University of Science & Technology (AUST)',
-    result: 'CGPA: 3.30+ (in 6th semester)',
+    result: 'CGPA: 3.25',
     year: '2023 – Present',
     coursework: [
-      'Digital System Design', 'MicroProcessors & MicroControllers', 'Data Communications',
-      'Computer Architecture', 'Assembly Language Programming', 'Numerical Methods',
-      'Electronic Devices & Circuits', 'Discrete Math', 'OOP (Java)',
-      'Elementary Structured Programming (C)', 'Data Structures & Algorithms',
-      'Database Management Systems', 'Software Engineering', 'Artificial Intelligence',
+      'OOP (C++, Java)',
+      'Data Structures & Algorithms',
+      'DBMS (Oracle, MySQL)',
+      'Software Engineering & Design Patterns',
+      'Microprocessors & Embedded Systems (Assembly, Arduino)',
+      'Theory of Computation',
     ],
-    extraCurricular: ['Associative Executive: AUST CAIC', '\n', 'Member: AUST PIC'],
-    skillsAcquired: 'Full-stack development, Logic Circuit Design & Embedded Systems Development',
+    achievements: [
+      '3rd IAIT National IT Fest 2026 – 1st Runners Up (AI Hackathon)',
+      'FastRoboX 1.0 (IEEE BUBT) – 2nd Runners Up (IoT Hackathon)',
+      'SciBlitz 2.0 (CUET IEEE Branch) – Finalist (AI Hackathon)',
+      'AUST CSE Carnival 7.0 – Top 5 in UI/UX Design',
+      'UFTB RoboFusion 1.0 – Top 10 in Techathon',
+      'AUST CSE Carnival 8.0 – Top 10 in Project Showcase',
+    ],
+    extraCurricular: [
+      'Organizing Committee Member, SciBlitz 2.0 & AUST Robotics Events',
+      'Active participant in National Robotics Competitions (RoboFusion 1.0, FastRoboX 1.0)',
+      'Student Mentor for junior CSE peers in C++ and Data Structures',
+    ],
+    skillsAcquired: 'Full-Stack Web Dev (React, Next.js, Node.js), Embedded Systems, IoT Prototyping, Agile Collaboration',
   },
   {
-    degree: 'HSC',
+    degree: 'Higher Secondary Certificate (HSC)',
     status: 'Completed',
-    institution: 'Shaheed Police Smrity College',
+    institution: 'Shaheed Police Smrity College (SPSC)',
     result: 'GPA: 5.00 / 5.00',
-    year: '2022',
-    coursework: ['Physics', 'Chemistry', 'Higher Mathematics'],
-    achievements: [
-      'Participated in Intra College Physics Olympiad',
-      'Participated in Science Fair with smart parking system',
-    ],
-    skillsAcquired: 'Foundational programming in C/C++',
+    year: '2020 – 2022',
+    coursework: ['Physics', 'Chemistry', 'Higher Mathematics', 'ICT', 'Biology'],
+    achievements: ['GPA 5.00 in Science Group with General Board Scholarship'],
+    extraCurricular: ['Science Club Member', 'Annual Sports Meet Volunteer', 'Intra-College Math Olympiad Participant'],
+    skillsAcquired: 'Analytical Problem Solving, Foundations of Computing & Logic',
   },
   {
-    degree: 'SSC',
+    degree: 'Secondary School Certificate (SSC)',
     status: 'Completed',
-    institution: 'Monipur High School and College',
+    institution: 'Monipur High School & College',
     result: 'GPA: 5.00 / 5.00',
-    year: '2020',
-    coursework: ['General Science'],
-    achievements: [
-      'Won Intra school Cricket tournament',
-      'Participated in Intra school Math Olympiad',
-      'Participated in Science Fair with Smart obstacle detection system for model cars',
-    ],
+    year: '2018 – 2020',
+    coursework: ['General Science', 'Higher Mathematics', 'Physics', 'Chemistry', 'Biology', 'ICT'],
+    achievements: ['GPA 5.00 in Science Group with General Board Scholarship'],
+    extraCurricular: ['Debate Club Member', 'School Cricket Team'],
+    skillsAcquired: 'Mathematics, Basic Programming Logic, Team Collaboration',
   },
 ];
 
@@ -169,7 +178,7 @@ const AboutSection = () => {
       </Reveal>
 
       <div className="about-grid">
-        <Reveal direction="right" delay={0.2} fullHeight>
+        <Reveal direction="right" delay={0.06} fullHeight>
           <Card className="about-card">
             <h3>Who I Am</h3>
             <p>
@@ -180,7 +189,7 @@ const AboutSection = () => {
           </Card>
         </Reveal>
 
-        <Reveal direction="left" delay={0.4} fullHeight>
+        <Reveal direction="left" delay={0.12} fullHeight>
           <Card className="about-card">
             <h3>What I Do</h3>
             <p>
@@ -191,7 +200,7 @@ const AboutSection = () => {
           </Card>
         </Reveal>
 
-        <Reveal direction="up" delay={0.5} fullHeight>
+        <Reveal direction="up" delay={0.18} fullHeight>
           <Card className="about-card">
             <h3>My Interests</h3>
             <p>
@@ -204,7 +213,7 @@ const AboutSection = () => {
       </div>
 
       {/* Education Section */}
-      <Reveal direction="up" delay={0.3}>
+      <Reveal direction="up" delay={0.05}>
         <div id="education" className="education-container">
           <h3 className="skills-title">Education</h3>
           <div className="education-timeline">
@@ -268,7 +277,7 @@ const AboutSection = () => {
       </Reveal>
 
       {/* Skills Section */}
-      <Reveal direction="up" delay={0.6}>
+      <Reveal direction="up" delay={0.05}>
         <div id="skills" className="skills-container">
           <h3 className="skills-title">Technical Skills</h3>
 
@@ -296,7 +305,7 @@ const AboutSection = () => {
       </Reveal>
 
       {/* Soft Skills */}
-      <Reveal direction="up" delay={0.8}>
+      <Reveal direction="up" delay={0.05}>
         <div className="soft-skills-container">
           <h3 className="skills-title">Strengths</h3>
           <div className="soft-skills-grid">

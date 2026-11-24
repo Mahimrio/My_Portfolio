@@ -88,12 +88,12 @@ const ContactSection = () => {
   return (
     <section id="contact" className="content-section">
       <Reveal direction="down">
-          <h2 className="section-title" style={{ textAlign: 'center' }}>
-            Get In Touch
-          </h2>
+        <h2 className="section-title" style={{ textAlign: 'center' }}>
+          Get In Touch
+        </h2>
       </Reveal>
 
-      <Reveal direction="up" delay={0.2}>
+      <Reveal direction="up" delay={0.08}>
         <div className="contact-layout">
 
           {/* ── Left panel: Contact Info ── */}

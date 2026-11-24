@@ -1,4 +1,3 @@
-
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 
@@ -64,7 +63,7 @@ const SocialsSection = () => {
 
       <div className="presence-grid">
         {socials.map((social, i) => (
-          <Reveal key={i} direction="up" delay={0.1 * i}>
+          <Reveal key={i} direction="up" delay={(i % 5) * 0.05}>
             <a 
               href={social.url} 
               target="_blank" 

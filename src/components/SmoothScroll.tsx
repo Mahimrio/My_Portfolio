@@ -19,11 +19,11 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
 
     const raf = requestAnimationFrame(() => {
       lenis = new Lenis({
-        duration: 1.5,
+        duration: 0.85, // Snappy, responsive scroll without sluggish lingering inertia
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        wheelMultiplier: 1.1,
-        touchMultiplier: 2,
+        wheelMultiplier: 1.15, // Natural travel per wheel notch
+        touchMultiplier: 1.5,
       });
 
       lenis.on('scroll', ScrollTrigger.update);
@@ -32,11 +32,21 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
         lenis!.raf(time * 1000);
       };
       gsap.ticker.add(tickerCallback);
-      gsap.ticker.lagSmoothing(0);
+      // Keep standard lag smoothing to protect against momentary micro-stutters
+      gsap.ticker.lagSmoothing(500, 33);
+
+      // Refresh ScrollTrigger once Lenis is synchronized
+      ScrollTrigger.refresh();
     });
+
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('load', handleLoad);
 
     return () => {
       cancelAnimationFrame(raf);
+      window.removeEventListener('load', handleLoad);
       if (tickerCallback) gsap.ticker.remove(tickerCallback);
       if (lenis) lenis.destroy();
     };

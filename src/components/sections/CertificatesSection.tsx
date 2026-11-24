@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import Reveal from '../animations/Reveal';
 
 export interface CertificateItem {
@@ -199,9 +200,13 @@ const CertificatesSection = () => {
       setTimeout(() => {
         setShowAll(false);
         setIsCollapsing(false);
+        ScrollTrigger.refresh();
       }, 350);
     } else {
       setShowAll(true);
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 60);
     }
   };
 
@@ -221,9 +226,19 @@ const CertificatesSection = () => {
           if (isExtra) {
             animClass = isCollapsing ? 'collapse-animate' : 'expand-animate';
           }
+          const rowStagger = (index % 2) * 0.08;
+
           return (
-            <Reveal key={item.title} direction="up" delay={isExtra ? 0.04 * (index - PINNED_CERT_COUNT) : 0.15 * index}>
-              <div className={`cert-photo-card ${item.featured ? 'is-featured' : ''} ${animClass}`}>
+            <Reveal
+              key={item.title}
+              direction="up"
+              delay={rowStagger}
+              disabled={isExtra}
+            >
+              <div
+                className={`cert-photo-card ${item.featured ? 'is-featured' : ''} ${animClass}`}
+                style={isExtra ? { animationDelay: `${(index - PINNED_CERT_COUNT) * 0.04}s` } : undefined}
+              >
                 {/* 1. Image Preview / Document Box */}
                 <div className="cert-photo-wrapper">
                   {item.featured && (

@@ -1,4 +1,5 @@
 import { useState, Suspense, lazy } from 'react';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import Layout from './components/Layout';
 import SmoothScroll from './components/SmoothScroll';
 import Loader from './components/Loader';
@@ -15,9 +16,16 @@ const BackgroundCanvas = lazy(() => import('./components/canvas/BackgroundCanvas
 function App() {
   const [loading, setLoading] = useState(true);
 
+  const handleLoaderComplete = () => {
+    setLoading(false);
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+  };
+
   return (
     <>
-      {loading && <Loader onComplete={() => setLoading(false)} />}
+      {loading && <Loader onComplete={handleLoaderComplete} />}
       <Suspense fallback={null}>
         <BackgroundCanvas />
       </Suspense>

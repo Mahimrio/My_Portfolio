@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { runThemeTransition } from '../lib/themeTransition';
 
 const navLinks = [
   { 
@@ -52,9 +53,10 @@ const Navbar = () => {
   );
   const menuRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const themeToggleRef = useRef<HTMLButtonElement>(null);
+  const isTransitioningRef = useRef(false);
 
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark';
+  const applyTheme = (next: 'dark' | 'light') => {
     document.documentElement.setAttribute('data-theme', next);
     try {
       localStorage.setItem('theme', next);
@@ -63,6 +65,21 @@ const Navbar = () => {
     }
     window.dispatchEvent(new CustomEvent('themechange', { detail: next }));
     setTheme(next);
+  };
+
+  const toggleTheme = () => {
+    if (isTransitioningRef.current) return;
+
+    const next = theme === 'dark' ? 'light' : 'dark';
+    isTransitioningRef.current = true;
+
+    runThemeTransition({
+      nextTheme: next,
+      originElement: themeToggleRef.current,
+      applyTheme: () => applyTheme(next),
+    }).finally(() => {
+      isTransitioningRef.current = false;
+    });
   };
 
   const targetHref = hoveredHref || activeSection;
@@ -260,6 +277,7 @@ const Navbar = () => {
         <div className="nav-right">
           <button
             type="button"
+            ref={themeToggleRef}
             className="theme-toggle"
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}

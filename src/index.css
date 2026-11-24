@@ -939,15 +939,22 @@ a {
   content: '';
   position: absolute;
   left: 7px;
-  top: 0;
-  bottom: 0;
+  top: calc(1.5rem + 8px);
+  bottom: calc(1.5rem + 8px);
   width: 2px;
-  background: linear-gradient(to bottom, var(--primary-accent), transparent);
+  border-radius: 999px;
+  background: var(--primary-accent);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.55);
+  opacity: 1;
 }
 
 .education-item {
   position: relative;
   margin-bottom: 1.5rem;
+}
+
+.education-item:last-child {
+  margin-bottom: 0;
 }
 
 .edu-dot {
@@ -958,7 +965,7 @@ a {
   height: 16px;
   border-radius: 50%;
   background: var(--primary-accent);
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18), 0 0 14px rgba(59, 130, 246, 0.7);
   z-index: 2;
 }
 
@@ -2683,4 +2690,47 @@ a {
 [data-theme="light"] .id-card-badge-wrapper:active,
 [data-theme="light"] .id-card-badge-wrapper.is-dragging {
   filter: drop-shadow(0 30px 45px rgba(16, 185, 129, 0.35));
+}
+
+/* ========== THEME VENOM TRANSITION ========== */
+/* Purely additive: these rules only style the native view-transition
+   snapshots. The organic blob is generated in `themeTransition.ts` and
+   written to --venom-clip on the document element. */
+
+html.theme-venom-active::view-transition-old(root),
+html.theme-venom-active::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.theme-venom-expand::view-transition-old(root) {
+  z-index: 1;
+}
+
+html.theme-venom-expand::view-transition-new(root) {
+  z-index: 2;
+  clip-path: var(--venom-clip, circle(0px at 50% 50%));
+  animation: theme-venom-hold var(--venom-duration, 1.38s) linear both;
+}
+
+html.theme-venom-retract::view-transition-old(root) {
+  z-index: 3;
+  clip-path: var(--venom-clip, circle(150vmax at 50% 50%));
+  animation: theme-venom-hold var(--venom-duration, 1.08s) linear both;
+}
+
+html.theme-venom-retract::view-transition-new(root) {
+  z-index: 2;
+}
+
+/* The hold animation defines the transition lifetime while GSAP drives the
+   actual clip-path, frame by frame. */
+@keyframes theme-venom-hold {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

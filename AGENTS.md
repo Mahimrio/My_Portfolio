@@ -15,6 +15,9 @@
 | `npm run deploy` | `gh-pages -d dist` (legacy manual deploy — CI/CD now preferred) |
 | `npm run preview` | `vite preview` (serve production build locally) |
 
+## Current UI State — Read Before Changing Anything
+- **The hanging AUST ID card is intentionally hidden by the owner (2026-11-24).** All of its code (`src/components/IdCardDrop.tsx`, its styles in `src/index.css`, GSAP/Draggable logic, assets) must stay in the repo. It is hidden only by a `.hero-corner-card { display: none; }` rule in `src/index.css`. Do **not** delete the component, remove its code, or "fix" the visibility — leave it hidden unless the owner explicitly asks to restore it. To restore, remove that one CSS rule.
+
 ## Project Structure
 ```
 src/
@@ -22,7 +25,7 @@ src/
 ├── App.tsx                    Root: Loader + BackgroundCanvas + SmoothScroll + Layout + sections
 ├── index.css                  All global styles (~2700 lines, CSS custom properties)
 ├── components/
-│   ├── IdCardDrop.tsx         Interactive 3D hanging AUST student ID card (physics, Draggable, elastic recoil)
+│   ├── IdCardDrop.tsx         Interactive 3D hanging AUST student ID card (physics, Draggable, elastic recoil) — CODE KEPT, CURRENTLY HIDDEN via CSS (see "Current UI State")
 │   ├── Layout.tsx             Navbar + main + Footer wrapper
 │   ├── Navbar.tsx             Fixed header, scroll progress bar, mobile tab bar, CV download button
 │   ├── Footer.tsx             Back-to-top button, footer links, copyright

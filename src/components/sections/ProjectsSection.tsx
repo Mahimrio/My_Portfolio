@@ -1,4 +1,5 @@
 import { useState, type CSSProperties } from 'react';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 
@@ -113,9 +114,13 @@ const ProjectsSection = () => {
       setTimeout(() => {
         setShowAll(false);
         setIsCollapsing(false);
+        ScrollTrigger.refresh();
       }, 350);
     } else {
       setShowAll(true);
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 60);
     }
   };
 
@@ -135,9 +140,23 @@ const ProjectsSection = () => {
           if (isExtra) {
             animClass = isCollapsing ? 'collapse-animate' : 'expand-animate';
           }
+          // Row-based subtle stagger for pinned cards; CSS keyframes handle expanded cards
+          const rowStagger = (index % 2) * 0.08;
+
           return (
-            <Reveal key={project.title} direction="up" delay={isExtra ? 0.04 * (index - PINNED_COUNT) : 0.15 * index}>
-              <Card className={`project-card ${animClass}`} style={{ '--accent': project.accent } as CSSProperties}>
+            <Reveal
+              key={project.title}
+              direction="up"
+              delay={rowStagger}
+              disabled={isExtra}
+            >
+              <Card
+                className={`project-card ${animClass}`}
+                style={{
+                  '--accent': project.accent,
+                  ...(isExtra ? { animationDelay: `${(index - PINNED_COUNT) * 0.04}s` } : {}),
+                } as CSSProperties}
+              >
                 <div className="project-accent-bar" style={{ background: `linear-gradient(90deg, ${project.accent}, transparent)` }} />
                 <div className="project-header">
                   <div>

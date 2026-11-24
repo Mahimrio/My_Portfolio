@@ -2,56 +2,85 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
-
-
 interface RevealProps {
   children: React.ReactNode;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right';
   className?: string;
   fullHeight?: boolean;
+  disabled?: boolean;
 }
 
-const Reveal: React.FC<RevealProps> = ({ children, delay = 0, direction = 'up', className = '', fullHeight = false }) => {
+const Reveal: React.FC<RevealProps> = ({
+  children,
+  delay = 0,
+  direction = 'up',
+  className = '',
+  fullHeight = false,
+  disabled = false,
+}) => {
   const container = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  useGSAP(
+    () => {
+      const el = container.current;
+      if (!el || disabled) return;
 
-    let y = 0;
-    let x = 0;
+      // Respect user's reduced motion preference
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(el, { opacity: 1, x: 0, y: 0, clearProps: 'all' });
+        return;
+      }
 
-    if (direction === 'up') y = 75;
-    if (direction === 'down') y = -75;
-    if (direction === 'left') x = 75;
-    if (direction === 'right') x = -75;
+      // Responsive, elegant translation distance
+      const distance = window.innerWidth <= 768 ? 20 : 28;
 
-    gsap.from(container.current, {
-      opacity: 0,
-      y: y,
-      x: x,
-      duration: 1.2,
-      delay: delay,
-      ease: 'power3.out',
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: container.current,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-        once: true,
-      },
-    });
-  }, { dependencies: [], scope: container });
+      let y = 0;
+      let x = 0;
+
+      if (direction === 'up') y = distance;
+      if (direction === 'down') y = -distance;
+      if (direction === 'left') x = distance;
+      if (direction === 'right') x = -distance;
+
+      // GSAP fromTo ensures the element is prepared in its initial offset/hidden state
+      // immediately on mount without lingering visible or snapping later.
+      gsap.fromTo(
+        el,
+        {
+          opacity: 0,
+          x,
+          y,
+          willChange: 'transform, opacity',
+        },
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          duration: 0.7,
+          delay,
+          ease: 'power2.out',
+          clearProps: 'transform,opacity,willChange',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+            once: true,
+          },
+        }
+      );
+    },
+    { dependencies: [direction, delay, disabled], scope: container }
+  );
 
   return (
-    <div 
-      ref={container} 
+    <div
+      ref={container}
       className={className}
-      style={{ 
-        opacity: 1, 
+      style={{
         height: fullHeight ? '100%' : 'auto',
         display: fullHeight ? 'flex' : 'block',
-        flexDirection: 'column'
+        flexDirection: 'column',
       }}
     >
       {children}

@@ -7,7 +7,8 @@ const Particles = ({ color = '#00ff88', opacity = 0.4, size = 0.025 }: { color?:
   const ref = useRef<ThreePoints>(null!);
   
   const [sphere] = useState(() => {
-    const count = 3000;
+    // 1800 particles maintains dense cosmic atmosphere while cutting vertex overhead by 40%
+    const count = 1800;
     const positions = new Float32Array(count * 3);
     for(let i = 0; i < count; i++) {
         const radius = Math.random() * 10;

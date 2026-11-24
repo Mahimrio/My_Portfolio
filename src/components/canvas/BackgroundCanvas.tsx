@@ -20,7 +20,17 @@ const BackgroundCanvas = () => {
 
   return (
     <div className="canvas-container">
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }} gl={{ alpha: true }}>
+      <Canvas
+        camera={{ position: [0, 0, 5], fov: 45 }}
+        dpr={[1, 1.5]}
+        gl={{
+          alpha: true,
+          powerPreference: 'high-performance',
+          antialias: false,
+          depth: false,
+          stencil: false,
+        }}
+      >
         <ambientLight intensity={0.2} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         <Suspense fallback={null}>

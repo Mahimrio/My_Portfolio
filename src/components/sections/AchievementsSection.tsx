@@ -122,8 +122,9 @@ const AchievementsSection = () => {
       <div className="achievements-grid">
         {achievements.map((item, index) => {
           const IconComponent = iconMap[item.icon];
+          const rowStagger = (index % 2) * 0.07;
           return (
-            <Reveal key={`${item.event}-${item.category}`} direction="up" delay={0.1 * index}>
+            <Reveal key={`${item.event}-${item.category}`} direction="up" delay={rowStagger}>
               <Card
                 className="achievement-card"
                 style={{ '--achievement-accent': item.accent } as CSSProperties}

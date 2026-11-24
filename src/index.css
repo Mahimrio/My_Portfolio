@@ -341,7 +341,10 @@ a {
 
 .scroll-progress-bar {
   height: 100%;
-  width: 0%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
   background: var(--primary-accent);
   box-shadow: 0 0 8px var(--primary-accent);
 }
@@ -836,6 +839,8 @@ a {
   border-radius: 12px;
   padding: var(--spacing-md);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateZ(0);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     border-color 0.4s ease,
     box-shadow 0.4s ease;
@@ -882,8 +887,10 @@ a {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  pointer-events: auto;
+  pointer-events: none;
   background: var(--bg-color);
+  contain: strict;
+  transform: translateZ(0);
 }
 
 /* ========== SECTIONS ========== */
@@ -1388,6 +1395,7 @@ a {
   height: 100%;
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     border-color 0.4s ease,
     box-shadow 0.4s ease;

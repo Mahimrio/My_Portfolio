@@ -49,19 +49,19 @@ const TypingEffect = () => {
 const HeroSection = () => {
   return (
     <section id="hero" className="hero-section">
-      {/* Centered Hero Content — Kept exactly as originally designed */}
+      {/* Centered Hero Content */}
       <div className="hero-content">
-        <Reveal direction="down" delay={0.1}>
+        <Reveal direction="down" delay={0.05}>
           <div className="hero-photo-wrapper">
             <img src={heroImg} alt="Mahim Abdullah Rianto" className="hero-photo" />
           </div>
         </Reveal>
 
-        <Reveal direction="down" delay={0.2}>
+        <Reveal direction="down" delay={0.1}>
           <p className="hero-greeting">Hello, I'm</p>
         </Reveal>
 
-        <Reveal direction="down" delay={0.3}>
+        <Reveal direction="down" delay={0.18}>
           <h1 className="hero-title">Mahim Abdullah Rianto</h1>
         </Reveal>
 
@@ -69,7 +69,7 @@ const HeroSection = () => {
           <TypingEffect />
         </h2>
 
-        <Reveal direction="up" delay={0.7}>
+        <Reveal direction="up" delay={0.28}>
           <p className="hero-description">
             Motivated and detail-oriented Computer Science &amp; Engineering student at
             Ahsanullah University of Science &amp; Technology (AUST), with hands-on experience
@@ -77,7 +77,7 @@ const HeroSection = () => {
           </p>
         </Reveal>
 
-        <Reveal direction="up" delay={0.9}>
+        <Reveal direction="up" delay={0.38}>
           <div className="hero-cta">
             <Button variant="primary" onClick={() =>
               document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
@@ -93,7 +93,7 @@ const HeroSection = () => {
         </Reveal>
       </div>
 
-      {/* Interactive Hanging AUST Student ID Card in the Right Corner Empty Space */}
+      {/* Interactive Hanging AUST Student ID Card in the Right Corner Empty Space (Hidden via CSS rule per owner requirements) */}
       <div className="hero-corner-card">
         <IdCardDrop />
       </div>

@@ -1,5 +1,5 @@
-import gsap from 'gsap';
 import { flushSync } from 'react-dom';
+import { setAppFrozen } from './appFreeze';
 
 export type ThemeName = 'dark' | 'light';
 
@@ -23,6 +23,7 @@ const EXPAND_DURATION = 1.3;
 const RETRACT_DURATION = 1;
 const HOLD_BUFFER = 0.08;
 const TAU = Math.PI * 2;
+const FROZEN_CLASS = 'theme-venom-frozen';
 
 // Tendrils radiate towards the middle of the page so the ink reaches into
 // the content instead of only spreading along the edge of the viewport.
@@ -139,16 +140,11 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const cleanup = (root: HTMLElement, tween: ReturnType<typeof gsap.to> | null) => {
-  if (tween) tween.kill();
-  root.classList.remove(
-    'theme-venom-active',
-    'theme-venom-expand',
-    'theme-venom-retract'
-  );
-  root.style.removeProperty('--venom-clip');
-  root.style.removeProperty('--venom-duration');
-};
+// Same curves as GSAP's power3.in / power3.inOut, but driven by rAF so the
+// blob keeps animating while the rest of the page is frozen.
+const power3In = (t: number) => t * t * t;
+const power3InOut = (t: number) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
 export const runThemeTransition = ({
   nextTheme,
@@ -181,13 +177,34 @@ export const runThemeTransition = ({
   const expanding = nextTheme === 'dark';
   const duration = expanding ? EXPAND_DURATION : RETRACT_DURATION;
 
-  let tween: ReturnType<typeof gsap.to> | null = null;
+  let animationFrame = 0;
+  let isFrozen = false;
 
-  // The initial core fully covers the toggle so the icon swaps cleanly.
+  const cleanup = () => {
+    if (animationFrame) cancelAnimationFrame(animationFrame);
+    root.classList.remove(
+      'theme-venom-active',
+      'theme-venom-expand',
+      'theme-venom-retract',
+      FROZEN_CLASS
+    );
+    root.style.removeProperty('--venom-clip');
+    root.style.removeProperty('--venom-duration');
+    if (isFrozen) {
+      setAppFrozen(false);
+      isFrozen = false;
+    }
+  };
+
+  // Freeze first so both snapshots capture the same, paused page state.
   root.classList.add(
     'theme-venom-active',
-    expanding ? 'theme-venom-expand' : 'theme-venom-retract'
+    expanding ? 'theme-venom-expand' : 'theme-venom-retract',
+    FROZEN_CLASS
   );
+  setAppFrozen(true);
+  isFrozen = true;
+
   root.style.setProperty('--venom-duration', `${duration + HOLD_BUFFER}s`);
   root.style.setProperty(
     '--venom-clip',
@@ -208,34 +225,34 @@ export const runThemeTransition = ({
       flushSync(applyTheme);
     });
   } catch {
-    cleanup(root, tween);
+    cleanup();
     applyTheme();
     return Promise.resolve();
   }
 
   transition.ready.then(
     () => {
-      const state = { progress: expanding ? 0 : 1 };
+      const startedAt = performance.now();
+      const ease = expanding ? power3InOut : power3In;
 
-      tween = gsap.to(state, {
-        progress: expanding ? 1 : 0,
-        duration,
-        ease: expanding ? 'power3.inOut' : 'power3.in',
-        overwrite: true,
-        onUpdate: () => {
-          root.style.setProperty(
-            '--venom-clip',
-            buildVenomClip(
-              originX,
-              originY,
-              state.progress,
-              maxRadius,
-              startRadius,
-              expanding
-            )
-          );
-        },
-      });
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - startedAt) / (duration * 1000));
+        const progress = expanding ? ease(t) : 1 - ease(t);
+        root.style.setProperty(
+          '--venom-clip',
+          buildVenomClip(
+            originX,
+            originY,
+            progress,
+            maxRadius,
+            startRadius,
+            expanding
+          )
+        );
+        if (t < 1) animationFrame = requestAnimationFrame(tick);
+      };
+
+      animationFrame = requestAnimationFrame(tick);
     },
     () => {
       // The browser skipped the transition; `finished` still cleans up.
@@ -244,7 +261,5 @@ export const runThemeTransition = ({
 
   return transition.finished
     .catch(() => undefined)
-    .finally(() => {
-      cleanup(root, tween);
-    });
+    .finally(cleanup);
 };

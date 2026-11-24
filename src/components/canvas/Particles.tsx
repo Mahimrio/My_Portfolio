@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import type { Points as ThreePoints, Group } from 'three';
+import { isAppFrozen } from '../../lib/appFreeze';
 
 const Particles = ({ color = '#00ff88', opacity = 0.4, size = 0.025 }: { color?: string; opacity?: number; size?: number }) => {
   const ref = useRef<ThreePoints>(null!);
@@ -24,6 +25,9 @@ const Particles = ({ color = '#00ff88', opacity = 0.4, size = 0.025 }: { color?:
   const groupRef = useRef<Group>(null!);
 
   useFrame((state, delta) => {
+    // Keep rendering so theme colors update, but hold particle motion still.
+    if (isAppFrozen()) return;
+
     if (groupRef.current) {
       // Automatic slow continuous rotation
       groupRef.current.rotation.x -= delta / 15;

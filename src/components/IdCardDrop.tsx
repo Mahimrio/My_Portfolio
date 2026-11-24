@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
+import { isAppFrozen } from '../lib/appFreeze';
 
 interface IdCardDropProps {
   className?: string;
@@ -90,8 +91,15 @@ const IdCardDrop = ({ className = '' }: IdCardDropProps) => {
 
     // Physics + Render Loop
     const tick = (now: number) => {
+      const frozen = isAppFrozen();
       let dt = (now - lastTimeRef.current) / 1000;
       lastTimeRef.current = now;
+
+      if (frozen) {
+        animFrameIdRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
       if (dt > 0.05) dt = 0.016; // guard against large time steps after tab inactive
 
       const particles = particlesRef.current;

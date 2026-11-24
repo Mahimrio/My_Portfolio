@@ -2734,3 +2734,11 @@ html.theme-venom-retract::view-transition-new(root) {
     opacity: 1;
   }
 }
+
+/* Freeze the page while the transition plays. View-transition pseudo-elements
+   are not matched by `*`, so the hold animation above keeps running. */
+html.theme-venom-frozen *,
+html.theme-venom-frozen *::before,
+html.theme-venom-frozen *::after {
+  animation-play-state: paused !important;
+}

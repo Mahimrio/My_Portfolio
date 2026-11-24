@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { isAppFrozen, onFreezeChange } from '../lib/appFreeze';
 
 interface SmoothScrollProps {
   children: React.ReactNode;
@@ -27,6 +28,7 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
       });
 
       lenis.on('scroll', ScrollTrigger.update);
+      if (isAppFrozen()) lenis.stop();
 
       tickerCallback = (time) => {
         lenis!.raf(time * 1000);
@@ -35,8 +37,15 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
       gsap.ticker.lagSmoothing(0);
     });
 
+    const unsubscribeFreeze = onFreezeChange((frozen) => {
+      if (!lenis) return;
+      if (frozen) lenis.stop();
+      else lenis.start();
+    });
+
     return () => {
       cancelAnimationFrame(raf);
+      unsubscribeFreeze();
       if (tickerCallback) gsap.ticker.remove(tickerCallback);
       if (lenis) lenis.destroy();
     };

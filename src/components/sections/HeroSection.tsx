@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { isAppFrozen, onFreezeChange } from '../../lib/appFreeze';
 import Reveal from '../animations/Reveal';
 import Button from '../ui/Button';
 import IdCardDrop from '../IdCardDrop';
@@ -16,8 +17,13 @@ const TypingEffect = () => {
   const [roleIdx, setRoleIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
+  const [frozen, setFrozen] = useState(isAppFrozen);
+
+  useEffect(() => onFreezeChange(setFrozen), []);
 
   useEffect(() => {
+    if (frozen) return undefined;
+
     const current = roles[roleIdx];
     let timer: ReturnType<typeof setTimeout>;
 
@@ -36,7 +42,7 @@ const TypingEffect = () => {
     }
 
     return () => clearTimeout(timer);
-  }, [charIdx, deleting, roleIdx]);
+  }, [charIdx, deleting, roleIdx, frozen]);
 
   return (
     <span>

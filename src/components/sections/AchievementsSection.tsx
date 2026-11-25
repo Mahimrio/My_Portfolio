@@ -76,6 +76,14 @@ const achievements: Achievement[] = [
     accent: "#3b82f6",
     icon: "star",
   },
+  {
+    place: "Star Panelist",
+    category: "Member (Fall 2025)",
+    event: "AUSTCAIC",
+    scope: "University",
+    accent: "#ec4899",
+    icon: "star",
+  },
 ];
 
 const TrophyIcon = ({ color }: { color: string }) => (

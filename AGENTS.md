@@ -16,45 +16,50 @@
 | `npm run preview` | `vite preview` (serve production build locally) |
 
 ## Current UI State — Read Before Changing Anything
-- **The hanging AUST ID card is intentionally hidden by the owner (2026-11-24).** All of its code (`src/components/IdCardDrop.tsx`, its styles in `src/index.css`, GSAP/Draggable logic, assets) must stay in the repo. It is hidden only by a `.hero-corner-card { display: none; }` rule in `src/index.css`. Do **not** delete the component, remove its code, or "fix" the visibility — leave it hidden unless the owner explicitly asks to restore it. To restore, remove that one CSS rule.
+- **The hanging AUST ID card is intentionally hidden by the owner (2026-11-24).** All of its code (`src/components/IdCardDrop.tsx`, its styles in `src/index.css`, GSAP/Draggable logic, `public/assets/`) must stay in the repo. It is hidden only by `.hero-corner-card { display: none; }` rules in `src/index.css` (`L502-510`). Do **not** delete the component, remove its code, or "fix" the visibility — leave it hidden unless the owner explicitly asks to restore it. To restore, remove the unconditional `.hero-corner-card { display: none; }` block at `L502-504` (keeping the `@media (max-width: 1100px)` rule if mobile should stay hidden).
 - **Unique per-project accent colors (2026-11-25):** Every project card in `ProjectsSection.tsx` MUST have a unique, clearly distinct `accent` color (avoid repeating or near-duplicate hues, especially on adjacent cards). Each card's `--accent` drives its persistent card border, subtle ambient glow, top accent bar, role badge, and tech stack tags at rest as well as on hover (while Live Demo and View Code buttons retain their unified styling). Whenever adding a new project, choose a fresh distinct hex color not already used in the registry below.
+- **3D flip project cards & nested wheel scrolling (2026-11-25):** Clicking (or pressing `Enter`/`Space` on) a project card flips it to `.project-card-back` showing the full project description in `.project-back-content`. Keep `allowNestedScroll: true` enabled in `SmoothScroll.tsx` so mouse-wheel scrolling works inside overflowing card descriptions without dragging the scrollbar.
 
 ## Project Structure
 ```
 src/
 ├── main.tsx                   Entry point, ErrorBoundary, registers ScrollTrigger & Draggable (no StrictMode)
 ├── App.tsx                    Root: Loader + BackgroundCanvas + SmoothScroll + Layout + sections
-├── index.css                  All global styles (~2700 lines, CSS custom properties)
+├── index.css                  All global styles (~3100 lines, dark/light CSS custom properties)
+├── lib/
+│   └── themeTransition.ts     View Transition API + GSAP polygon-clip ("venom") theme switch effect
 ├── components/
 │   ├── IdCardDrop.tsx         Interactive 3D hanging AUST student ID card (physics, Draggable, elastic recoil) — CODE KEPT, CURRENTLY HIDDEN via CSS (see "Current UI State")
 │   ├── Layout.tsx             Navbar + main + Footer wrapper
-│   ├── Navbar.tsx             Fixed header, scroll progress bar, mobile tab bar, CV download button
+│   ├── Navbar.tsx             Fixed header, scroll progress bar, spotlight + sliding pill nav, theme toggle, mobile tab bar, CV download button
 │   ├── Footer.tsx             Back-to-top button, footer links, copyright
-│   ├── Loader.tsx             Full-screen loading bar (fake progress, 60ms interval)
-│   ├── SmoothScroll.tsx       Lenis smooth scroll integration with GSAP ScrollTrigger
+│   ├── Loader.tsx             Full-screen loading bar (simulated progress, 60ms interval)
+│   ├── SmoothScroll.tsx       Lenis smooth scroll integration with GSAP ScrollTrigger (`allowNestedScroll: true`)
 │   ├── animations/
-│   │   └── Reveal.tsx         Scroll-triggered entrance animation (opacity + translate, fullHeight prop)
+│   │   └── Reveal.tsx         Scroll-triggered one-shot entrance animation (`once: true`, `fullHeight` and `disabled` props)
 │   ├── canvas/
-│   │   ├── BackgroundCanvas.tsx   R3F Canvas (dark bg, city HDR, lights)
-│   │   └── Particles.tsx          3000-point particle sphere with mouse interaction
+│   │   ├── BackgroundCanvas.tsx   Lazy R3F Canvas (theme-reactive lights + Particles via `'themechange'`)
+│   │   └── Particles.tsx          1800-point particle sphere with auto-rotation and mouse tilt
 │   ├── sections/
-│   │   ├── HeroSection.tsx    Photo, typing effect (4 roles), CTA buttons
-│   │   ├── AboutSection.tsx   About cards, education timeline, skill marquees (pure CSS), soft skills
-│   │   ├── AchievementsSection.tsx 8 competition & hackathon awards in responsive card grid
-│   │   ├── ProjectsSection.tsx 8 project cards with accent bars, GitHub links, and Live Demo buttons
-│   │   ├── CertificatesSection.tsx Certificates cards with featured labels, badges & previews
-│   │   ├── ContactSection.tsx 2-column layout + EmailJS form (state machine)
-│   │   └── SocialsSection.tsx 5 social media link cards (LinkedIn, GitHub, WhatsApp, FB, IG)
+│   │   ├── HeroSection.tsx        Photo, typing effect (4 roles), CTA buttons, scroll cue, hidden IdCardDrop slot
+│   │   ├── AboutSection.tsx       About cards, scroll-driven Education timeline, pure-CSS skill marquees, Strengths
+│   │   ├── AchievementsSection.tsx 9 competition, hackathon & panelist awards in responsive card grid
+│   │   ├── ProjectsSection.tsx    14 project cards (8 pinned + 6 expandable) with 3D flip overview, unique accents, GitHub & Live Demo links
+│   │   ├── CertificatesSection.tsx 10 certificates (4 pinned featured + 6 expandable) with previews, badges & links
+│   │   ├── ContactSection.tsx     2-column layout + EmailJS form (state machine)
+│   │   └── SocialsSection.tsx     5 social media link cards (LinkedIn, GitHub, WhatsApp, FB, IG)
 │   └── ui/
 │       ├── Button.tsx         Variants: primary, outline, ghost
 │       ├── Card.tsx           Glassmorphism card wrapper
 │       └── Input.tsx          Labeled input with consistent styling
-├── assets/
-│   ├── hero.png               OpenGraph image
-│   └── my-photo.jpg           Profile photo used in HeroSection
+└── assets/
+    └── my-photo.jpg           Profile photo used in HeroSection
 public/
+├── assets/                    Hanging ID card textures (`aust-badge.png`, `aust-id-card.png`, `aust-ribbon.png`)
+├── certificates/              Certificate images & PDF (11 files referenced by CertificatesSection)
 ├── cv.pdf                     Downloadable CV (linked from Navbar)
 ├── favicon.svg                Site favicon
+├── hero.png                   OpenGraph / Twitter card image
 └── icons.svg                  SVG icon sprite
 .github/
 └── workflows/
@@ -64,51 +69,50 @@ public/
 ## Key Technical Decisions
 
 ### Smooth Scrolling (Lenis + GSAP)
-- `SmoothScroll` wraps all children, uses Lenis default mode (window wrapper, document.documentElement content)
-- Lenis drives `ScrollTrigger.update()` on scroll; GSAP ticker drives `lenis.raf()`
-- Initialized inside `requestAnimationFrame` to avoid DOM conflicts during mount
-- Lenis v1: `duration: 1.5`, custom easing, `wheelMultiplier: 1.1`, `touchMultiplier: 2`
-- GSAP ticker callback cleaned up on unmount
+- `SmoothScroll` wraps all children, using Lenis (`^1.3.23`) in window mode
+- Automatically skipped when `(prefers-reduced-motion: reduce)` matches
+- Config: `duration: 0.85`, exponential ease-out, `smoothWheel: true`, `wheelMultiplier: 1.15`, `touchMultiplier: 1.5`, `allowNestedScroll: true` (enables native mouse-wheel scrolling inside overflow containers such as flipped project card backs)
+- Lenis drives `ScrollTrigger.update()` on scroll; GSAP ticker drives `lenis.raf()` (with `lagSmoothing(500, 33)`) and cleans up both RAF/listeners/ticker on unmount
+- Refreshes `ScrollTrigger` once Lenis initializes and on `window` `load`
 
-### CSS Architecture
-- All styles in `src/index.css` (~1342 lines) — no CSS modules or co-located styles
-- Full theming via `:root` CSS custom properties (`--bg-color`, `--primary-accent`, `--font-main`, etc.)
-- Fonts: **Outfit** (300–800) + **Space Mono** (mono) via Google Fonts (loaded in `index.html`)
-- Glassmorphism: `backdrop-filter: blur()` on navbar, cards
-- Shimmer gradient buttons: `btn-shimmer` keyframe animation
-- Custom pure-CSS marquee (`CSSMarquee` component, triplicated content, CSS animation) instead of `react-fast-marquee`
-- Note: `react-fast-marquee` is still listed in `package.json` dependencies and in `vite.config.ts` `optimizeDeps.include`, but is **not imported or used** in any component
+### CSS Architecture & Theming
+- All styles in `src/index.css` (`~3100 lines`) — no CSS modules or co-located CSS files
+- Full theming via `:root` custom properties and `data-theme="dark" | "light"` (`--bg-color`, `--primary-accent`, `--font-main`, `--font-ui`, `--font-mono`, `--nav-glow`, etc.)
+- `index.html` initializes `data-theme` pre-paint from `localStorage` or `prefers-color-scheme` to avoid flash of wrong theme
+- Theme switching dispatches a `'themechange'` `CustomEvent` (consumed by `BackgroundCanvas`) and uses `runThemeTransition` in `src/lib/themeTransition.ts`: wraps `flushSync` in `document.startViewTransition` animated with GSAP symbiote-like polygon tendrils (`--venom-clip`) expanding from/retracting to the theme toggle button, with instant fallback when unsupported or under reduced motion
+- Fonts: **Outfit** (`300–800`), **Inter** (`400–700`), and **Space Mono** via Google Fonts (loaded in `index.html`)
+- Glassmorphism: `backdrop-filter: blur()` on navbar and cards; shimmer buttons (`btn-shimmer`)
+- Custom pure-CSS marquee (`CSSMarquee` in `AboutSection.tsx`, triplicated items, CSS animation with pause-on-hover)
 
 ### Animations (GSAP + @gsap/react)
-- `useGSAP` hook from `@gsap/react` used in `Reveal` and `Navbar` components
-- `Reveal` component: Each wrapped element gets its own `ScrollTrigger` with `toggleActions: 'play none none reverse'`
-- `Reveal` supports `fullHeight` prop for flex-layout children (used in AboutSection cards)
-- Scroll progress bar: GSAP animates width from 0 to 100% based on body scroll
-- Mobile tab bar: GSAP entrance animation from bottom (window width ≤ 768px)
+- `useGSAP` hook from `@gsap/react` used in `Reveal`, `Navbar`, and `AboutSection`
+- `Reveal` component: `gsap.fromTo` (`duration: 0.7`, `ease: 'power2.out'`, `clearProps: 'transform,opacity,willChange'`) with responsive offset (`20px` on `<= 768px`, `28px` desktop) and `ScrollTrigger` (`start: 'top 88%'`, `toggleActions: 'play none none none'`, `once: true`); supports `fullHeight` and `disabled` props (used for dynamically expanded cards) and honors `prefers-reduced-motion`
+- **Education Timeline (`AboutSection.tsx`):** `useGSAP` + `ScrollTrigger` (`start: 'top 68%'`, `end: 'bottom 68%'`, `scrub: 0.15`, `invalidateOnRefresh: true`) and a `ResizeObserver` dynamically measure `.edu-dot` centers, scrub `.education-timeline-fill` (`scaleY`) and `.education-timeline-orb`, and toggle `.is-reached` on milestone dots
+- Scroll progress bar (`Navbar.tsx`): GPU-composited `scaleX: 1` animation tied to body scroll (`scrub: 0.05`)
+- Mobile tab bar (`Navbar.tsx`): GSAP slide-up entrance when `window.innerWidth <= 768` (skipped under `prefers-reduced-motion`)
 
 ### Navbar
-- IntersectionObserver-based active section highlighting (`rootMargin: '-30% 0px -70% 0px'`)
-- 5 nav links: About, Education, Skills, Projects, Contact (each with inline SVG icon for mobile tab bar)
-- CV download button: `<a>` with `download` attribute, uses `import.meta.env.BASE_URL + 'cv.pdf'`
-- `navLinks` defined at module scope (stable reference for hooks)
+- `IntersectionObserver`-based active section highlighting (`{ threshold: [0.2, 0.5] }`, selects the section with the highest `intersectionRatio` among `hero`, `presence`, and `navLinks` targets)
+- **7 nav links** (`navLinks` at module scope): `About`, `Education`, `Skills`, `Achievements`, `Projects`, `Certificates`, `Contact` (each with inline SVG icon for the mobile tab bar)
+- Desktop hover/active effects: cursor-tracking radial spotlight (`.nav-spotlight` via `--mouse-x`/`--mouse-y`) and sliding pill indicator (`.nav-slider-pill`)
+- Theme toggle button (`theme-toggle`) + CV download button (`<a>` with `download` attribute, `import.meta.env.BASE_URL + 'cv.pdf'`)
 
 ### Contact Form (EmailJS)
 - Environment variables: `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, `VITE_EMAILJS_PUBLIC_KEY`
 - State machine: `'idle' | 'sending' | 'success' | 'error'`
 - 5 form fields: `user_name`, `user_email`, `user_phone` (optional), `subject`, `message`
-- Falls back gracefully if env vars are missing
-- Contact info panel: Email, Phone, Location (Dhaka, Bangladesh), University Email
+- Fails gracefully to `'error'` state if env vars are missing (logs warning in `DEV` only)
+- Contact info panel: Email, Phone, Location (`Dhaka, Bangladesh`), University Email
 
 ### 3D Background (Three.js / R3F)
 - `BackgroundCanvas` is lazy-loaded via `React.lazy()` + `Suspense`
-- 3000 particles in spherical distribution, green (`#00ff88`), 0.025 size, 0.4 opacity
-- Auto-rotation + mouse-follow with lerp interpolation
-- `frustumCulled: false` (all particles rendered)
+- **1800 particles** in spherical distribution (`frustumCulled: false`), slow `groupRef` rotation + interactive mouse-tilt lerp
+- Theme-reactive via `'themechange'`: dark mode (`#00ff88`, size `0.025`, opacity `0.4`) vs light mode (`#2563eb`, size `0.04`, opacity `0.7`)
 
 ### Known Issue: removeChild Error During HMR
 - A `NotFoundError: removeChild` DOM exception can occur during Vite HMR when React 19 reconciliation conflicts with Lenis/GSAP DOM operations
-- The `ErrorBoundary` in `main.tsx` catches this and shows a "Reload Page" button
-- It's a development-only issue; production build is stable
+- `ErrorBoundary` in `src/main.tsx` catches runtime errors and renders a diagnostic view displaying the error message and stack trace
+- Development-only HMR hazard; production builds are stable
 
 ### CI/CD (GitHub Actions)
 - `.github/workflows/deploy.yml` runs on push to `main` + manual `workflow_dispatch`
@@ -117,6 +121,21 @@ public/
 - Uses `actions/upload-pages-artifact` + `actions/deploy-pages` (OIDC-based deployment)
 
 ## Data Structures
+
+### Achievements (AchievementsSection.tsx)
+```ts
+{ place: string, category: string, event: string, scope: string, accent: string, icon: 'trophy' | 'medal' | 'star' }
+// Current (9 items rendered in responsive card grid):
+//   1. 1st Runners Up — AI Hackathon       | 3rd IAIT National IT Fest             (Nationals)
+//   2. 2nd Runners Up — IoT Hackathon      | FastRoboX 1.0 · IEEE Student Branch   (Nationals)
+//   3. Top 5 — UI/UX                       | AUST CSE Carnival 7.0                 (University)
+//   4. Top 10 — Techathon                  | UFTB RoboFusion 1.0                   (Nationals)
+//   5. Top 10 — Project Showcase           | AUST CSE Carnival 8.0                 (University)
+//   6. 9th Place — IAPC                    | AUST CSE Carnival 8.0                 (University)
+//   7. Top 15 — Techathon                  | IUT Techathon & Rover Summit          (Nationals)
+//   8. Finalist — AI Hackathon             | SciBlitz 2.0 · CUET IEEE Branch       (Nationals)
+//   9. Star Panelist — Member (Fall 2025)  | AUSTCAIC                              (University)
+```
 
 ### Projects (ProjectsSection.tsx)
 ```ts
@@ -143,8 +162,9 @@ public/
 
 ### Certifications (CertificatesSection.tsx)
 ```ts
-{ title, issuer, date, description, image?: string, credentialId?: string, link?: string, accent?: string, featured?: boolean }
+{ title, issuer, date, description, image?: string, credentialId?: string, link?: string, accent?: string, featured?: boolean, previewTags?: { topLeft, topRight, heading, subtext, footerText } }
 // Current (10 certificates, 4 pinned featured certificates + 6 expandable via "See More Certifications"):
+// Images & PDFs served from `public/certificates/`.
 //   Pinned / Featured (4):
 //     1. 3rd IAIT National IT Fest – AI Hackathon Certificate of Achievement (Runner Up)
 //     2. FastRoboX 1.0 – IoT Hackathon Certificate of Achievement (2nd Runner Up)
@@ -162,9 +182,13 @@ public/
 ### Education (AboutSection.tsx)
 ```ts
 { degree, status: 'Ongoing' | 'Completed', institution, result, year,
-  coursework?: string[], achievements?: string[], extraCurricular?: string[],
-  skillsAcquired?: string }
-// Current: BSc in CSE (AUST), HSC (SPSC), SSC (Monipur High School)
+  courseworkLabel?: string, coursework?: string[], achievements?: string[],
+  extraCurricular?: string[], skillsAcquired?: string }
+// Current: BSc in CSE (AUST), HSC (SPSC), SSC (Monipur High School & College)
+// Notes:
+//   - BSc displays `Coursework (Relevant)` (incl. Computer Networks, Introduction to AI, Operating Systems)
+//   - BSc omits `achievements` (deduplicated against standalone Achievements section); HSC & SSC keep General Board Scholarship `achievements`
+//   - BSc Involvement includes Associate Executive - AUSTCAIC, Member - AUSTPIC, Member - AUSTIDC, national robotics competitions, and Student Mentor for SSC and HSC as Home Tutor
 ```
 
 ### Contact Info (ContactSection.tsx)
@@ -188,12 +212,13 @@ public/
 // Databases:   MySQL, MSSQL, MongoDB, Firebase, Supabase
 // Tools:       Git, VS Code, Arduino, Proteus, iGraphics
 // Icons from:  https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons
-// Fallback:    first 3 chars of skill name (uppercase)
+// Fallback:    first 3 uppercase letters of skill name
 ```
 
-### Soft Skills (AboutSection.tsx)
+### Strengths / Soft Skills (AboutSection.tsx)
 ```ts
-// 4 items: Teamwork & Collaboration, Problem-Solving, Tutoring & Mentoring, Analytical Thinking
+// Heading: "Strengths" (4 items):
+//   Teamwork & Collaboration, Problem-Solving, Tutoring & Mentoring, Analytical Thinking
 ```
 
 ## Environment Variables
@@ -202,30 +227,22 @@ VITE_EMAILJS_SERVICE_ID=
 VITE_EMAILJS_TEMPLATE_ID=
 VITE_EMAILJS_PUBLIC_KEY=
 ```
-Also configured as GitHub repository secrets for CI/CD builds.
+See `.env.example`. Also configured as GitHub repository secrets for CI/CD builds.
 
 ## Git Branches
 - `main` — production (current active branch)
-- `feature/code-review-fixes` — code review fixes + new projects (merged)
-- `feature/live-demo-buttons` — added Live Demo links to project cards (merged)
-- `fix/align-view-code-button` — right-aligned action buttons in project cards (merged)
-- Previous: `feature/ui-navigation-overhaul`, `feature/cv-content-update`, `feature/mobile-optimization-v2`, `feature/shield-rest-and-edu-update`, `feature/social-presence`, `feature/milestone-*`, etc.
+- Recent merged PR branches (`#46`–`#53`): `feature/hide-id-card`, `feature/scroll-animation-performance`, `feature/project-accents-and-new-certs`, `feature/add-new-projects-and-internlink-live`, `feature/add-kendrafi-and-dhakapath`, `feature/featured-projects-and-card-scroll`, `feature/scroll-education-timeline`
+- Earlier feature branches: `feature/venom-theme-transition`, `feature/achievements-and-featured-certs`, `feature/aust-id-card-lanyard`, `feature/ui-ux-polish`, `feature/certifications-and-ui-enhancements`, `feature/code-review-fixes`, `feature/live-demo-buttons`, `fix/align-view-code-button`, `feature/ui-navigation-overhaul`, `feature/milestone-*`, etc.
 
-## Recent Changes (merged to main)
-1. **Live Demo buttons** — project cards now show "Live Demo ↗" links for deployed projects (`feature/live-demo-buttons`)
-2. **Action button alignment** — project card action buttons (View Code, Live Demo) are right-aligned (`fix/align-view-code-button`)
-3. **GitHub Actions CI/CD** — added `deploy.yml` workflow for automated build & deploy to GitHub Pages on push to `main`
-4. **CV & profile photo update** — updated `public/cv.pdf` and profile photo asset
-5. Fixed HeroSection typing effect cascading render
-6. Properly typed ErrorBoundary (no `any`)
-7. Typed Particles refs (`ThreePoints` and `Group` from three.js)
-8. Moved `navLinks` to module scope (stable useEffect deps)
-9. GSAP ticker cleanup on unmount in SmoothScroll
-10. Removed redundant `<span>` wrappers across all sections
-11. Added `.env.example` for EmailJS config
-12. Added 4 projects: Zenith Protocol, ShasthyaHub-AI, LockIn, OfficeVolt
-13. Removed Task Flow Pro project
-14. **Topbar glowing & sliding transition** — cursor-following spotlight glow + smooth sliding pill indicator across nav tabs with dark/light mode contrast
-15. **Achievements section** — added standalone section above Projects displaying 8 competition & hackathon placements
-16. **Featured certificates** — added FastRoboX 1.0 (BUBT), 3rd IAIT National IT Fest, and RoboFusion 1.0 (Walton/UFTB) certificates with `★ FEATURED` badges
-17. **Interactive 3D AUST ID Card Lanyard** — added `IdCardDrop.tsx` with GSAP elastic drop-in, pendulum swing, 3D hover tilt with glare, and Draggable spring-back physics in Hero section
+## Recent Changes (merged to `main`)
+1. **Live Demo buttons & alignment** (`feature/live-demo-buttons`, `fix/align-view-code-button`) — right-aligned `Live Demo` & `View Code` links on project cards
+2. **GitHub Actions CI/CD** — `.github/workflows/deploy.yml` builds and deploys to GitHub Pages on push to `main`
+3. **Topbar glowing & sliding transition** — cursor-following `.nav-spotlight` glow, `.nav-slider-pill`, and dark/light theme toggle across 7 nav items
+4. **Venom View Transition theme switch** (`src/lib/themeTransition.ts`) — GSAP polygon tendril reveal on dark/light toggle with pre-paint theme script in `index.html` and theme-reactive particles
+5. **Achievements section** — standalone grid displaying competition & hackathon placements
+6. **Interactive 3D AUST ID Card Lanyard** (`IdCardDrop.tsx`, hidden via `.hero-corner-card { display: none; }` in PR `#46`)
+7. **Scroll animation & particle performance** (PR `#47`–`#48`) — one-shot `Reveal` (`once: true`), GPU-composited `scaleX` scroll progress bar, and 1800-particle field
+8. **3D click-to-flip project cards & wheel scroll** (PR `#48`, `#52`) — front shows tags/role/actions, back shows scrollable overview (`allowNestedScroll: true` in `SmoothScroll.tsx`), cleaned up flip hint copy
+9. **Unique per-project accents, 14 projects & 10 certificates** (PR `#49`–`#52`) — added HydroSense-SWOT, KendraFi, DhakaPath, Heaven Furniture Mart, CampusOS, InternLink live URL, pinned top 8 projects (`Featured` badges on DhakaPath, HydroSense-SWOT, KendraFi), and updated `public/certificates/`
+10. **Scroll-driven Education timeline** (PR `#53`) — animated track fill (`scaleY`), tracking orb, and `.is-reached` milestone dots synchronized via `ResizeObserver` + `ScrollTrigger`
+11. **Education, Achievements & AGENTS.md sync** — removed duplicated achievements from BSc Education card, added CS coursework (`Computer Networks`, `Introduction to AI`, `Operating Systems`), changed BSc label to `Coursework (Relevant)`, updated club involvements (`AUSTCAIC`, `AUSTPIC`, `AUSTIDC`, SSC/HSC home tutoring), added 9th Achievement (`Star Panelist — Member (Fall 2025)` for `AUSTCAIC`), and synced `AGENTS.md`

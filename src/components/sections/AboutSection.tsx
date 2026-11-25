@@ -124,6 +124,7 @@ const education = [
     institution: 'Ahsanullah University of Science & Technology (AUST)',
     result: 'CGPA: 3.25',
     year: '2023 – Present',
+    courseworkLabel: 'Coursework (Relevant)',
     coursework: [
       'OOP (C++, Java)',
       'Data Structures & Algorithms',
@@ -131,19 +132,16 @@ const education = [
       'Software Engineering & Design Patterns',
       'Microprocessors & Embedded Systems (Assembly, Arduino)',
       'Theory of Computation',
-    ],
-    achievements: [
-      '3rd IAIT National IT Fest 2026 – 1st Runners Up (AI Hackathon)',
-      'FastRoboX 1.0 (IEEE BUBT) – 2nd Runners Up (IoT Hackathon)',
-      'SciBlitz 2.0 (CUET IEEE Branch) – Finalist (AI Hackathon)',
-      'AUST CSE Carnival 7.0 – Top 5 in UI/UX Design',
-      'UFTB RoboFusion 1.0 – Top 10 in Techathon',
-      'AUST CSE Carnival 8.0 – Top 10 in Project Showcase',
+      'Computer Networks',
+      'Introduction to AI',
+      'Operating Systems',
     ],
     extraCurricular: [
-      'Organizing Committee Member, SciBlitz 2.0 & AUST Robotics Events',
+      'Associate Executive - AUSTCAIC',
+      'Member - AUSTPIC',
+      'Member - AUSTIDC',
       'Active participant in National Robotics Competitions (RoboFusion 1.0, FastRoboX 1.0)',
-      'Student Mentor for junior CSE peers in C++ and Data Structures',
+      'Student Mentor for SSC and HSC as Home Tutor',
     ],
     skillsAcquired: 'Full-Stack Web Dev (React, Next.js, Node.js), Embedded Systems, IoT Prototyping, Agile Collaboration',
   },
@@ -361,7 +359,7 @@ const AboutSection = () => {
                   <div className="edu-details">
                     {edu.coursework && (
                       <div className="edu-detail-row">
-                        <span className="edu-detail-label"><BookIcon /> Coursework</span>
+                        <span className="edu-detail-label"><BookIcon /> {'courseworkLabel' in edu ? edu.courseworkLabel : 'Coursework'}</span>
                         <span className="edu-detail-content">{edu.coursework.join(', ')}</span>
                       </div>
                     )}

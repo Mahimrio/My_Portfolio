@@ -24,6 +24,7 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
         smoothWheel: true,
         wheelMultiplier: 1.15, // Natural travel per wheel notch
         touchMultiplier: 1.5,
+        allowNestedScroll: true, // Allow native mouse-wheel scrolling inside overflow containers
       });
 
       lenis.on('scroll', ScrollTrigger.update);

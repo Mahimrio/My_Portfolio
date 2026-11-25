@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import Reveal from '../animations/Reveal';
 import Card from '../ui/Card';
 
@@ -171,6 +173,109 @@ const education = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const AboutSection = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const fillRef = useRef<HTMLDivElement>(null);
+  const orbRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useGSAP(
+    () => {
+      const timelineEl = timelineRef.current;
+      const trackEl = trackRef.current;
+      const fillEl = fillRef.current;
+      const orbEl = orbRef.current;
+      if (!timelineEl || !trackEl || !fillEl || !orbEl) return;
+
+      let trackHeight = 0;
+      let dotRatios: number[] = [];
+
+      const measureTrack = () => {
+        const firstItem = itemRefs.current[0];
+        const firstDot = dotRefs.current[0];
+        const lastItem = itemRefs.current[education.length - 1];
+        const lastDot = dotRefs.current[education.length - 1];
+        if (!firstItem || !firstDot || !lastItem || !lastDot) return;
+
+        const firstCenterY = firstItem.offsetTop + firstDot.offsetTop + firstDot.offsetHeight / 2;
+        const lastCenterY = lastItem.offsetTop + lastDot.offsetTop + lastDot.offsetHeight / 2;
+        const dotCenterX = firstItem.offsetLeft + firstDot.offsetLeft + firstDot.offsetWidth / 2;
+
+        trackHeight = Math.max(1, lastCenterY - firstCenterY);
+        trackEl.style.left = `${dotCenterX - 1}px`;
+        trackEl.style.top = `${firstCenterY}px`;
+        trackEl.style.height = `${trackHeight}px`;
+
+        dotRatios = education.map((_, idx) => {
+          const item = itemRefs.current[idx];
+          const dot = dotRefs.current[idx];
+          if (!item || !dot) return 0;
+          const y = item.offsetTop + dot.offsetTop + dot.offsetHeight / 2;
+          return Math.max(0, Math.min(1, (y - firstCenterY) / trackHeight));
+        });
+      };
+
+      measureTrack();
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.set(fillEl, { scaleY: 1 });
+        orbEl.style.display = 'none';
+        dotRefs.current.forEach((dot) => dot?.classList.add('is-reached'));
+        return;
+      }
+
+      const syncDotsAndOrb = (progress: number) => {
+        orbEl.style.opacity = progress > 0.005 && progress < 0.995 ? '1' : '0';
+        dotRefs.current.forEach((dot, idx) => {
+          if (!dot) return;
+          const ratio = dotRatios[idx] ?? 0;
+          if (progress >= ratio - 0.015 && progress > 0.005) {
+            dot.classList.add('is-reached');
+          } else {
+            dot.classList.remove('is-reached');
+          }
+        });
+      };
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: trackEl,
+          start: 'top 68%',
+          end: 'bottom 68%',
+          scrub: 0.15,
+          invalidateOnRefresh: true,
+          onRefresh: () => {
+            measureTrack();
+          },
+          onUpdate: (self) => {
+            syncDotsAndOrb(self.progress);
+          },
+        },
+      });
+
+      tl.fromTo(fillEl, { scaleY: 0 }, { scaleY: 1, ease: 'none' }, 0).fromTo(
+        orbEl,
+        { y: 0 },
+        { y: () => trackHeight, ease: 'none' },
+        0
+      );
+
+      syncDotsAndOrb(tl.scrollTrigger?.progress ?? 0);
+
+      const resizeObserver = new ResizeObserver(() => {
+        measureTrack();
+        tl.scrollTrigger?.refresh();
+      });
+      resizeObserver.observe(timelineEl);
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    },
+    { dependencies: [], scope: timelineRef }
+  );
+
   return (
     <section id="about" className="content-section">
       <Reveal direction="up">
@@ -213,13 +318,31 @@ const AboutSection = () => {
       </div>
 
       {/* Education Section */}
-      <Reveal direction="up" delay={0.05}>
-        <div id="education" className="education-container">
+      <div id="education" className="education-container">
+        <Reveal direction="up" delay={0.05}>
           <h3 className="skills-title">Education</h3>
-          <div className="education-timeline">
-            {education.map((edu, i) => (
-              <div key={i} className="education-item">
-                <div className="edu-dot" />
+        </Reveal>
+        <div className="education-timeline" ref={timelineRef}>
+          <div className="education-timeline-track" ref={trackRef} aria-hidden="true">
+            <div className="education-timeline-fill" ref={fillRef} />
+            <div className="education-timeline-orb" ref={orbRef} />
+          </div>
+
+          {education.map((edu, i) => (
+            <div
+              key={i}
+              className="education-item"
+              ref={(el) => {
+                itemRefs.current[i] = el;
+              }}
+            >
+              <div
+                className="edu-dot"
+                ref={(el) => {
+                  dotRefs.current[i] = el;
+                }}
+              />
+              <Reveal direction="up" delay={0.05 * i}>
                 <Card className="education-card">
                   <div className="edu-header">
                     <h4>
@@ -270,11 +393,11 @@ const AboutSection = () => {
                     )}
                   </div>
                 </Card>
-              </div>
-            ))}
-          </div>
+              </Reveal>
+            </div>
+          ))}
         </div>
-      </Reveal>
+      </div>
 
       {/* Skills Section */}
       <Reveal direction="up" delay={0.05}>

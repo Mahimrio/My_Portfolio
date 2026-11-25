@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { runThemeTransition } from '../lib/themeTransition';
+import CvResumeDropdown from './CvResumeDropdown';
 
 const navLinks = [
   { 
@@ -204,8 +205,6 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, []);
 
-  const cvHref = `${import.meta.env.BASE_URL}cv.pdf`;
-
   return (
     <>
       <div className="scroll-progress-container">
@@ -289,16 +288,7 @@ const Navbar = () => {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
             )}
           </button>
-          <a
-            href={cvHref}
-            download="Mahim_Abdullah_Rianto_CV.pdf"
-            className="nav-cv-btn"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M5 20h14v-2H5v2zm14-9h-4V3H9v8H5l7 7 7-7z" />
-            </svg>
-            <span>Download CV</span>
-          </a>
+          <CvResumeDropdown />
         </div>
       </header>
 

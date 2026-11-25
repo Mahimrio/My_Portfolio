@@ -1565,6 +1565,7 @@ a {
   letter-spacing: -0.005em;
   color: var(--text-primary);
   opacity: 0.94;
+  white-space: pre-line;
 }
 
 .project-card {
@@ -1658,10 +1659,12 @@ a {
   background: color-mix(in srgb, var(--accent, var(--primary-accent)) 14%, transparent);
   color: color-mix(in srgb, var(--accent, var(--primary-accent)) 88%, #ffffff);
   border: 1px solid color-mix(in srgb, var(--accent, var(--primary-accent)) 28%, transparent);
-  border-radius: 50px;
+  border-radius: 14px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  white-space: nowrap;
+  line-height: 1.35;
+  max-width: 100%;
+  white-space: normal;
 }
 
 .project-description {

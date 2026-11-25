@@ -120,20 +120,23 @@ public/
 
 ### Projects (ProjectsSection.tsx)
 ```ts
-{ title, subtitle, description, tags: string[], role, github: string | null, live: string | null, accent: string }
-// Current (9 projects, 8 pinned by default with 3D click-to-flip overview + "See More Projects" toggle):
+{ title, subtitle, description, tags: string[], role, github: string | null, live: string | null, inDevelopment?: boolean, accent: string }
+// Current (12 projects, 8 pinned by default with 3D click-to-flip overview + "See More Projects" toggle):
 // Rule: Always assign a unique, visually distinct `accent` color to every project (existing & future).
 //   Pinned (8):
-//     1. InternLink            — accent: #3b82f6 (Royal Blue)     | github: github.com/Mahimrio/InternLink.git
-//     2. ShasthyaHub-AI        — accent: #10b981 (Emerald Green)  | live: shasthyahub-ai.vercel.app
-//     3. Eventify              — accent: #a855f7 (Orchid Purple)  | live: eventi-fy.me
-//     4. OfficeVolt            — accent: #ef4444 (Crimson Red)    | live: officevolt.vercel.app
-//     5. Zenith Protocol       — accent: #f59e0b (Amber Gold)     | live: null (In Development)
-//     6. Interactive Portfolio — accent: #ec4899 (Rose Pink)      | live: mahimrio.github.io/My_Portfolio/
-//     7. MRP                   — accent: #06b6d4 (Cyan)           | live: null
-//     8. LockIn                — accent: #84cc16 (Lime Green)     | live: mahimrio.github.io/LockIn/ (In Development)
-//   Expanded (1):
-//     9. Fire Fighting Bot     — accent: #ff6b35 (Flame Orange)   | github: null, live: null
+//     1. InternLink            — accent: #3b82f6 (Royal Blue)       | live: intern-link-eight.vercel.app
+//     2. ShasthyaHub-AI        — accent: #10b981 (Emerald Green)    | live: shasthyahub-ai.vercel.app
+//     3. HydroSense-SWOT       — accent: #6366f1 (Cosmic Indigo)    | live: nasa-hackathon-seven.vercel.app
+//     4. OfficeVolt            — accent: #ef4444 (Crimson Red)      | live: officevolt.vercel.app
+//     5. Heaven Furniture Mart — accent: #d4a373 (Champagne Bronze) | live: heaven-furniture-mart-alpha.vercel.app
+//     6. Eventify              — accent: #a855f7 (Orchid Purple)    | live: eventi-fy.me
+//     7. CampusOS              — accent: #2dd4bf (Aquamarine Mint)  | live: cse-carnival-8-aibuild-hackathon-iota.vercel.app
+//     8. Interactive Portfolio — accent: #ec4899 (Rose Pink)        | live: mahimrio.github.io/My_Portfolio/
+//   Expanded (4):
+//     9. Zenith Protocol       — accent: #f59e0b (Amber Gold)       | live: null (In Development)
+//    10. MRP                   — accent: #06b6d4 (Cyan)             | live: null
+//    11. LockIn                — accent: #84cc16 (Lime Green)       | live: mahimrio.github.io/LockIn/ (In Development)
+//    12. Fire Fighting Bot     — accent: #ff6b35 (Flame Orange)     | github: null, live: null
 ```
 
 ### Certifications (CertificatesSection.tsx)

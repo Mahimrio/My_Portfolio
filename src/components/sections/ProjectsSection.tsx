@@ -12,7 +12,7 @@ const projects = [
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "ASP.NET Core 8", "EF Core 8", "Npgsql", "Supabase PostgreSQL"],
     role: "Full-Stack Developer (Frontend & Backend)",
     github: "https://github.com/Mahimrio/InternLink.git",
-    live: null,
+    live: "https://intern-link-eight.vercel.app/",
     accent: "#3b82f6", // Royal Blue
   },
   {
@@ -26,14 +26,14 @@ const projects = [
     accent: "#10b981", // Emerald Green
   },
   {
-    title: "Eventify",
-    subtitle: "Event Management System",
-    description: "A web-based platform that allows users to host events and purchase tickets online. Supports event creation, ticket management, and user authentication.",
-    tags: ["React.js", "PHP Laravel", "MySQL"],
-    role: "Full-Stack Developer",
-    github: "https://github.com/FazleRabbiMugdho/Eventify.git",
-    live: "https://eventi-fy.me/",
-    accent: "#a855f7", // Orchid Purple
+    title: "HydroSense-SWOT",
+    subtitle: "Decadal Earth System Trend Detection Meets Real-Time Agrarian Flood Warning in Northeastern Bangladesh",
+    description: "HydroSense-SWOT was built for the NASA International Space Apps Challenge 2026 under the challenge \"Be An Earth System Trend Detective!\". Our mission combines rigorous multi-decadal Earth system trend detection with actionable, physics-based flood routing to protect agrarian communities in Bangladesh's Haor basin.\n\nIn the flash-flood-vulnerable Haor basin of northeastern Bangladesh, ripening Boro rice feeds over 20 million people. We investigate 25 years (2001–2025) of authentic NASA satellite observations to detect whether pre-monsoon precipitation patterns are intensifying, and connect those climate trends to actionable agricultural flood advisories.",
+    tags: ["NASA SWOT", "GPM IMERG", "Data Pipelines", "Coordinate Transformations", "Offline Fixtures", "Next.js", "Three.js", "Gemini API", "Supabase"],
+    role: "Data Pipelines, Ingestion & Infrastructure Engineer",
+    github: "https://github.com/Mahimrio/Nasa_Hackathon.git",
+    live: "https://nasa-hackathon-seven.vercel.app/",
+    accent: "#6366f1", // Cosmic Indigo
   },
   {
     title: "OfficeVolt",
@@ -46,15 +46,34 @@ const projects = [
     accent: "#ef4444", // Crimson Red
   },
   {
-    title: "Zenith Protocol",
-    subtitle: "Scalable Web-Based Game Platform",
-    description: "A highly scalable web-based game platform employing a Plugin Architecture where a central React 'Host App' lazy-loads self-contained game modules via dynamic imports and communicates through a shared event bus. Scores, authentication, and state validation are securely handled via a robust Laravel 11 backend.",
-    tags: ["React 18+", "Vite", "TypeScript", "Tailwind CSS", "Zustand", "GSAP 3", "Laravel 11", "MySQL 8+"],
+    title: "Heaven Furniture Mart",
+    subtitle: "Luxury Bespoke Furniture & Interior Styling Studio · RACDOX Hackathon",
+    description: "A conversion-focused luxury landing page for Heaven Furniture Mart, a bespoke furniture & interior styling studio in Agrabad, Chattogram. Built for the RACDOX Hackathon with Next.js 16 App Router, GSAP ScrollTrigger & SplitText animations, Lenis smooth scroll, self-hosted Cormorant Garamond & Manrope typography, and Zod-validated inquiry forms.",
+    tags: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "GSAP 3", "Motion", "Lenis", "React Hook Form", "Zod", "Vercel"],
     role: "Full-Stack Developer",
-    github: "https://github.com/Mahimrio/Zenith-Protocol.git",
-    live: null,
-    inDevelopment: true,
-    accent: "#f59e0b", // Amber Gold
+    github: "https://github.com/Mahimrio/RACDOX_Hackathon.git",
+    live: "https://heaven-furniture-mart-alpha.vercel.app",
+    accent: "#d4a373", // Champagne Bronze
+  },
+  {
+    title: "Eventify",
+    subtitle: "Event Management System",
+    description: "A web-based platform that allows users to host events and purchase tickets online. Supports event creation, ticket management, and user authentication.",
+    tags: ["React.js", "PHP Laravel", "MySQL"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/FazleRabbiMugdho/Eventify.git",
+    live: "https://eventi-fy.me/",
+    accent: "#a855f7", // Orchid Purple
+  },
+  {
+    title: "CampusOS",
+    subtitle: "Intelligent University Operating System · AUST CSE Carnival 8.0 (AI Build Hackathon)",
+    description: "Students struggle daily with scattered campus information — class schedule changes buried in messaging groups, deadlines forgotten, room conflicts, and no centralized pulse of campus activities. CampusOS solves this with a unified, role-based university management dashboard and an autonomous AI Agent powered by Gemini function calling.\n\n• 5 Live Campus Data Systems: Schedules, Rooms, Events, Announcements, and Assignments with real-time synchronization and persistent full CRUD.\n• Autonomous AI Agent: Multi-source reasoning, real-time lookups, room booking, event registration, smart clarification on vague prompts, and strict authorization checks.\n• Role-Based Access Control (RBAC): Hierarchical permissions for Super Admin, Data Managers (CR / SR), and Student accounts with an approval pipeline.\n• Smart Data Entry (Gemini Vision): Upload photos of physical notices or timetable routines for automated parsing into a human-in-the-loop review queue.\n• Public Audit Trail: Every addition, update, deletion, room booking, and event registration is logged to an immutable public timeline.",
+    tags: ["Next.js 15", "Tailwind CSS v4", "shadcn/ui", "Space Grotesk + Inter", "Supabase Postgres", "Supabase Auth", "Supabase Storage", "Supabase Realtime", "Zod v4", "React Hook Form"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/Mahimrio/cse-carnival-8-aibuild-hackathon.git",
+    live: "https://cse-carnival-8-aibuild-hackathon-iota.vercel.app/",
+    accent: "#2dd4bf", // Aquamarine Mint
   },
   {
     title: "Interactive Portfolio",
@@ -65,6 +84,19 @@ const projects = [
     github: "https://github.com/Mahimrio/My_Portfolio",
     live: "https://mahimrio.github.io/My_Portfolio/",
     accent: "#ec4899", // Rose Pink
+  },
+
+  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
+  {
+    title: "Zenith Protocol",
+    subtitle: "Scalable Web-Based Game Platform",
+    description: "A highly scalable web-based game platform employing a Plugin Architecture where a central React 'Host App' lazy-loads self-contained game modules via dynamic imports and communicates through a shared event bus. Scores, authentication, and state validation are securely handled via a robust Laravel 11 backend.",
+    tags: ["React 18+", "Vite", "TypeScript", "Tailwind CSS", "Zustand", "GSAP 3", "Laravel 11", "MySQL 8+"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/Mahimrio/Zenith-Protocol.git",
+    live: null,
+    inDevelopment: true,
+    accent: "#f59e0b", // Amber Gold
   },
   {
     title: "MRP",
@@ -87,8 +119,6 @@ const projects = [
     inDevelopment: true,
     accent: "#84cc16", // Lime Green
   },
-
-  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
   {
     title: "Fire Fighting Bot",
     subtitle: "Arduino-Based Robot",

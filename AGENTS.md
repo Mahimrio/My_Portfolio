@@ -120,18 +120,18 @@ public/
 
 ### Projects (ProjectsSection.tsx)
 ```ts
-{ title, subtitle, description, tags: string[], role, github: string | null, live: string | null, inDevelopment?: boolean, accent: string }
+{ title, subtitle, description, tags: string[], role, github: string | null, live: string | null, inDevelopment?: boolean, featured?: boolean, accent: string }
 // Current (14 projects, 8 pinned by default with 3D click-to-flip overview + "See More Projects" toggle):
 // Rule: Always assign a unique, visually distinct `accent` color to every project (existing & future).
 //   Pinned (8):
-//     1. InternLink            — accent: #3b82f6 (Royal Blue)       | live: intern-link-eight.vercel.app
-//     2. ShasthyaHub-AI        — accent: #10b981 (Emerald Green)    | live: shasthyahub-ai.vercel.app
-//     3. HydroSense-SWOT       — accent: #6366f1 (Cosmic Indigo)    | live: nasa-hackathon-seven.vercel.app
-//     4. OfficeVolt            — accent: #ef4444 (Crimson Red)      | live: officevolt.vercel.app
-//     5. KendraFi              — accent: #d946ef (Electric Fuchsia) | live: kendrafi.vercel.app (In Development)
-//     6. Heaven Furniture Mart — accent: #d4a373 (Champagne Bronze) | live: heaven-furniture-mart-alpha.vercel.app
-//     7. CampusOS              — accent: #2dd4bf (Aquamarine Mint)  | live: cse-carnival-8-aibuild-hackathon-iota.vercel.app
-//     8. DhakaPath             — accent: #eab308 (Solar Gold)       | live: dhaka-path.vercel.app
+//     1. DhakaPath             — accent: #eab308 (Solar Gold)       | live: dhaka-path.vercel.app (Featured)
+//     2. HydroSense-SWOT       — accent: #6366f1 (Cosmic Indigo)    | live: nasa-hackathon-seven.vercel.app (Featured)
+//     3. KendraFi              — accent: #d946ef (Electric Fuchsia) | live: kendrafi.vercel.app (Featured, In Development)
+//     4. InternLink            — accent: #3b82f6 (Royal Blue)       | live: intern-link-eight.vercel.app
+//     5. ShasthyaHub-AI        — accent: #10b981 (Emerald Green)    | live: shasthyahub-ai.vercel.app
+//     6. OfficeVolt            — accent: #ef4444 (Crimson Red)      | live: officevolt.vercel.app
+//     7. Heaven Furniture Mart — accent: #d4a373 (Champagne Bronze) | live: heaven-furniture-mart-alpha.vercel.app
+//     8. CampusOS              — accent: #2dd4bf (Aquamarine Mint)  | live: cse-carnival-8-aibuild-hackathon-iota.vercel.app
 //   Expanded (6):
 //     9. Eventify              — accent: #a855f7 (Orchid Purple)    | live: eventi-fy.me
 //    10. Interactive Portfolio — accent: #ec4899 (Rose Pink)        | live: mahimrio.github.io/My_Portfolio/

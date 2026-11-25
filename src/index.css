@@ -1463,6 +1463,15 @@ a {
   background: color-mix(in srgb, var(--card-bg) 94%, var(--accent, var(--primary-accent)) 6%);
 }
 
+/* Ensure the hidden 3D face never steals wheel or pointer hit-testing */
+.project-flip-inner.is-flipped .project-card-front {
+  pointer-events: none;
+}
+
+.project-flip-inner:not(.is-flipped) .project-card-back {
+  pointer-events: none;
+}
+
 .project-front-body {
   display: flex;
   flex-direction: column;
@@ -1483,19 +1492,13 @@ a {
 }
 
 .projects-flip-hint-text {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: inline-block;
   font-size: 0.92rem;
   font-family: var(--font-ui);
   font-weight: 500;
   letter-spacing: -0.005em;
   color: var(--text-secondary);
   opacity: 0.92;
-}
-
-.projects-flip-hint-text svg {
-  color: var(--primary-accent);
 }
 
 /* Back Face Styling */
@@ -1544,6 +1547,7 @@ a {
 .project-back-content {
   flex-grow: 1;
   overflow-y: auto;
+  overscroll-behavior-y: contain;
   margin-bottom: var(--spacing-sm);
   padding-right: 0.25rem;
 }
@@ -1607,6 +1611,23 @@ a {
   color: #fbbf24;
   background: rgba(251, 191, 36, 0.12);
   border: 1px solid rgba(251, 191, 36, 0.35);
+}
+
+.project-featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.16rem 0.55rem;
+  border-radius: 999px;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.14);
+  border: 1px solid rgba(245, 158, 11, 0.42);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
 }
 
 .project-status::before {
@@ -2850,6 +2871,13 @@ a {
 
 [data-theme="light"] .projects-flip-hint-text {
   color: var(--text-secondary);
+}
+
+[data-theme="light"] .project-featured-badge {
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.12);
 }
 
 [data-theme="light"] .project-flip-back-btn {

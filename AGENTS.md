@@ -17,6 +17,7 @@
 
 ## Current UI State — Read Before Changing Anything
 - **The hanging AUST ID card is intentionally hidden by the owner (2026-11-24).** All of its code (`src/components/IdCardDrop.tsx`, its styles in `src/index.css`, GSAP/Draggable logic, assets) must stay in the repo. It is hidden only by a `.hero-corner-card { display: none; }` rule in `src/index.css`. Do **not** delete the component, remove its code, or "fix" the visibility — leave it hidden unless the owner explicitly asks to restore it. To restore, remove that one CSS rule.
+- **Unique per-project accent colors (2026-11-25):** Every project card in `ProjectsSection.tsx` MUST have a unique, clearly distinct `accent` color (avoid repeating or near-duplicate hues, especially on adjacent cards). Each card's `--accent` drives its persistent card border, subtle ambient glow, top accent bar, role badge, and tech stack tags at rest as well as on hover (while Live Demo and View Code buttons retain their unified styling). Whenever adding a new project, choose a fresh distinct hex color not already used in the registry below.
 
 ## Project Structure
 ```
@@ -120,25 +121,37 @@ public/
 ### Projects (ProjectsSection.tsx)
 ```ts
 { title, subtitle, description, tags: string[], role, github: string | null, live: string | null, accent: string }
-// Current (9 projects, 4 pinned by default + "See More Projects" expansion toggle):
-//   Pinned (4):
-//     1. InternLink        — github: github.com/Mahimrio/InternLink.git
-//     2. ShasthyaHub-AI    — live: shasthyahub-ai.vercel.app
-//     3. Eventify          — live: eventi-fy.me
-//     4. OfficeVolt        — live: officevolt.vercel.app
-//   Expanded (5):
-//     5. Zenith Protocol    — live: null (In Development)
-//     6. Interactive Portfolio — live: mahimrio.github.io/My_Portfolio/
-//     7. MRP               — live: null
-//     8. LockIn            — live: mahimrio.github.io/LockIn/ (In Development)
-//     9. Fire Fighting Bot  — github: null, live: null
+// Current (9 projects, 8 pinned by default with 3D click-to-flip overview + "See More Projects" toggle):
+// Rule: Always assign a unique, visually distinct `accent` color to every project (existing & future).
+//   Pinned (8):
+//     1. InternLink            — accent: #3b82f6 (Royal Blue)     | github: github.com/Mahimrio/InternLink.git
+//     2. ShasthyaHub-AI        — accent: #10b981 (Emerald Green)  | live: shasthyahub-ai.vercel.app
+//     3. Eventify              — accent: #a855f7 (Orchid Purple)  | live: eventi-fy.me
+//     4. OfficeVolt            — accent: #ef4444 (Crimson Red)    | live: officevolt.vercel.app
+//     5. Zenith Protocol       — accent: #f59e0b (Amber Gold)     | live: null (In Development)
+//     6. Interactive Portfolio — accent: #ec4899 (Rose Pink)      | live: mahimrio.github.io/My_Portfolio/
+//     7. MRP                   — accent: #06b6d4 (Cyan)           | live: null
+//     8. LockIn                — accent: #84cc16 (Lime Green)     | live: mahimrio.github.io/LockIn/ (In Development)
+//   Expanded (1):
+//     9. Fire Fighting Bot     — accent: #ff6b35 (Flame Orange)   | github: null, live: null
 ```
 
 ### Certifications (CertificatesSection.tsx)
 ```ts
-{ title, issuer, date, description, credentialId?: string, link?: string, accent?: string }
-// Features 3 pinned certificates + "See More Certifications" toggle with smooth scale/entrance animation.
-// Slots ready for PDF links when provided.
+{ title, issuer, date, description, image?: string, credentialId?: string, link?: string, accent?: string, featured?: boolean }
+// Current (10 certificates, 4 pinned featured certificates + 6 expandable via "See More Certifications"):
+//   Pinned / Featured (4):
+//     1. 3rd IAIT National IT Fest – AI Hackathon Certificate of Achievement (Runner Up)
+//     2. FastRoboX 1.0 – IoT Hackathon Certificate of Achievement (2nd Runner Up)
+//     3. 2026 NASA Space Apps Challenge – Galactic Problem Solver
+//     4. RoboFusion 1.0 – Techathon Certificate of Participation
+//   Expanded (6):
+//     5. 3rd IAIT National IT Fest – AI Hackathon Certificate of Participation
+//     6. SciBlitz 2.0 – AI Hackathon Certificate of Achievement
+//     7. Unpacking AI – Practical Foundations Certificate
+//     8. Techathon 2026 – Hackathon Certificate of Participation
+//     9. Securing the Digital Future – Certificate of Participation
+//    10. Future-Proof Your Cyber Career – Certificate of Participation
 ```
 
 ### Education (AboutSection.tsx)

@@ -1426,8 +1426,12 @@ a {
   position: relative;
   width: 100%;
   height: 100%;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent, var(--primary-accent)) 5%, var(--card-bg)) 0%,
+    var(--card-bg) 42%
+  );
+  border: 1px solid color-mix(in srgb, var(--accent, var(--primary-accent)) 32%, transparent);
   border-radius: 12px;
   padding: var(--spacing-md);
   backdrop-filter: blur(10px);
@@ -1437,13 +1441,15 @@ a {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25),
+    0 0 18px color-mix(in srgb, var(--accent, var(--primary-accent)) 10%, transparent);
   transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .project-flip-inner:hover .project-card-face {
-  border-color: color-mix(in srgb, var(--accent, var(--primary-accent)) 55%, transparent);
+  border-color: color-mix(in srgb, var(--accent, var(--primary-accent)) 65%, transparent);
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45),
-    0 0 22px color-mix(in srgb, var(--accent, var(--primary-accent)) 22%, transparent);
+    0 0 26px color-mix(in srgb, var(--accent, var(--primary-accent)) 26%, transparent);
 }
 
 .project-card-front {
@@ -1620,11 +1626,10 @@ a {
 
 .project-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
   margin-bottom: 1rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.65rem;
 }
 
 .project-title {
@@ -1650,8 +1655,9 @@ a {
   font-family: var(--font-ui);
   font-size: 0.74rem;
   padding: 0.28rem 0.75rem;
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--primary-accent);
+  background: color-mix(in srgb, var(--accent, var(--primary-accent)) 14%, transparent);
+  color: color-mix(in srgb, var(--accent, var(--primary-accent)) 88%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent, var(--primary-accent)) 28%, transparent);
   border-radius: 50px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -1685,8 +1691,9 @@ a {
   font-weight: 500;
   letter-spacing: 0.005em;
   padding: 0.24rem 0.62rem;
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--primary-accent);
+  background: color-mix(in srgb, var(--accent, var(--primary-accent)) 12%, transparent);
+  color: color-mix(in srgb, var(--accent, var(--primary-accent)) 86%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent, var(--primary-accent)) 22%, transparent);
   border-radius: 5px;
 }
 
@@ -2586,10 +2593,6 @@ a {
   .edu-header {
     flex-direction: column;
   }
-
-  .project-header {
-    flex-direction: column;
-  }
 }
 
 /* ========== ACCESSIBILITY ========== */
@@ -2808,10 +2811,34 @@ a {
 }
 
 /* Project cards */
+[data-theme="light"] .project-card-face {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent, var(--primary-accent)) 6%, rgba(255, 255, 255, 0.85)) 0%,
+    rgba(255, 255, 255, 0.78) 42%
+  );
+  border-color: color-mix(in srgb, var(--accent, var(--primary-accent)) 35%, transparent);
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06),
+    0 0 16px color-mix(in srgb, var(--accent, var(--primary-accent)) 10%, transparent);
+}
+
 [data-theme="light"] .project-card:hover,
 [data-theme="light"] .project-flip-inner:hover .project-card-face {
+  border-color: color-mix(in srgb, var(--accent, var(--primary-accent)) 60%, transparent);
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.14),
-    0 0 22px color-mix(in srgb, var(--accent, var(--primary-accent)) 18%, transparent);
+    0 0 24px color-mix(in srgb, var(--accent, var(--primary-accent)) 22%, transparent);
+}
+
+[data-theme="light"] .project-role {
+  background: color-mix(in srgb, var(--accent, var(--primary-accent)) 12%, transparent);
+  color: color-mix(in srgb, var(--accent, var(--primary-accent)) 78%, #0f172a);
+  border-color: color-mix(in srgb, var(--accent, var(--primary-accent)) 30%, transparent);
+}
+
+[data-theme="light"] .tag {
+  background: color-mix(in srgb, var(--accent, var(--primary-accent)) 11%, transparent);
+  color: color-mix(in srgb, var(--accent, var(--primary-accent)) 76%, #0f172a);
+  border-color: color-mix(in srgb, var(--accent, var(--primary-accent)) 25%, transparent);
 }
 
 [data-theme="light"] .project-card-back {

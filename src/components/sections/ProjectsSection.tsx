@@ -4,6 +4,7 @@ import Reveal from '../animations/Reveal';
 
 const projects = [
   // --- PINNED PROJECTS (first PINNED_COUNT shown by default) ---
+  // Each project MUST have a unique, clearly distinct accent color (see AGENTS.md).
   {
     title: "InternLink",
     subtitle: "AI-Powered Career & Internship Portal",
@@ -12,7 +13,7 @@ const projects = [
     role: "Full-Stack Developer (Frontend & Backend)",
     github: "https://github.com/Mahimrio/InternLink.git",
     live: null,
-    accent: "#3b82f6",
+    accent: "#3b82f6", // Royal Blue
   },
   {
     title: "ShasthyaHub-AI",
@@ -22,7 +23,7 @@ const projects = [
     role: "Full-Stack Developer",
     github: "https://github.com/Mahimrio/ShasthyaHub-AI.git",
     live: "https://shasthyahub-ai.vercel.app/",
-    accent: "#10b981",
+    accent: "#10b981", // Emerald Green
   },
   {
     title: "Eventify",
@@ -32,7 +33,7 @@ const projects = [
     role: "Full-Stack Developer",
     github: "https://github.com/FazleRabbiMugdho/Eventify.git",
     live: "https://eventi-fy.me/",
-    accent: "#00ff88",
+    accent: "#a855f7", // Orchid Purple
   },
   {
     title: "OfficeVolt",
@@ -42,10 +43,8 @@ const projects = [
     role: "Full-Stack Developer (Frontend & Backend)",
     github: "https://github.com/FazleRabbiMugdho/Techathon2026-Team_Prognosis.git",
     live: "https://officevolt.vercel.app/",
-    accent: "#ef4444",
+    accent: "#ef4444", // Crimson Red
   },
-
-  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
   {
     title: "Zenith Protocol",
     subtitle: "Scalable Web-Based Game Platform",
@@ -55,9 +54,8 @@ const projects = [
     github: "https://github.com/Mahimrio/Zenith-Protocol.git",
     live: null,
     inDevelopment: true,
-    accent: "#6366f1",
+    accent: "#f59e0b", // Amber Gold
   },
-
   {
     title: "Interactive Portfolio",
     subtitle: "Personal Web Showcase",
@@ -66,7 +64,7 @@ const projects = [
     role: "Frontend Developer",
     github: "https://github.com/Mahimrio/My_Portfolio",
     live: "https://mahimrio.github.io/My_Portfolio/",
-    accent: "#a855f7",
+    accent: "#ec4899", // Rose Pink
   },
   {
     title: "MRP",
@@ -76,7 +74,7 @@ const projects = [
     role: "Full-Stack Developer",
     github: "https://github.com/FazleRabbiMugdho/mrp.git",
     live: null,
-    accent: "#00d4ff",
+    accent: "#06b6d4", // Cyan
   },
   {
     title: "LockIn",
@@ -87,8 +85,10 @@ const projects = [
     github: "https://github.com/Mahimrio/LockIn.git",
     live: "https://mahimrio.github.io/LockIn/",
     inDevelopment: true,
-    accent: "#f59e0b",
+    accent: "#84cc16", // Lime Green
   },
+
+  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
   {
     title: "Fire Fighting Bot",
     subtitle: "Arduino-Based Robot",
@@ -97,7 +97,7 @@ const projects = [
     role: "Embedded Systems Developer",
     github: null,
     live: null,
-    accent: "#ff6b35",
+    accent: "#ff6b35", // Flame Orange
   },
 ];
 

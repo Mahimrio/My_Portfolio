@@ -25,13 +25,14 @@
 src/
 ├── main.tsx                   Entry point, ErrorBoundary, registers ScrollTrigger & Draggable (no StrictMode)
 ├── App.tsx                    Root: Loader + BackgroundCanvas + SmoothScroll + Layout + sections
-├── index.css                  All global styles (~3100 lines, dark/light CSS custom properties)
+├── index.css                  All global styles (~3330 lines, dark/light CSS custom properties)
 ├── lib/
 │   └── themeTransition.ts     View Transition API + GSAP polygon-clip ("venom") theme switch effect
 ├── components/
+│   ├── CvResumeDropdown.tsx   GSAP-animated CV / Resume dropdown menu with sliding highlight & cursor spotlight
 │   ├── IdCardDrop.tsx         Interactive 3D hanging AUST student ID card (physics, Draggable, elastic recoil) — CODE KEPT, CURRENTLY HIDDEN via CSS (see "Current UI State")
 │   ├── Layout.tsx             Navbar + main + Footer wrapper
-│   ├── Navbar.tsx             Fixed header, scroll progress bar, spotlight + sliding pill nav, theme toggle, mobile tab bar, CV download button
+│   ├── Navbar.tsx             Fixed header, scroll progress bar, spotlight + sliding pill nav, theme toggle, mobile tab bar, CV/Resume dropdown
 │   ├── Footer.tsx             Back-to-top button, footer links, copyright
 │   ├── Loader.tsx             Full-screen loading bar (simulated progress, 60ms interval)
 │   ├── SmoothScroll.tsx       Lenis smooth scroll integration with GSAP ScrollTrigger (`allowNestedScroll: true`)
@@ -57,10 +58,11 @@ src/
 public/
 ├── assets/                    Hanging ID card textures (`aust-badge.png`, `aust-id-card.png`, `aust-ribbon.png`)
 ├── certificates/              Certificate images & PDF (11 files referenced by CertificatesSection)
-├── cv.pdf                     Downloadable CV (linked from Navbar)
+├── cv.pdf                     Downloadable updated full CV (linked from CvResumeDropdown)
 ├── favicon.svg                Site favicon
 ├── hero.png                   OpenGraph / Twitter card image
-└── icons.svg                  SVG icon sprite
+├── icons.svg                  SVG icon sprite
+└── resume.pdf                 Downloadable 1-page resume (linked from CvResumeDropdown)
 .github/
 └── workflows/
     └── deploy.yml             GitHub Actions CI/CD: build + deploy to GitHub Pages on push to main
@@ -76,7 +78,7 @@ public/
 - Refreshes `ScrollTrigger` once Lenis initializes and on `window` `load`
 
 ### CSS Architecture & Theming
-- All styles in `src/index.css` (`~3100 lines`) — no CSS modules or co-located CSS files
+- All styles in `src/index.css` (`~3330 lines`) — no CSS modules or co-located CSS files
 - Full theming via `:root` custom properties and `data-theme="dark" | "light"` (`--bg-color`, `--primary-accent`, `--font-main`, `--font-ui`, `--font-mono`, `--nav-glow`, etc.)
 - `index.html` initializes `data-theme` pre-paint from `localStorage` or `prefers-color-scheme` to avoid flash of wrong theme
 - Theme switching dispatches a `'themechange'` `CustomEvent` (consumed by `BackgroundCanvas`) and uses `runThemeTransition` in `src/lib/themeTransition.ts`: wraps `flushSync` in `document.startViewTransition` animated with GSAP symbiote-like polygon tendrils (`--venom-clip`) expanding from/retracting to the theme toggle button, with instant fallback when unsupported or under reduced motion
@@ -95,7 +97,7 @@ public/
 - `IntersectionObserver`-based active section highlighting (`{ threshold: [0.2, 0.5] }`, selects the section with the highest `intersectionRatio` among `hero`, `presence`, and `navLinks` targets)
 - **7 nav links** (`navLinks` at module scope): `About`, `Education`, `Skills`, `Achievements`, `Projects`, `Certificates`, `Contact` (each with inline SVG icon for the mobile tab bar)
 - Desktop hover/active effects: cursor-tracking radial spotlight (`.nav-spotlight` via `--mouse-x`/`--mouse-y`) and sliding pill indicator (`.nav-slider-pill`)
-- Theme toggle button (`theme-toggle`) + CV download button (`<a>` with `download` attribute, `import.meta.env.BASE_URL + 'cv.pdf'`)
+- Theme toggle button (`theme-toggle`) + `CvResumeDropdown` (`src/components/CvResumeDropdown.tsx`): GSAP-animated open/close dropdown with sliding hover highlight (`.nav-cv-slider`), cursor spotlight, keyboard navigation (`Escape`, `ArrowUp`/`ArrowDown`), and two PDF downloads (`cv.pdf` and `resume.pdf` via `import.meta.env.BASE_URL`)
 
 ### Contact Form (EmailJS)
 - Environment variables: `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, `VITE_EMAILJS_PUBLIC_KEY`
@@ -246,3 +248,4 @@ See `.env.example`. Also configured as GitHub repository secrets for CI/CD build
 9. **Unique per-project accents, 14 projects & 10 certificates** (PR `#49`–`#52`) — added HydroSense-SWOT, KendraFi, DhakaPath, Heaven Furniture Mart, CampusOS, InternLink live URL, pinned top 8 projects (`Featured` badges on DhakaPath, HydroSense-SWOT, KendraFi), and updated `public/certificates/`
 10. **Scroll-driven Education timeline** (PR `#53`) — animated track fill (`scaleY`), tracking orb, and `.is-reached` milestone dots synchronized via `ResizeObserver` + `ScrollTrigger`
 11. **Education, Achievements & AGENTS.md sync** — removed duplicated achievements from BSc Education card, added CS coursework (`Computer Networks`, `Introduction to AI`, `Operating Systems`), changed BSc label to `Coursework (Relevant)`, updated club involvements (`AUSTCAIC`, `AUSTPIC`, `AUSTIDC`, SSC/HSC home tutoring), added 9th Achievement (`Star Panelist — Member (Fall 2025)` for `AUSTCAIC`), and synced `AGENTS.md`
+12. **CV / Resume animated dropdown & updated PDFs** — extracted `CvResumeDropdown.tsx` (GSAP open/close transitions, sliding highlight pill, cursor spotlight, rounded focus rings) and updated `public/cv.pdf` + `public/resume.pdf`

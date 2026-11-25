@@ -46,6 +46,17 @@ const projects = [
     accent: "#ef4444", // Crimson Red
   },
   {
+    title: "KendraFi",
+    subtitle: "Zero-Trust Cooperative Risk & Programmable B2B Escrow · FinSphere AI",
+    description: "Zero-Trust Multi-Agent Cooperative Risk and Programmable B2B Escrow Protocol for Bangladesh SME working capital — International AI Builders Congress 2026 (FinSphere AI · SME Capital Engine).",
+    tags: ["Next.js 15", "TypeScript", "Tailwind CSS 3", "Next.js BFF", "Python FastAPI", "Supabase Postgres", "Solidity 0.8.20", "Foundry", "Base Sepolia", "Vercel"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/shads-01/KendraFi.git",
+    live: "https://kendrafi.vercel.app/",
+    inDevelopment: true,
+    accent: "#d946ef", // Electric Fuchsia
+  },
+  {
     title: "Heaven Furniture Mart",
     subtitle: "Luxury Bespoke Furniture & Interior Styling Studio · RACDOX Hackathon",
     description: "A conversion-focused luxury landing page for Heaven Furniture Mart, a bespoke furniture & interior styling studio in Agrabad, Chattogram. Built for the RACDOX Hackathon with Next.js 16 App Router, GSAP ScrollTrigger & SplitText animations, Lenis smooth scroll, self-hosted Cormorant Garamond & Manrope typography, and Zod-validated inquiry forms.",
@@ -54,16 +65,6 @@ const projects = [
     github: "https://github.com/Mahimrio/RACDOX_Hackathon.git",
     live: "https://heaven-furniture-mart-alpha.vercel.app",
     accent: "#d4a373", // Champagne Bronze
-  },
-  {
-    title: "Eventify",
-    subtitle: "Event Management System",
-    description: "A web-based platform that allows users to host events and purchase tickets online. Supports event creation, ticket management, and user authentication.",
-    tags: ["React.js", "PHP Laravel", "MySQL"],
-    role: "Full-Stack Developer",
-    github: "https://github.com/FazleRabbiMugdho/Eventify.git",
-    live: "https://eventi-fy.me/",
-    accent: "#a855f7", // Orchid Purple
   },
   {
     title: "CampusOS",
@@ -76,6 +77,28 @@ const projects = [
     accent: "#2dd4bf", // Aquamarine Mint
   },
   {
+    title: "DhakaPath",
+    subtitle: "Live Urban Transit & Route Intelligence for Dhaka",
+    description: "Every morning in Dhaka, millions of students and office workers play a guessing game just to cross the city. Google Maps does not know which local bus accepts a ten-taka student half-pass, how much a rickshaw surges when Malibagh floods, or when a sudden blockade shuts down Shahbagh — leaving commuters stranded or overpaying.\n\nDhakaPath fixes this: commuters simply ask in Banglish how to reach Motijheel under fifty taka. The platform checks crowd-verified street alerts, filters out fake reports, calculates the exact multi-leg route across buses, Metro Rail, and shared rickshaws, and exports an offline route card when phone battery or internet dies.",
+    tags: ["Next.js 15", "TypeScript", "Tailwind CSS 3", "Next.js BFF", "Python FastAPI", "Supabase Postgres"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/FazleRabbiMugdho/DhakaPath.git",
+    live: "https://dhaka-path.vercel.app/",
+    accent: "#eab308", // Solar Gold
+  },
+
+  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
+  {
+    title: "Eventify",
+    subtitle: "Event Management System",
+    description: "A web-based platform that allows users to host events and purchase tickets online. Supports event creation, ticket management, and user authentication.",
+    tags: ["React.js", "PHP Laravel", "MySQL"],
+    role: "Full-Stack Developer",
+    github: "https://github.com/FazleRabbiMugdho/Eventify.git",
+    live: "https://eventi-fy.me/",
+    accent: "#a855f7", // Orchid Purple
+  },
+  {
     title: "Interactive Portfolio",
     subtitle: "Personal Web Showcase",
     description: "A highly interactive, 3D animated personal portfolio website. Features smooth scrolling, performant CSS animations, and a responsive glassmorphic UI.",
@@ -85,8 +108,6 @@ const projects = [
     live: "https://mahimrio.github.io/My_Portfolio/",
     accent: "#ec4899", // Rose Pink
   },
-
-  // --- ADDITIONAL PROJECTS (Expanded on "See More") ---
   {
     title: "Zenith Protocol",
     subtitle: "Scalable Web-Based Game Platform",
